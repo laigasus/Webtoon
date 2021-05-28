@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 
 import com.webtoon.domain.listVO;
 import com.webtoon.domain.naverVO;
-import com.webtoon.domain.viewVO;
+import com.webtoon.domain.ViewVO;
 import com.webtoon.mapper.NaverMapper;
 
 @Service("NaverService")
@@ -104,11 +104,11 @@ public class NaverServiceImpl implements NaverService {
 		return articles;
 	}
 
-	public ArrayList<viewVO> toonView(String URL) {
+	public ArrayList<ViewVO> toonView(String URL) {
 
 		webtoonDAO.getInstance().webtoonViewCrawling(URL);
 
-		ArrayList<viewVO> articles = new ArrayList<>();
+		ArrayList<ViewVO> articles = new ArrayList<>();
 		String sql = "SELECT * FROM webtoon_view where url=? ORDER BY num ASC";
 
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
@@ -116,7 +116,7 @@ public class NaverServiceImpl implements NaverService {
 			ResultSet rs = pstmt.executeQuery();
 
 			while (rs.next()) {
-				viewVO article = new viewVO(rs.getInt("num"), rs.getString("url"), rs.getString("img"));
+				ViewVO article = new ViewVO(rs.getInt("num"), rs.getString("url"), rs.getString("img"));
 				articles.add(article);
 			}
 		} catch (Exception e) {

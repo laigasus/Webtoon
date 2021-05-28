@@ -44,8 +44,8 @@ ArrayList<String> InfoArr=naverDAO.getInstance().toonInfo(URL);
         </div>
         <div id="intro-content">
            <%
-            for(viewVO articles: naverDAO.getInstance().toonView(URL)){
-        	%>
+           	for(ViewVO articles: naverDAO.getInstance().toonView(URL)){
+           %>
             <img src="<%=articles.getImg()%>"/>
 		<% }%>
         </div>

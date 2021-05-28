@@ -8,16 +8,16 @@ package com.webtoon.domain;
 		);
 */
 
-public class viewVO {
+public class ViewVO {
 	private int num;
 	private String url;
 	private String img;
 
-	public viewVO() {
+	public ViewVO() {
 
 	}
 
-	public viewVO(int num, String url, String img) {
+	public ViewVO(int num, String url, String img) {
 		super();
 		this.num = num;
 		this.url = url;
