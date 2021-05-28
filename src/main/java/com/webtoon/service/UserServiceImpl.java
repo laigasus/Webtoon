@@ -13,6 +13,8 @@ import javax.sql.DataSource;
 
 import org.springframework.stereotype.Service;
 
+import com.webtoon.domain.UserVO;
+
 @Service("UserService")
 public class UserServiceImpl implements UserService {
 
@@ -52,7 +54,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public void insertUser(UserVO vo) {
-
+		// TODO Auto-generated method stub
 		String sql = "INSERT INTO toon_user VALUES (?,?,?)";
 		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			pstmt.setString(1, vo.getEmail());
