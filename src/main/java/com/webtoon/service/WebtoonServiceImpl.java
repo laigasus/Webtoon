@@ -12,12 +12,14 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.springframework.stereotype.Service;
 
-public class webtoonDAO implements IwebtoonDAO {
+@Service("WebtoonService")
+public class WebtoonServiceImpl implements WebtoonService {
 
 	DataSource ds;
 
-	public webtoonDAO() {
+	public WebtoonServiceImpl() {
 		try {
 			InitialContext ct = new InitialContext();
 			ds = (DataSource) ct.lookup("java:comp/env/jdbc/mysql");
@@ -26,20 +28,12 @@ public class webtoonDAO implements IwebtoonDAO {
 		}
 	}
 
-	private static webtoonDAO dao = new webtoonDAO();
-
-	public static webtoonDAO getInstance() {
-		if (dao == null)
-			dao = new webtoonDAO();
-		return dao;
-	}
-
 	/////////////////////////////////////////////////////////
 
 	@Override
 	public void insertQuery(int day, String title, String url, String thumb) {
 
-		String sql = " INSERT INTO webtoon (no, day, title, url, thumb) VALUES (0, ?, ?, ?, ?) ";
+		String sql = "INSERT INTO webtoon (no, day, title, url, thumb) VALUES (0, ?, ?, ?, ?) ";
 		try (java.sql.Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 			int index = 1;
@@ -64,7 +58,7 @@ public class webtoonDAO implements IwebtoonDAO {
 	@Override
 	public void insertQuery(String id, String thumb, String title, String url, String day) {
 
-		String sql = " INSERT INTO webtoon_list (id, thumb, title, url, day) VALUES (?, ?, ?, ?, ?) ";
+		String sql = "INSERT INTO webtoon_list (id, thumb, title, url, day) VALUES (?, ?, ?, ?, ?) ";
 		try (java.sql.Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 			int index = 1;
@@ -90,7 +84,7 @@ public class webtoonDAO implements IwebtoonDAO {
 	@Override
 	public void insertQuery(String url, String img) {
 
-		String sql = " INSERT INTO webtoon_view (url, num, img) VALUES (?, 0, ?) ";
+		String sql = "INSERT INTO webtoon_view (url, num, img) VALUES (?, 0, ?) ";
 		try (java.sql.Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 			int index = 1;
@@ -170,7 +164,7 @@ public class webtoonDAO implements IwebtoonDAO {
 	public int selectQuery(String title) {
 
 		int result = 0;
-		String sql = " SELECT count(*) as cnt FROM webtoon where title = ? ";
+		String sql = "SELECT count(*) as cnt FROM webtoon where title = ?";
 		try (java.sql.Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql);) {
 			ResultSet rs = null;
 

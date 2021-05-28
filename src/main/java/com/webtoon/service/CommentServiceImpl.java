@@ -10,25 +10,20 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class CommentDAO implements ICommentDAO {
+import org.springframework.stereotype.Service;
+
+@Service("CommentService")
+public class CommentServiceImpl implements CommentService {
 
 	DataSource ds;
 
-	private CommentDAO() {
+	private CommentServiceImpl() {
 		try {
 			InitialContext ct = new InitialContext();
 			ds = (DataSource) ct.lookup("java:comp/env/jdbc/mysql");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private static CommentDAO dao = new CommentDAO();
-
-	public static CommentDAO getInstance() {
-		if (dao == null)
-			dao = new CommentDAO();
-		return dao;
 	}
 
 	////////////////////////////////////////////////////////////////

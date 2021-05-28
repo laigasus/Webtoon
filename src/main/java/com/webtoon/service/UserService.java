@@ -1,11 +1,11 @@
 package com.webtoon.service;
 
+import java.net.PasswordAuthentication;
 import java.util.List;
 
-import javax.mail.PasswordAuthentication;
+import com.webtoon.domain.UserVO;
 
-public interface IUserDAO {
-
+public interface UserService {
 	// 중복 ID 여부를 검증하는 메서드
 	boolean CheckDuplicate(String email);
 
@@ -35,5 +35,4 @@ public interface IUserDAO {
 
 	// 관리자로써 회원의 목록를 출력하는 메서드
 	List<UserVO> listUser();
-
 }

@@ -11,25 +11,20 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class UserDAO implements IUserDAO {
+import org.springframework.stereotype.Service;
+
+@Service("UserService")
+public class UserServiceImpl implements UserService {
 
 	DataSource ds;
 
-	private UserDAO() {
+	private UserServiceImpl() {
 		try {
 			InitialContext ct = new InitialContext();
 			ds = (DataSource) ct.lookup("java:comp/env/jdbc/mysql");
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private static UserDAO dao = new UserDAO();
-
-	public static UserDAO getInstance() {
-		if (dao == null)
-			dao = new UserDAO();
-		return dao;
 	}
 
 	/////////////////////////////////////////////////////////
@@ -177,11 +172,6 @@ public class UserDAO implements IUserDAO {
 	}
 
 	@Override
-	public PasswordAuthentication getPasswordAuthentication() {
-		return new PasswordAuthentication("laigasus98@gmail.com", "okjaeook98");
-	}
-
-	@Override
 	public List<UserVO> listUser() {
 
 		List<UserVO> users = new ArrayList<>();
@@ -199,4 +189,10 @@ public class UserDAO implements IUserDAO {
 		}
 		return users;
 	}
+
+	@Override
+	public PasswordAuthentication getPasswordAuthentication() {
+		return new PasswordAuthentication("laigasus98@gmail.com", "okjaeook98");
+	}
+
 }

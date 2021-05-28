@@ -2,8 +2,9 @@ package com.webtoon.service;
 
 import java.util.List;
 
-public interface IBoardDAO {
+import com.webtoon.domain.BoardVO;
 
+public interface BoardService {
 	// 글 등록 메서드
 	void regist(String email, String writer, String title, String content, String absoluteImgPath);
 
@@ -33,7 +34,4 @@ public interface IBoardDAO {
 	
 	// 글갯수를 받아온다.
 	int getCountBoard();
-	
-	
-	
 }

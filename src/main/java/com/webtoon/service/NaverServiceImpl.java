@@ -1,17 +1,25 @@
 package com.webtoon.service;
 
-import java.sql.*;
-import java.util.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
 
-import javax.naming.*;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-import com.crawling.model.webtoonDAO;
+import org.springframework.stereotype.Service;
 
-public class naverDAO implements InaverDAO {
+import com.webtoon.domain.listVO;
+import com.webtoon.domain.naverVO;
+import com.webtoon.domain.viewVO;
+
+@Service("NaverService")
+public class NaverServiceImpl implements NaverService {
 	DataSource ds;
 
-	private naverDAO() {
+	private NaverServiceImpl() {
 
 		try {
 			InitialContext ct = new InitialContext();
@@ -20,14 +28,6 @@ public class naverDAO implements InaverDAO {
 		} catch (NamingException e) {
 			e.printStackTrace();
 		}
-	}
-
-	private static naverDAO dao = new naverDAO();
-
-	public static naverDAO getInstance() {
-		if (dao == null)
-			dao = new naverDAO();
-		return dao;
 	}
 
 	////////////////////////////////////////////////////////////////

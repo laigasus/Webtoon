@@ -11,11 +11,14 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
-public class BoardDAO implements IBoardDAO {
+import org.springframework.stereotype.Service;
+
+@Service("BoardService")
+public class BoardServiceImpl implements BoardService {
 
 	DataSource ds;
 
-	private BoardDAO() {
+	private BoardServiceImpl() {
 		try {
 			InitialContext ct = new InitialContext();
 			ds = (DataSource) ct.lookup("java:comp/env/jdbc/mysql");
@@ -24,13 +27,6 @@ public class BoardDAO implements IBoardDAO {
 		}
 	}
 
-	private static BoardDAO dao = new BoardDAO();
-
-	public static BoardDAO getInstance() {
-		if (dao == null)
-			dao = new BoardDAO();
-		return dao;
-	}
 
 	////////////////////////////////////////////////////////////////
 

@@ -2,8 +2,9 @@ package com.webtoon.service;
 
 import java.util.List;
 
-public interface ICommentDAO {
+import com.webtoon.domain.CommentVO;
 
+public interface CommentService {
 	// 댓글 등록 메서드
 	void regist(int bd_num, String cm_writer, String cm_content, String email);
 

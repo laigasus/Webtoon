@@ -2,8 +2,11 @@ package com.webtoon.service;
 
 import java.util.ArrayList;
 
-public interface InaverDAO {
+import com.webtoon.domain.listVO;
+import com.webtoon.domain.naverVO;
+import com.webtoon.domain.viewVO;
 
+public interface NaverService {
 	// 네이버 웹툰 요일별 목록을 가져와 웹화면에 출력(naver.jsp)하기 위한 메소드
 	ArrayList<naverVO> listBoard(int YoIll);
 
