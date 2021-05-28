@@ -10,7 +10,7 @@ mt_url mediumtext not null
 */
 
 
-public class my_webtoon {
+public class MyWebtoonVO {
 	private String imgSrc;
 	private String webtoontitle;
 	private String webtoonUrl;

@@ -9,14 +9,20 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webtoon.domain.listVO;
 import com.webtoon.domain.naverVO;
 import com.webtoon.domain.viewVO;
+import com.webtoon.mapper.NaverMapper;
 
 @Service("NaverService")
 public class NaverServiceImpl implements NaverService {
+	
+	@Autowired
+	private NaverMapper naverMapper;
+
 	DataSource ds;
 
 	private NaverServiceImpl() {
@@ -33,7 +39,7 @@ public class NaverServiceImpl implements NaverService {
 	////////////////////////////////////////////////////////////////
 	@Override
 	public ArrayList<naverVO> listBoard(int YoIll) {
-		
+
 		webtoonDAO.getInstance().webtoonCrawling();
 
 		ArrayList<naverVO> articles = new ArrayList<>();
@@ -56,7 +62,7 @@ public class NaverServiceImpl implements NaverService {
 
 	@Override
 	public ArrayList<naverVO> searchBoard(String searchParam) {
-		
+
 		webtoonDAO.getInstance().webtoonCrawling();
 
 		ArrayList<naverVO> articles = new ArrayList<>();
@@ -77,7 +83,7 @@ public class NaverServiceImpl implements NaverService {
 	}
 
 	public ArrayList<listVO> toonList(String URL, String id) {
-		
+
 		webtoonDAO.getInstance().webtoonListCrawling(URL, id);
 
 		ArrayList<listVO> articles = new ArrayList<>();
@@ -99,7 +105,7 @@ public class NaverServiceImpl implements NaverService {
 	}
 
 	public ArrayList<viewVO> toonView(String URL) {
-		
+
 		webtoonDAO.getInstance().webtoonViewCrawling(URL);
 
 		ArrayList<viewVO> articles = new ArrayList<>();

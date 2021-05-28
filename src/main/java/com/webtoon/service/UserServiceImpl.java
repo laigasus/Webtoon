@@ -11,12 +11,17 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webtoon.domain.UserVO;
+import com.webtoon.mapper.UserMapper;
 
 @Service("UserService")
 public class UserServiceImpl implements UserService {
+
+	@Autowired
+	private UserMapper userMapper;
 
 	DataSource ds;
 

@@ -10,17 +10,17 @@ thumb	varchar(2000)
 );
  */
 
-public class webtoon {
+public class WebtoonVO {
 
 	private String day;
 	private String title;
 	private String url;
 	private String thumb;
 
-	public webtoon() {
+	public WebtoonVO() {
 	}
 
-	public webtoon(String day, String title, String url, String thumb) {
+	public WebtoonVO(String day, String title, String url, String thumb) {
 		super();
 		this.day = day;
 		this.title = title;

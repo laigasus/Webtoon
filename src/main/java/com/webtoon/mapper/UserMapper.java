@@ -11,7 +11,7 @@ import com.webtoon.domain.UserVO;
 
 public interface UserMapper {
 	// 중복 ID 여부를 검증하는 메서드
-	@Select("SELECT email FROM toon_user WHERE email=?";)
+	@Select("SELECT email FROM toon_user WHERE email=?")
 	boolean CheckDuplicate(String email);
 
 	// 회원 가입을 처리하는 메서드

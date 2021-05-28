@@ -11,11 +11,18 @@ import javax.naming.InitialContext;
 import javax.naming.NamingException;
 import javax.sql.DataSource;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.webtoon.domain.BoardVO;
+import com.webtoon.mapper.BoardMapper;
 
 @Service("BoardService")
 public class BoardServiceImpl implements BoardService {
 
+	@Autowired
+	private BoardMapper boardMapper;
+	
 	DataSource ds;
 
 	private BoardServiceImpl() {

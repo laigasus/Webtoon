@@ -1,7 +1,9 @@
 package com.webtoon.service;
 
 import java.io.IOException;
-import java.sql.*;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 
 import javax.naming.InitialContext;
@@ -12,10 +14,20 @@ import org.jsoup.Connection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.webtoon.domain.MyWebtoonVO;
+import com.webtoon.domain.WebtoonVO;
+import com.webtoon.domain.WebtoonListVO;
+import com.webtoon.domain.WebtoonViewVO;
+import com.webtoon.mapper.WebtoonMapper;
 
 @Service("WebtoonService")
 public class WebtoonServiceImpl implements WebtoonService {
+
+	@Autowired
+	private WebtoonMapper webtoonMapper;
 
 	DataSource ds;
 
@@ -58,7 +70,7 @@ public class WebtoonServiceImpl implements WebtoonService {
 	@Override
 	public void insertQuery(String id, String thumb, String title, String url, String day) {
 
-		String sql = "INSERT INTO webtoon_list (id, thumb, title, url, day) VALUES (?, ?, ?, ?, ?) ";
+		String sql = "INSERT INTO WebtoonListVO (id, thumb, title, url, day) VALUES (?, ?, ?, ?, ?) ";
 		try (java.sql.Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 			int index = 1;
@@ -84,7 +96,7 @@ public class WebtoonServiceImpl implements WebtoonService {
 	@Override
 	public void insertQuery(String url, String img) {
 
-		String sql = "INSERT INTO webtoon_view (url, num, img) VALUES (?, 0, ?) ";
+		String sql = "INSERT INTO WebtoonViewVO (url, num, img) VALUES (?, 0, ?) ";
 		try (java.sql.Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 
 			int index = 1;
@@ -211,7 +223,7 @@ public class WebtoonServiceImpl implements WebtoonService {
 	@Override
 	public void webtoonCrawling() {
 
-		deleteQuery(webtoon.class.getSimpleName());
+		deleteQuery(WebtoonVO.class.getSimpleName());
 
 		Document doc = null;
 		Elements elemList = new Elements();
@@ -271,7 +283,7 @@ public class WebtoonServiceImpl implements WebtoonService {
 	@Override
 	public void webtoonListCrawling(String URL, String id) {
 
-		deleteQuery(webtoon_list.class.getSimpleName());
+		deleteQuery(WebtoonListVO.class.getSimpleName());
 
 		Document doc = null;
 		Elements elemList = new Elements();
@@ -334,7 +346,7 @@ public class WebtoonServiceImpl implements WebtoonService {
 	@Override
 	public void webtoonViewCrawling(String URL) {
 
-		deleteQuery(webtoon_view.class.getSimpleName());
+		deleteQuery(WebtoonViewVO.class.getSimpleName());
 
 		Document doc = null;
 		Elements elemList = new Elements();
@@ -438,15 +450,15 @@ public class WebtoonServiceImpl implements WebtoonService {
 	}
 
 	@Override
-	public ArrayList<my_webtoon> getMyWebtoonList(String email) {
+	public ArrayList<MyWebtoonVO> getMyWebtoonList(String email) {
 
-		ArrayList<my_webtoon> datas = new ArrayList<my_webtoon>();
+		ArrayList<MyWebtoonVO> datas = new ArrayList<MyWebtoonVO>();
 		String sql = "select * from my_toon where mt_user ='".concat(email) + "';";
 
 		try (java.sql.Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
 			ResultSet rs = pstmt.executeQuery();
 			while (rs.next()) {
-				my_webtoon mywebtoon = new my_webtoon();
+				MyWebtoonVO mywebtoon = new MyWebtoonVO();
 				mywebtoon.setImgSrc(rs.getString("mt_imgsrc"));
 				mywebtoon.setWebtoonTitle(rs.getString("mt_title"));
 				mywebtoon.setWebtoonUrl(rs.getString("mt_url"));

@@ -6,7 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
 
-import com.webtoon.domain.my_webtoon;
+import com.webtoon.domain.MyWebtoonVO;
 
 public interface WebtoonMapper {
 	// 크롤링한 데이터를 처리하는데 필요한 메서드(추가). webtoon 테이블 insert문. webtoon 활용
@@ -55,5 +55,5 @@ public interface WebtoonMapper {
 
 	// 선택한 만화의 목차를 출력하는 메서드
 	@Select("select * from my_toon where mt_user ='".concat(email) + "';")
-	ArrayList<my_webtoon> getMyWebtoonList(String email);
+	ArrayList<MyWebtoonVO> getMyWebtoonList(String email);
 }

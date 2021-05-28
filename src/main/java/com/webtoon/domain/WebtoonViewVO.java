@@ -8,15 +8,15 @@ img varchar(2000)
 );
  */
 
-public class webtoon_view {
+public class WebtoonViewVO {
 
 	private String url;
 	private String img;
 
-	public webtoon_view() {
+	public WebtoonViewVO() {
 	}
 
-	public webtoon_view(String url, String img) {
+	public WebtoonViewVO(String url, String img) {
 		super();
 		this.url = url;
 		this.img = img;

@@ -1,28 +1,28 @@
 package com.webtoon.domain;
 
-/*
-create table webtoon_list(
-id		varchar(10),
-num int not null primary key auto_increment,
-thumb	varchar(2000) not null,
-title	varchar(30) not null,
-url		varchar(255),
-day		varchar(10)
-);
- */
+/*CREATE TABLE `webtoon_list` (
+		  `id` varchar(10) DEFAULT NULL,
+		  `num` int NOT NULL AUTO_INCREMENT,
+		  `thumb` varchar(2000) NOT NULL,
+		  `title` varchar(30) NOT NULL,
+		  `url` varchar(255) DEFAULT NULL,
+		  `day` varchar(10) DEFAULT NULL,
+		  PRIMARY KEY (`num`)
+		);
+*/
 
-public class webtoon_list {
-
+public class ListVO {
 	private String id;
 	private String thumb;
 	private String title;
 	private String url;
 	private String day;
 
-	public webtoon_list() {
+	public ListVO() {
+
 	}
 
-	public webtoon_list(String id, String thumb, String title, String url, String day) {
+	public ListVO(String id, String thumb, String title, String url, String day) {
 		super();
 		this.id = id;
 		this.thumb = thumb;

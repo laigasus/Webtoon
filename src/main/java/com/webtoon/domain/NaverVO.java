@@ -10,17 +10,17 @@ package com.webtoon.domain;
 		);
 */
 
-public class naverVO {
+public class NaverVO {
 	private int no;
 	private int day;
 	private String title;
 	private String url;
 	private String thumb;
 
-	public naverVO() {
+	public NaverVO() {
 	}
 
-	public naverVO(int no, int day, String title, String url, String thumb) {
+	public NaverVO(int no, int day, String title, String url, String thumb) {
 		super();
 		this.no = no;
 		this.day = day;
