@@ -1,0 +1,1082 @@
+@import
+	url(https://cdn.jsdelivr.net/font-notosans-kr/1.0.0-v1004/NotoSansKR-2350.css)
+;
+
+body, input, button, textarea {
+	font-family: 'NotoSansKR';
+}
+
+body, h2, input, textarea {
+	font-size: 17px;
+}
+
+body {
+	margin: 0;
+}
+
+.container {
+	width: 1080px;
+	margin: 0 auto;
+}
+
+ul {
+	list-style: none;
+	padding-left: 0;
+	margin-top: 12px;
+}
+
+a {
+	text-decoration: none !important;
+	cursor: pointer;
+}
+
+a:visited {
+	color: #eaeaec;
+}
+
+/*검은 a 민수*/
+.black_a{
+	color:#000000;
+}
+.black_a:visited{
+	color:#000000;	
+}
+
+button {
+	border: none;
+	outline: none;
+	color: #ffffff;
+	padding: 10px 0;
+	font-size: 16px;
+	cursor: pointer;
+}
+.red {
+	background-color: #d65550;
+}
+.green {
+	background-color: #46c376;
+}
+.blue {
+	background-color: #4675c3;
+	color: #ffffff;
+}
+
+.cursorpointer{
+	cursor: pointer;
+}
+
+hr {
+	clear: both;
+	border: none;
+	border-bottom: 1px solid rgba(0, 0, 0, .12);
+	margin: 0;
+}
+
+/* global 체크박스
+---------------------------------------------------------------------------------------------------------- */
+/*  커스텀 체크박스인데 여러가지 단점이 있어서 일단 주석
+input[type="checkbox"] { checkbox를 보이지 않게
+	display: none;
+}
+
+label::before {
+	content: "";
+	display: inline-block;
+	margin: 3px 10px 3px 3px;
+	width: 20px;
+	height: 20px;
+	border: 2px solid #4675c3;
+	text-align: center;
+	vertical-align: middle;
+}
+
+input[type="checkbox"]:checked+label::before {
+	input[type="checkbox"]:checked 바로 뒤에 오는 label
+	content: "\2713";
+	background: #4675c3;
+	font-size: 18px;
+	font-weight: bold;
+	line-height: 20px;
+	color: #ffffff;
+}
+
+label {
+	display: inline-block;
+	width: 120px;
+}
+ */
+/*1119김민수 global 체크박스*/
+
+
+/* global 네비게이션
+---------------------------------------------------------------------------------------------------------- */
+nav {
+	background-color: #161616;
+}
+
+#logo {
+	height: 74px;
+	margin-right: 20px;
+	float: left;
+	
+}
+
+nav ul {
+	margin: 0;
+}
+
+nav li a {
+	display: inline-block;
+	width: auto;
+	line-height: 75px; /* inline 속성의 상하 여백 */
+	font-size: 15px;
+	font-weight: bold;
+	color: #eaeaec;
+	text-align: center;
+	padding: 0 20px;
+}
+
+nav li:hover a, nav li:hover {
+	background-color: #ffffff;
+	color: #343434;
+}
+
+#nav-container {
+	display: flex;
+}
+
+#nav-icon {
+	display: inline;
+	flex: auto;
+	display: flex;
+	justify-content: flex-end;
+}
+
+#nav-icon li {
+	padding: 0 10px;
+	cursor: pointer;
+}
+
+#nav-icon img {
+	padding: 23px 0;
+	width: 25px;
+}
+
+.opened {
+	background-color: #ffffff;
+	color: #343434;
+}
+
+#user-close, #search-close {
+	display: none;
+}
+
+#user-bar, #search-bar {
+	background-color: #ffffff;
+	height: 75px;
+	text-align: right;
+	display: none;
+
+}
+
+
+#user-bar>.container, #search-bar>.container {
+	height: inherit;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+#user-bar button, #search-bar button {
+	width: 100px;
+	border-radius: 4px;
+	margin-left: 13.5px;
+}
+
+#search-bar form {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	margin-bottom: 0;
+}
+
+#search-bar form>img {
+	width: 18px;
+	margin-right: 13.5px;
+}
+
+#search-bar form>input {
+	flex: auto;
+	font-size: 18px;
+	height: 48px;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #c0c0c0;
+}
+
+#search-bar form>input:focus {
+	border-bottom: 1px solid #4675c3;
+	box-shadow: 0 1px #4675c3;
+}
+
+/* global 헤더
+---------------------------------------------------------------------------------------------------------- */
+header {
+	padding: 45px 0;
+	background-color: #161616;
+	font-size: 70px;
+	font-weight: bold;
+	color: #ffffff;
+}
+
+header>div {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	line-height: 80px;
+}
+
+header img {
+	height: 180px;
+	float: right;
+}
+
+/* global 섹션
+---------------------------------------------------------------------------------------------------------- */
+section {
+	padding-top: 30px;
+	padding-bottom: 100px;
+}
+
+div[id*="slide"] { /* class 속성에 slides가 포함된 div */
+	width: 100%;
+	justify-content: space-between;
+	margin-bottom: 108px;
+	box-shadow: 0 0 10px #989898;
+	display: none;
+}
+
+div[id*="slide"] button {
+	width: auto;
+}
+
+div[id*="slide"]:nth-child(1) {
+	background-color: #ffd133;
+	display: flex;
+}
+
+div[id*="slide"]:nth-child(2) {
+	background-color: #9db5b6;
+}
+
+div[id*="slide"]:nth-child(3) {
+	background-color: #6699cc;
+}
+
+div[id*="slide"]:nth-child(4) {
+	background-color: #534741;
+}
+
+div[id*="slide"]>img {
+	width: 900px;
+	height: 100%;
+}
+
+div[id*="slide"]>button {
+	background-color: inherit;
+	padding: 0;
+	margin: 0;
+	outline: none;
+}
+
+div[id*="slide"]>button>img {
+	width: 50px;
+}
+
+section h1 {
+	font-size: 22px;
+	color: #333;
+	font-weight: 500;
+	text-align: center;
+	padding-bottom: 19px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+	margin-bottom: 30px;
+}
+
+section h1 img {
+	vertical-align: middle;
+	width: 27px;
+	margin: 0 0 5px 0;
+}
+
+.list-container { /* 웹툰 10개 리스트 컨테이너 */
+	display: flex;
+	/*justify-content: space-between; 한줄에 4개를 넣었을때 화면을 위해 바꿉니다*/
+	justify-content: flex-start;
+	flex-wrap: wrap;
+}
+
+.list-container img {
+	border: 1px solid #e1e1e8;
+	width: 200px;
+	height: 200px;
+}
+/*민수1117*/
+.list-container .toonlist-a{
+	margin-right: 7px;
+}
+
+
+.title { /* 제목 */
+	color: #333;
+	margin-bottom: 7px;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.badge { /* UP 배지 */
+	float: right;
+	padding: 3px 7px;
+	font-size: 9px;
+	font-weight: bold;
+	color: #ffffff;
+	background-color: #f44336;
+	border-radius: 10px;
+}
+
+.genre { /* 장르 */
+	font-size: 15px;
+	color: #8fa6c0;
+	margin-bottom: 2px;
+}
+
+.author { /* 작가 */
+	font-size: 15px;
+	color: #7f7f7f;
+	margin-bottom: 43px;
+}
+
+/* global 푸터
+---------------------------------------------------------------------------------------------------------- */
+footer {
+	height: 265px;
+	padding: 65px 0 25px;
+	box-sizing: border-box;
+	background-color: #3b3e43;
+	font-size: 16px;
+	color: #f0f0f0;
+	line-height: 1.2;
+}
+
+footer>.container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+#footer-logo {
+	width: 124px;
+	height: 124px;
+}
+
+.col-1 { /* 로고 */
+	flex: 1;
+}
+
+.col-3 { /* 로고 빼고 나머지 */
+	flex: 3;
+}
+
+.col-3>div {
+	margin-bottom: 40px;
+}
+
+.col-3>div:last-child {
+	margin-bottom: 0;
+}
+
+.col-3>div>div {
+	width: 50%;
+	display: inline-block;
+}
+
+.col-3>div>div:last-child { /* 소셜 */
+	float: right;
+}
+
+footer h1 {
+	font-size: 18px;
+	margin: 0 0 24px;
+}
+
+footer li {
+	display: block;
+	font-size: 16px;
+	color: #919191;
+	margin-bottom: 9px;
+}
+
+footer li>a, footer li>a:visited {
+	color: #919191;
+}
+
+#social-container {
+	display: flex;
+	justify-content: space-between;
+}
+
+#social-container>ul {
+	margin-top: 0;
+}
+
+#social-container li {
+	display: inline;
+	margin: 0 9px 0 0;
+}
+
+#social-container img {
+	width: 50px;
+}
+
+#copyright {
+	color: #7d8186;
+}
+
+#top { /* TOP FAB 버튼 */
+	width: 56px;
+	height: 56px;
+	background-color: #dd2c50;
+	border-radius: 50%;
+	position: fixed;
+	right: 0;
+	bottom: 0;
+	margin: 16px;
+	display: flex;
+	justify-content: center;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0
+		rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+/* only 웹툰 소개
+---------------------------------------------------------------------------------------------------------- */
+#detail h1 {
+	margin-bottom: 0;
+}
+
+.tabs {
+	height: 57px;
+	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0
+		rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+}
+
+.tabs>form {
+	height: 57px;
+	text-align: center;
+}
+
+.tabs>form>select {
+	height: 86%;
+	float: left;
+	justify-content: center;
+	border: none;
+}
+
+.tabs>form>input {
+	height: 77%;
+	width: 60%;
+	justify-content: center;
+	border: none;
+}
+
+.tabs>form>button {
+	height: 88%;
+	position: relative;
+	bottom: 16px;
+}
+
+.tabs>form>button:hover {
+	background-color: black;
+}
+
+.community-container {
+	border: 1px solid lightgray;
+	border-radius: 4px;
+}
+
+.community-container>div {
+	border-bottom: 1px solid lightgray;
+	padding: 10px 10px 10px 10px;
+}
+
+#detail-tab li {
+	width: 50%;
+}
+
+#intro-top dd:last-child {
+	margin-bottom: 0;
+}
+
+#intro-top {
+	display: flex;
+}
+
+#intro-top img {
+	border: 1px solid #e1e1e8;
+	width: 400px;
+	height: 400px;
+}
+
+#intro-top #title {
+	font-size: 25px;
+	margin-bottom: 7px;
+}
+
+#intro-top div:nth-child(2) {
+	/* 웹툰 제목, 장르, 작가 */
+	margin: 28px 0 0 40px;
+}
+
+#intro-top dl {
+	margin: 0;
+	padding-bottom: 30px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+	margin-bottom: 23px;
+}
+
+#intro-top dt {
+	float: left;
+	width: 120px;
+	font-weight: bold;
+	line-height: 40px;
+	clear: both;
+}
+
+#intro-top dd {
+	line-height: 40px;
+}
+
+#intro-top div:nth-child(3) {
+	/* 웹툰 가격 */
+	font-size: 30px;
+	margin-bottom: 27px;
+}
+
+#intro-top button {
+	font-size: 20px;
+	width: 493px;
+	height: 57px;
+	border-radius: 4px;
+	margin: 0 13.5px 11px 0;
+}
+
+#intro-content {
+	text-align: center;
+}
+
+/* only 장바구니
+---------------------------------------------------------------------------------------------------------- */
+#link {
+	text-align: center;
+}
+
+table {
+	color: #333;
+	width: 100%;
+	padding-bottom: 30px;
+	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+	border-collapse: collapse; /* 안주면 아래 셀 때문에 border 안보임 */
+}
+
+#cart-table {
+	text-align: center;
+}
+
+th, td {
+	padding: 16px 0;
+}
+
+#order-history td {
+	text-align: center;
+}
+
+table ul {
+	text-align: left;
+	margin: 12px 0;
+}
+
+#cart-table .author, #order-history .author {
+	margin-bottom: 0;
+}
+
+thead {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+}
+
+table a img {
+	border: 0px solid #e1e1e8;
+	width: 100px;
+	height: 100px;
+	float: left;
+	margin-right: 20px;
+}
+
+button {
+	width: 135px;
+	border-radius: 4px;
+	margin-left: 13.5px;
+}
+
+table ul {
+	text-align: left;
+	margin: 12px 0;
+}
+
+#cart-amount { /* 총 상품금액 */
+	width: 300px;
+	background-color: #c0392b;
+	color: #ffffff;
+	padding: 20px;
+	float: right;
+}
+
+#cart-amount p { /* 총 할인금액 */
+	display: flex;
+	justify-content: space-between;
+	margin: 0;
+}
+
+#cart-amount p:nth-child(2) { /* 결제금액 */
+	margin-bottom: 20px;
+}
+
+#cart-amount p:nth-child(3) {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.delete-item {
+	width: 100px;
+	height: 30px;
+	font-size: 13px;
+	background-color: #333840;
+	padding: 0;
+	margin: 15px 0 0 0;
+}
+
+/* only 사이트(네이버, 다음 네이트)
+---------------------------------------------------------------------------------------------------------- */
+nav .container, #day-tab {
+	text-align: center;
+}
+
+#day-tab img {
+	height: 100px;
+	margin: 10px 16px 0 0;
+}
+
+#day-tab li {
+	display: inline-flex;
+	flex-direction: column;
+}
+
+#day-tab .active a {
+	background-color: #e83d3d;
+}
+
+#day-tab li a {
+	width: 50px;
+	height: 50px;
+	background-color: #c2c2c2;
+	border-radius: 50%;
+	text-align: center;
+	vertical-align: middle;
+	margin-right: 16px;
+	color: #ffffff;
+	line-height: 50px;
+}
+
+#day-tab li a:hover {
+	background-color: #e83d3d;
+}
+
+
+/* only 자작툰
+---------------------------------------------------------------------------------------------------------- */
+#jajak-section .container {
+	border-bottom: 1px solid rgba(0, 0, 0, .12);
+}
+
+#jajak-tab {
+	height: 50px;
+}
+
+#jajak-tab li {
+	width: 10%;
+}
+
+#jajak-tab li a {
+	display: inline-block;
+	line-height: 50px; /* inline 속성의 상하 여백 */
+}
+
+#jajak-tab .active a {
+	border: 0;
+}
+
+#jajak-serach-button {
+	width: 120px;
+	float: right;
+	margin-top: 16px;
+	/*1120민수추가*/
+	background-color: #999999;	
+}
+#jajak-serach-button:hover{
+	background-color: #000000;
+}
+/*민수   */
+#jajak-section td{  
+	font-size:15px;
+	padding:14px 0px;
+}
+/*1125민수*/
+#jajak-input-button {
+	border-radius: 4px;
+	width: 120px;
+	background-color: #999999;	
+	color: #ffffff;
+	padding: 10px 0;
+	font-size: 16px;
+	border: none;
+	outline: none;
+}
+
+#jajak-paging-tr {
+	border-top: 3px;
+}
+#jajak-paging-tr a:visited {
+	color: #A9A9A9;
+}
+
+
+/* 주창륜 -----------------------------------------------------------------------------------------------start*/
+/* only 자작툰 올리기
+---------------------------------------------------------------------------------------------------------- */
+#jajak-upload-form {
+	border-bottom: 0;
+}
+
+#jajak-upload-form button{
+	width: 120px;
+	float: right;
+	margin-top: 16px;
+}
+
+#jajak-upload-form input[type="file"]{
+	padding-bottom: 20px;
+}
+#jajak-upload-form input[type="text"] {
+	width: 100%;
+	height: 45px;
+	border: none;
+	outline: none;
+	border-bottom: 1px solid #c0c0c0;
+	padding-bottom: 10px;
+	margin-bottom: 10px;
+}
+
+#jajak-upload-form input[type="text"]:focus {
+	border-bottom: 1px solid #4675c3;
+	box-shadow: 0 1px #4675c3;
+}
+/* only 자작툰 콘텐츠 민수
+---------------------------------------------------------------------------------------------------------- */
+.jajak_content_header h3{
+	margin-bottom: 20px;
+}
+.jajak_content_footer{
+	text-align: right;
+}
+
+.jajak_content_footer button {
+	width: 100px;
+	border-radius: 4px;
+	margin-left: 13.5px;
+}
+/*민수1202*/
+
+#jajak-input-button:hover{
+	background-color: #000000;
+	color:#ffffff;
+}
+/* 에디터 --------------------------------------*/
+.toolbar {
+	padding: 10px 0;
+}
+
+.toolbar i {
+	color: gray;
+	padding: 0 10px;
+}
+
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+.toolbar span {
+	font-size: 115%;
+	font: bold;
+	font-weight: bold;
+	color: gray;
+}
+
+
+.editor {
+	resize: none;
+	display: block;
+	background-color: white;
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	overflow: auto;
+	width: 1080px;
+	height: 500px;
+}
+
+.editor:focus {
+	outline: 0;
+}
+
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+.dropdown-fontsize {
+	display: inline-block;
+	padding: 0 10px;
+}
+
+.dropdown-content-fontsize {
+	display: none;
+	position: absolute;
+	border: 1px solid lightgray;
+	padding: 0;
+}
+
+.dropdown-fontsize:hover .dropdown-content-fontsize {
+	display: block;
+}
+
+.dropdown-content-fontsize>a {
+	display: block;
+	background-color: white;
+	text-decoration: none;
+	color: gray;
+}
+
+.dropdown-content-fontsize>a:hover {
+	border-bottom: 0.5px solid lightgray;
+	border-top: 0.5px solid lightgray;
+	background-color: lightgray;
+}
+
+.dropdown-content-fontsize>a:visited {
+	text-decoration: none;
+}
+
+/* @@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@ */
+.dropdown-content-color {
+	display: none;
+	position: absolute;
+	padding: 0;
+}
+
+.dropdown-color {
+	display: inline-block;
+	padding: 0 10px;
+}
+
+.dropdown-content-color input{
+	width:80px;
+	height:80px;
+}
+
+.dropdown-color:hover .dropdown-content-color {
+	display: block;
+}
+
+/* 창륜------------------------------------------------------------------------------------------------end */
+
+/* only 마이페이지 ----창륜 수정
+---------------------------------------------------------------------------------------------------------- */
+.inner-container {
+	display:flex;
+	justify-content: space-between;
+}
+
+.inner-container h4{
+	margin-bottom: 30px;
+}
+
+.my_post{
+	display:inline-block;
+	flex:1;
+	align-items: center;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	text-align: center;
+	overflow: auto;
+	margin-right: 4px;
+}
+.my_post ul{
+	display:flex;
+	justify-content:space-around;
+	text-align:center;
+}
+.my_post li{
+	display: inline;
+}
+
+.my-post-container{
+	display:flex;
+	justify-content:space-around;
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	border-radius: 3px;
+	margin-bottom: 6px;
+	text-align:center;
+	height: 50px;
+}
+.my-post-container:hover{
+	background-color:lightgray;
+}
+
+.my-post-container div{
+	margin: auto 0;
+}
+
+.my_webtoon_list{
+	display:inline-block;
+	flex:1;
+	border: 1px solid lightgray;
+	border-radius: 5px;
+	align-items: center;
+	text-align: center;
+	overflow: auto;
+	margin-left: 4px;
+}
+
+.my-webtoon-container {
+	display:flex;
+	justify-content:space-between;
+	border-top: 1px solid lightgray;
+	border-bottom: 1px solid lightgray;
+	border-radius: 3px;
+	margin-bottom: 6px;
+	text-align:center;
+	height: 100px;
+	cursor: pointer;
+}
+
+.my-webtoon-container:hover{
+	background-color:lightgray;
+}
+
+.my-webtoon-container img{
+	margin: 0;
+	flex-grow: 2;
+}
+
+.my-webtoon-container p{
+	margin:auto 0;
+	text-align:center;
+	flex-grow: 8;
+	
+}
+
+
+
+/*  only   toon_list.jsp  민수 ----------------------------------------------------------------------------------------------------------
+ */
+.like-button-div button:hover {
+	background-color:#d60950;
+}
+
+.my-webtoon-container {
+	display:flex;
+	justify-content:space-around;
+	border: 1px solid lightgray;
+	border-radius: 3px;
+	margin-bottom: 3px;
+	text-align:center;
+	height: 100px;
+}
+
+.my-webtoon-container:hover{
+	background-color:lightgray;
+}
+
+.my-webtoon-container *{
+	margin: 0 auto;
+}
+
+
+
+/* only 자주 묻는 질문
+---------------------------------------------------------------------------------------------------------- */
+#faq h2 {
+	background: #ffffff;
+	color: #000;
+	padding: 20px;
+	margin-top: 15px;
+	border-left: 5px solid #dd2c50;
+	box-shadow: 0px 0px 10px #dddddd;
+}
+
+#faq div {
+	border-bottom: 1px solid rgba(0, 0, 0, .12);
+}
+
+#faq div:last-child {
+	border: none;
+}
+
+#feedback {
+	display: flex;
+	justify-content: space-between;
+}
+
+#feedback textarea {
+	flex: auto;
+	padding: 5px;
+}
+
+#feedback button {
+	width: 100px;
+	border-radius: 4px;
+}
+
+/**/
+
+
+/* only 자작툰  1119김민수 실헝용으로 추가
+---------------------------------------------------------------------------------------------------------- */
+#jajak-section .container {
+	border-bottom: 1px solid rgba(0,0,0,.12);
+}
+
+#jajak-tab {
+	height: 50px;
+}
+
+
+#jajak-tab li a {
+	display: inline-block;
+	line-height: 50px;	/* inline 속성의 상하 여백 */
+}
+
+#jajak-tab .active a {
+	border: 0;
+}
+
+#jajak-section button {
+	width: 120px;
+	float: right;
+	margin-top: 16px;
+}
+
+
+
+

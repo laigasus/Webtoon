@@ -1,0 +1,111 @@
+@import url(https://cdn.jsdelivr.net/font-notosans-kr/1.0.0-v1004/NotoSansKR-2350.css);
+
+body > * { /*민수1114원래꺼이있길래 넣어봄*/
+	all:unset;
+}
+
+body {
+	margin: 0;
+	font-family: 'NotoSansKR', serif;
+	background-image: url("../img/bg.jpg");
+	background-size: cover;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+input, button {
+	font-family: 'NotoSansKR', serif;
+}
+
+a {
+	color: #fff;
+	text-decoration: none;
+}
+
+.container,.regcontainer{
+	width: 500px;
+	height: 500px;
+	text-align: center;
+	background-color: rgba(52, 73, 94, 0.7);
+	border-radius: 4px;
+}
+.regcontainer{
+	height:600px;
+}
+
+.container img,.regcontainer img{
+	width: 120px;
+	height: 120px;
+	margin-top: -60px;
+	margin-bottom: 30px;
+}
+
+/**/
+
+/*type="text"를 지정해서 특정css를 적용시키는거는 안좋을꺼같아서 name으로 대체*/
+input[type="email"],input[type="password"],input[name="nickname"],input[name="resNum"]{
+	height: 40px;
+	width: 300px;
+	border: none;
+	font-size: 18px;
+	margin-bottom: 20px;
+	border-radius: 4px;
+	padding-left: 40px;
+}
+/*민수1114 input[type="submit은 역할이 버튼과 같음으로 button처럼 외형을 만듬"*/
+button,input[type="submit"]{
+	display: inline-block;
+	width: 300px;
+	font-size: 18px;
+	padding: 10px 0;
+	cursor: pointer;
+	color: #fff;
+	border-radius: 4px;
+	border: none;
+	background-color: #dd2c50;
+	margin-bottom: 20px;
+}
+#inputSearch{
+	display: inline-block;
+	width: 100px;
+	font-size: 10px;
+	padding: 5px 0;
+	cursor: pointer;
+	color: #fff;
+	border-radius: 4px;
+	border: none;
+	background-color: #dd2c50;
+	margin-bottom: 5px;
+}
+/*민수1114 width height 조절해서 적당한 크기로 조절*/
+.form-input::before,#emailduplicate-form::before {
+	content: url("../img/input/email.svg");
+	width: 23px;
+	height: 24px;
+	display: inline-block;
+	position: absolute;
+	padding: 12px 0 0 10px;
+}
+
+
+
+.form-input:nth-child(2)::before {
+	content: url("../img/input/password.svg");
+}
+
+.form-input:nth-child(3)::before {
+	content: url("../img/input/password.svg");
+}
+.form-input:nth-child(4)::before {
+	content: url("../img/input/person.svg");
+}
+
+.link {
+	font-weight: 300;
+	width: 300px;
+	margin: 0 auto;
+	justify-content: space-between;
+	display: flex;
+}
