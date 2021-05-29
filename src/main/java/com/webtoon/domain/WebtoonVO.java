@@ -12,6 +12,7 @@ thumb	varchar(2000)
 
 public class WebtoonVO {
 
+	private int no;
 	private String day;
 	private String title;
 	private String url;
@@ -26,6 +27,10 @@ public class WebtoonVO {
 		this.title = title;
 		this.url = url;
 		this.thumb = thumb;
+	}
+
+	public int getNo() {
+		return no;
 	}
 
 	public String getDay() {
