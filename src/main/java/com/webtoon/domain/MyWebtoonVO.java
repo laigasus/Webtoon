@@ -9,33 +9,42 @@ mt_url mediumtext not null
 ); 
 */
 
-
 public class MyWebtoonVO {
 	private String imgSrc;
-	private String webtoontitle;
+	private String webtoonTitle;
 	private String webtoonUrl;
+	private String userEmail;
+
+	public String getImgSrc() {
+		return imgSrc;
+	}
 
 	public void setImgSrc(String imgSrc) {
 		this.imgSrc = imgSrc;
 	}
 
-	public String getImgSrc() {
-		return this.imgSrc;
-	}
-
-	public void setWebtoonTitle(String webtoontitle) {
-		this.webtoontitle = webtoontitle;
-	}
-
 	public String getWebtoonTitle() {
-		return this.webtoontitle;
+		return webtoonTitle;
+	}
+
+	public void setWebtoonTitle(String webtoonTitle) {
+		this.webtoonTitle = webtoonTitle;
+	}
+
+	public String getWebtoonUrl() {
+		return webtoonUrl;
 	}
 
 	public void setWebtoonUrl(String webtoonUrl) {
 		this.webtoonUrl = webtoonUrl;
 	}
 
-	public String getWebtoonUrl() {
-		return this.webtoonUrl;
+	public String getUserEmail() {
+		return userEmail;
 	}
+
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+
 }

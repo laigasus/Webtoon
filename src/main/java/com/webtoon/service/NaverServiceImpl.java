@@ -1,132 +1,56 @@
 package com.webtoon.service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.util.ArrayList;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.webtoon.domain.listVO;
-import com.webtoon.domain.naverVO;
+import com.webtoon.domain.ListVO;
+import com.webtoon.domain.NaverVO;
 import com.webtoon.domain.ViewVO;
 import com.webtoon.mapper.NaverMapper;
 
 @Service("NaverService")
 public class NaverServiceImpl implements NaverService {
-	
+
 	@Autowired
 	private NaverMapper naverMapper;
-
-	DataSource ds;
-
-	private NaverServiceImpl() {
-
-		try {
-			InitialContext ct = new InitialContext();
-			ds = (DataSource) ct.lookup("java:comp/env/jdbc/mysql");
-
-		} catch (NamingException e) {
-			e.printStackTrace();
-		}
-	}
+	private WebtoonService webtoonService;
 
 	////////////////////////////////////////////////////////////////
+
 	@Override
-	public ArrayList<naverVO> listBoard(int YoIll) {
-
-		webtoonDAO.getInstance().webtoonCrawling();
-
-		ArrayList<naverVO> articles = new ArrayList<>();
-		String sql = "SELECT * FROM webtoon where day=? ORDER BY no ASC";
-
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setInt(1, YoIll);
-			ResultSet rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				naverVO article = new naverVO(rs.getInt("no"), rs.getInt("day"), rs.getString("title"),
-						rs.getString("url"), rs.getString("thumb"));
-				articles.add(article);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return articles;
+	public ArrayList<NaverVO> listBoard(int YoIll) {
+		// TODO Auto-generated method stub
+		webtoonService.webtoonCrawling();
+		return naverMapper.listBoard(YoIll);
 	}
 
 	@Override
-	public ArrayList<naverVO> searchBoard(String searchParam) {
-
-		webtoonDAO.getInstance().webtoonCrawling();
-
-		ArrayList<naverVO> articles = new ArrayList<>();
-		String sql = "SELECT * FROM webtoon where title LIKE " + "'%" + searchParam + "%'" + " ORDER BY no ASC";
-
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			ResultSet rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				naverVO article = new naverVO(rs.getInt("no"), rs.getInt("day"), rs.getString("title"),
-						rs.getString("url"), rs.getString("thumb"));
-				articles.add(article);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return articles;
+	public ArrayList<NaverVO> searchBoard(String searchParam) {
+		// TODO Auto-generated method stub
+		webtoonService.webtoonCrawling();
+		return naverMapper.searchBoard(searchParam);
 	}
 
-	public ArrayList<listVO> toonList(String URL, String id) {
-
-		webtoonDAO.getInstance().webtoonListCrawling(URL, id);
-
-		ArrayList<listVO> articles = new ArrayList<>();
-		String sql = "SELECT * FROM webtoon_list where id=? ORDER BY num ASC";
-
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, id);
-			ResultSet rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				listVO article = new listVO(rs.getString("id"), rs.getString("thumb"), rs.getString("title"),
-						rs.getString("url"), rs.getString("day"));
-				articles.add(article);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return articles;
+	@Override
+	public ArrayList<ListVO> toonList(String URL, String id) {
+		// TODO Auto-generated method stub
+		webtoonService.webtoonListCrawling(URL, id);
+		return naverMapper.toonList(URL, id);
 	}
 
-	public ArrayList<ViewVO> toonView(String URL) {
-
-		webtoonDAO.getInstance().webtoonViewCrawling(URL);
-
-		ArrayList<ViewVO> articles = new ArrayList<>();
-		String sql = "SELECT * FROM webtoon_view where url=? ORDER BY num ASC";
-
-		try (Connection conn = ds.getConnection(); PreparedStatement pstmt = conn.prepareStatement(sql)) {
-			pstmt.setString(1, URL);
-			ResultSet rs = pstmt.executeQuery();
-
-			while (rs.next()) {
-				ViewVO article = new ViewVO(rs.getInt("num"), rs.getString("url"), rs.getString("img"));
-				articles.add(article);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return articles;
+	@Override
+	public ArrayList<ViewVO> toonView(String url) {
+		// TODO Auto-generated method stub
+		webtoonService.webtoonViewCrawling(url);
+		return naverMapper.toonView(url);
 	}
 
 	@Override
 	public ArrayList<String> toonInfo(String URL) {
-		return webtoonDAO.getInstance().webtoonInfoCrawling(URL);
+		// TODO Auto-generated method stub
+		return webtoonService.webtoonInfoCrawling(URL);
 	}
+
 }
