@@ -9,7 +9,7 @@ public interface BoardService {
 	void regist(String email, String writer, String title, String content, String absoluteImgPath);
 
 	// 글 목록을 가지고 오는 메서드
-	List<BoardVO> listBoard(int startRow,int pageSize);
+	List<BoardVO> listBoard(int startRow, int pageSize);
 
 	// 내가 쓴 글 목록을 가지고 오는 메서드
 	List<BoardVO> myListBoard(String email);
@@ -31,7 +31,7 @@ public interface BoardService {
 
 	// DB에 있는 view의 값을 증가 시켜주는 메서드
 	void viewIncrease(int bId, int bView);
-	
+
 	// 글갯수를 받아온다.
 	int getCountBoard();
 }
