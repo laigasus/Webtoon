@@ -7,10 +7,10 @@ import com.webtoon.domain.MyWebtoonVO;
 public interface WebtoonService {
 	// 크롤링한 데이터를 처리하는데 필요한 메서드(추가). webtoon 테이블 insert문. webtoon 활용
 	public void insertWebtoon(int day, String title, String url, String thumb);
-
+	
 	// 크롤링한 데이터를 처리하는데 필요한 메서드(추가). webtoon 테이블 insert문. webtoon_list 활용
 	public void insertWebtoonList(String id, String thumb, String title, String url, String day);
-
+	
 	// 크롤링한 데이터를 처리하는데 필요한 메서드(추가). webtoon 테이블 insert문. webtoon_view 활용
 	public void insertWebtoonView(String url, String img);
 
