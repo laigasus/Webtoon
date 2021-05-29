@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.webtoon.domain.BoardVO;
@@ -20,8 +21,6 @@ public class BoardController {
 	private BoardService service; 
 	
 	
-	
-	
 	// 커뮤니티 글 목록     시작글번호와 표현할 글 갯수가
 	@GetMapping("jajak")
 	public String jajakListView(Model model,int startRow,int pageSize) {
@@ -33,71 +32,48 @@ public class BoardController {
 		return "jajak";
 	}
 	
-	
-	
-	
 	//커뮤니티 특정글 선택 후 화면
 	@GetMapping("jajak_content")
-	public String jajakContentView(Model model,int bId) {
-		
+	public String jajakContentView(Model model,BoardVO vo) {
 		//bd_num을 받아와야함
-		BoardVO boardContent = service.contentBoard(bId);
-		
+		BoardVO boardContent = service.contentBoard(vo.getBd_num());
 		model.addAttribute("boardContent",boardContent);
 		
 		return "jajak_content";
 	}
 	
+	// 커뮤니티 글올리기 페이지
+	@GetMapping("jajak-upload")
+	public String jajakUploadView(Model model) {
+		
+		return "jajak-upload";
+	}
+	// 커뮤니티 글 올리기 확인 눌렀을때
+	@PostMapping("jajak-upload")
+	public String jajakUpload(BoardVO vo) {
+//		service.regist(email, writer, title, content, absoluteImgPath);
+		service.regist(vo.getBd_email(), vo.getBd_writer(), vo.getBd_title(), vo.getBd_content(), null);
+		return "redirect:/jajak";
+	}
+
 	//글 수정하는 페이지
-	@GetMapping("jajak_update")
-	public String jajakUpdateView(Model model,String title,String content, String img, int bId) {
-		System.out.println("jajakUpdateView start ====");
-		
-		service.updateBoard(title, content, img, bId);
-		
-		
-		return "jajak_update";
+	@GetMapping("jajak-update")
+	public String jajakUpdateView(Model model,BoardVO vo) {
+		System.out.println("jajakUpdateView start ====");		
+//		void updateBoard(String title, String content, String img, int bId);
+		service.updateBoard(vo.getBd_title(), vo.getBd_content(), null, vo.getBd_num());
+		return "jajak-update";
 	}
 	
 	
 	// 글 삭제
 	@RequestMapping("/jajak_delete")
-	public String delete(int bId) {
-		System.out.println("delete..... "+ bId);
+	public String delete(BoardVO vo) {
+		System.out.println("delete..... "+ vo);
 		
-		service.deleteBoard(bId);
+		service.deleteBoard(vo.getBd_num());
 		return "redirect:/jajak";
 	}
-	
-//	@Override
-//	public List<BoardVO> listBoard(int startRow, int pageSize) {
-//		return boardMapper.listBoard(startRow, pageSize);
-//	}
-	
-	
-//	@GetMapping("/list")
-//	public String listView(Model model, HttpServletRequest request) {
-//		System.out.println("listView start ====");
-//		//HttpSession session = requset.getSession();
-//		//String userName = (String) session.getAttribute("userName");
-//		List<BoardVO> boardList = service.getListBoard();
-//		for (BoardVO boardVO : boardList) {
-//			System.out.println("list.. " + boardVO);
-//		}
-//		model.addAttribute("boardList", boardList);
-//		return "getBoardList";
-//	}
-//	
-//	@PostMapping("/list")
-//	public String list(SearchVO searchvo,Model model) {
-//		System.out.println("list search start ======== " + searchvo);
-//		List<BoardVO> boardList = service.getListSearch(searchvo);
-//		for (BoardVO boardVO : boardList) {
-//			System.out.println("list.. " + boardVO);
-//		}
-//		model.addAttribute("boardList",boardList);
-//		return "getBoardList";
-//	}
 	
 	
 }

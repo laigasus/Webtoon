@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import com.webtoon.domain.ListVO;
 import com.webtoon.domain.NaverVO;
-import com.webtoon.external.CalculateDate;
 import com.webtoon.service.NaverService;
 
 @Controller
@@ -22,12 +21,11 @@ public class NaverController {
 	@GetMapping("/naver")
 	public String naverListView(Model model, NaverVO vo) {
 		System.out.println("네이버 ");
-		//CalculateDate 사용법 아직모름
-		ArrayList<NaverVO> naverList= service.listBoard(CalculateDate.calcDayOfWeek("kor", "월"));  ///listBoard 반환값 ArrayList<NaverVO>
-		for(NaverVO naverVO : naverList ) {
-			System.out.println("list.. " + naverVO);
-		}
-		model.addAttribute("naverList",naverList);
+//		ArrayList<NaverVO> naverList= service.listBoard(CalculateDate.calcDayOfWeek("kor", "월"));  
+//		for(NaverVO naverVO : naverList ) {
+//			System.out.println("list.. " + naverVO);
+//		}
+//		model.addAttribute("naverList",naverList);
 		
 		return "naver";  //naver.jsp 출력
 	}
@@ -36,12 +34,19 @@ public class NaverController {
 	@GetMapping("/toon_list")
 	public String toonListView(Model model,ListVO vo) {
 		
-		ArrayList<ListVO> toonList = service.toonList(URL, id);
-		
+		ArrayList<ListVO> toonList = service.toonList(vo.getUrl(), vo.getId());
 		model.addAttribute("toonList",toonList);
 		
 		return "toon_list";
 	}
+	
+	@GetMapping("/detail")
+	public String detail() {	
+		
+		return "detail";
+	}
+	
+	
 	
 	
 
