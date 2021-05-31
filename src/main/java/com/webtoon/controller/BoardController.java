@@ -16,7 +16,6 @@ import com.webtoon.service.BoardService;
 @Controller
 public class BoardController {
 
-	
 	@Autowired
 	private BoardService service; 
 	
@@ -64,7 +63,6 @@ public class BoardController {
 		service.updateBoard(vo.getBd_title(), vo.getBd_content(), null, vo.getBd_num());
 		return "jajak-update";
 	}
-	
 	
 	// 글 삭제
 	@RequestMapping("/jajak_delete")
