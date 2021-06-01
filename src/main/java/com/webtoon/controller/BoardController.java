@@ -129,7 +129,7 @@ public class BoardController {
 
 	@PostMapping("/jajak_content_control")
 	public String jajakContentControlPOST() {
-		return "";
+		return "jajak_content_control";
 	}
 	/////////////////////////////////////////////////
 
@@ -145,14 +145,8 @@ public class BoardController {
 		service.deleteBoard(Bd_num);
 		
 		return "redirect:/jajak";
-	}
-		
-//	@Delete("DELETE FROM toon_board WHERE bd_num=#{bd_num}")
-//	void deleteBoard(int bId);
+	}	
 	
-//	int Bd_num=Integer.parseInt(request.getParameter("Bd_num"));
-//	BoardDAO.getInstance().deleteBoard(Bd_num);	
-//	response.sendRedirect("mypage.jsp"); 
 	/////////////////////////////////////////////////
 
 	// jajak_content.jsp
@@ -199,7 +193,7 @@ public class BoardController {
 
 	@PostMapping("/jajak_content")
 	public String jajakContentPOST() {
-		return "";
+		return "jajak_content";
 	}
 	// jajak_update_control.jsp
 	// 커뮤니티 글 수정
@@ -241,7 +235,7 @@ public class BoardController {
 
 	@PostMapping("/jajak_update_control")
 	public String jajakUpdateControlPOST() {
-		return "";
+		return "jajak_update_control";
 	}
 	/////////////////////////////////////////////////
 
@@ -262,7 +256,7 @@ public class BoardController {
 
 	@PostMapping("/jajak_update")
 	public String jajakUpdatePOST() {
-		return "";
+		return "jajak_update";
 	}
 	/////////////////////////////////////////////////
 
@@ -306,7 +300,7 @@ public class BoardController {
 
 	@PostMapping("/jajak_upload_control")
 	public String jajakUploadControlPOST() {
-		return "";
+		return "jajak_upload_control";
 	}
 	/////////////////////////////////////////////////
 	// jajak_upload.jsp
@@ -355,7 +349,7 @@ public class BoardController {
 
 	@PostMapping("/my_post")
 	public String myPostPOST() {
-		return "";
+		return "my_post";
 	}
 	/////////////////////////////////////////////////
 

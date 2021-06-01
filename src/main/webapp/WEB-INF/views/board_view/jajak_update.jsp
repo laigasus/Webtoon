@@ -28,7 +28,7 @@
 				<img src="img/button/arrow.svg" /> 글쓰기
 			</h1>
 			<form method="post" action="jajak-update-control.jsp" enctype="multipart/form-data">
-			<c:forEach items="articles" var="article">
+			<c:forEach items="${articles }" var="article">
 				<div id="jajak-upload-form">
 					<input type="text" name="title" placeholder="제목" value=${article.getBd_title() } required/>
 					<hr>

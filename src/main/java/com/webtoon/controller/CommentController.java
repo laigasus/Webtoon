@@ -39,7 +39,7 @@ public class CommentController {
 
 	@PostMapping("/comment_like_control")
 	public String commentLikeControlPOST() {
-		return "";
+		return "comment_like_control";
 	}
 	/////////////////////////////////////////////////
 	

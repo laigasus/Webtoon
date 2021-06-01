@@ -17,7 +17,7 @@ pageEncoding="UTF-8"%>
     <section>
       <div class="container">
         <h1><img src="img/button/arrow.svg"/> 커뮤니티 </h1>
-		<c:forEach items="articles" var="article">
+		<c:forEach items="${articles}" var="article">
 			<div class="jajak_content_header">
 				<h3>${article.getBd_title()}</h3>
 				<div class="jajak_content_header_infor">등록일:${article.getBd_date()}조회수:${article.getBd_view()}작성자:${article.getBd_writer()}</div>
@@ -58,7 +58,7 @@ pageEncoding="UTF-8"%>
 			<thead>
 			</thead>
 			<tbody>
-				<c:forEach items="best" var="best">
+				<c:forEach items="${best}" var="best">
 					<tr style="background-color: #ffe2f4;">
 						<td width="10%">${best_commentor}<br>
 						${best.getCm_date()}</td>
@@ -68,11 +68,7 @@ pageEncoding="UTF-8"%>
 						<img src="img/love.svg"></a></td>
 					</tr>
 				</c:forEach>
-				<c:forEach items="comments" var="comment">
-				
-				</c:forEach>
-				
-				<c:forEach items="comments" var="comment">
+				<c:forEach items="${comments}" var="comment">
 					<tr>
 						<td width="10%">"작성자"<br>
 						${comment.getCm_date()}</td>
