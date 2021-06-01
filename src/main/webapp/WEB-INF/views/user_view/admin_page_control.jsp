@@ -7,11 +7,9 @@
 <meta charset="UTF-8">
 </head>
 <body>
-	<%
-	out.print("<script>");
-	out.print("alert('회원탈퇴가 완료되었습니다');");
-	out.print("location.href='admin_page.jsp';");
-	out.print("</script>");
-	%>
+	<script>
+		alert('회원탈퇴가 완료되었습니다');
+		location.href = 'admin_page.jsp';
+	</script>
 </body>
 </html>

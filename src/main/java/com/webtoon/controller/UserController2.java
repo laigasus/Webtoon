@@ -1,9 +1,24 @@
 package com.webtoon.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Properties;
+import java.util.Random;
 
+import javax.mail.Address;
+import javax.mail.Authenticator;
+import javax.mail.Message;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,14 +27,19 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.webtoon.domain.MyWebtoonVO;
 import com.webtoon.domain.UserVO;
+import com.webtoon.external.DBConnect;
+import com.webtoon.external.SMTPAuthenticatior;
 import com.webtoon.service.UserService;
+import com.webtoon.service.WebtoonService;
 
 @Controller
 public class UserController2 {
 
 	@Autowired
 	private UserService service;
+	private WebtoonService webtoonService;
 
 	// admin_page_control.jsp
 	// 관리자 페이지 제어 이벤트 페이지
@@ -248,12 +268,12 @@ public class UserController2 {
 	// 페이지 설명 추가
 	@GetMapping("/login")
 	public String loginGET(HttpServletRequest request, HttpSession session, Model model) {
-		String chSave=(String)session.getAttribute("chSave"); //체크했으면 checked 저장
-		String saveId=(String)session.getAttribute("saveId");  //saveId
-		String savePw=(String)session.getAttribute("savePw");
-		if(saveId==null){ //saveId가 비어있어서 null이 보여지는 것 방지
-			saveId="";
-			savePw="";
+		String chSave = (String) session.getAttribute("chSave"); // 체크했으면 checked 저장
+		String saveId = (String) session.getAttribute("saveId"); // saveId
+		String savePw = (String) session.getAttribute("savePw");
+		if (saveId == null) { // saveId가 비어있어서 null이 보여지는 것 방지
+			saveId = "";
+			savePw = "";
 		}
 		return "";
 	}
@@ -269,7 +289,7 @@ public class UserController2 {
 	@GetMapping("/logout")
 	public String logoutGET(HttpServletRequest request, HttpSession session) {
 		session.invalidate();
-		//response.sendRedirect("index.jsp");
+		// response.sendRedirect("index.jsp");
 		return "";
 	}
 
@@ -279,7 +299,6 @@ public class UserController2 {
 	}
 	/////////////////////////////////////////////////
 
-	
 	// my_webtoon_add.jsp
 	// 페이지 설명 추가
 	@GetMapping("/my_webtoon_add")
@@ -289,7 +308,27 @@ public class UserController2 {
 	}
 
 	@PostMapping("/my_webtoon_add")
-	public String myWebtoonAddPOST() {
+	public String myWebtoonAddPOST(HttpServletRequest request, HttpSession session, Model model)
+			throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		String imgSrc = request.getParameter("imgSrc");
+		String webtoonTitle = request.getParameter("webtoonTitle");
+		String webtoonUrl = request.getParameter("webtoonUrl");
+		String login;
+		if (session.getAttribute("session_user_email") == null) {
+			login = "";
+		} else {
+			login = (String) session.getAttribute("session_user_email");
+		}
+		int likeCheck = webtoonService.myWebtoonCheck(webtoonTitle, login); // like좋아요 했으면 1반환
+
+		if (!login.equals("") && likeCheck == 1) { // 좋아요를 이미 눌렀고 로그인을 한상황
+			webtoonService.myWebtoonDelete(webtoonTitle, login); // insert into 4가지 인자 삽입
+		} else if (!login.equals("")) { // 좋아요 안눌렀고 로그인 한상황
+			webtoonService.myWebtoonUpload(imgSrc, webtoonTitle, webtoonUrl, login); // insert into 4가지 인자 삽입
+		} else {
+			// 로그인 해주세요 실행
+		}
 		return "";
 	}
 	/////////////////////////////////////////////////
@@ -297,8 +336,13 @@ public class UserController2 {
 	// my_webtoon_list.jsp
 	// 페이지 설명 추가
 	@GetMapping("/my_webtoon_list")
-	public String my_webtoonListGET() {
-
+	public String my_webtoonListGET(HttpServletRequest request, HttpSession session, Model model)
+			throws UnsupportedEncodingException {
+		request.setCharacterEncoding("utf-8");
+		String email = (session.getAttribute("session_user_email") != null)
+				? (String) session.getAttribute("session_user_email")
+				: "";
+		ArrayList<MyWebtoonVO> webtoon = webtoonService.getMyWebtoonList(email);
 		return "";
 	}
 
@@ -325,8 +369,16 @@ public class UserController2 {
 	// nick_change_control.jsp
 	// 페이지 설명 추가
 	@GetMapping("/nick_change_control")
-	public String nickChangeControlGET() {
-
+	public String nickChangeControlGET(HttpServletRequest request, HttpSession session, Model model)
+			throws UnsupportedEncodingException {
+		request.setCharacterEncoding("utf-8");
+		String email = (String) session.getAttribute("session_user_email");
+		String password = (String) session.getAttribute("session_user_password");
+		String nickname = request.getParameter("nickname");
+		UserVO vo = new UserVO(email, nickname, password);
+		service.updateUser(vo);
+		session.removeAttribute("session_user_nick");
+		session.setAttribute("session_user_nick", nickname);
 		return "";
 	}
 
@@ -367,7 +419,81 @@ public class UserController2 {
 	// pw_control.jsp
 	// 페이지 설명 추가
 	@GetMapping("/pw_control")
-	public String pwControlGET() {
+	public String pwControlGET(HttpServletRequest request, HttpSession session, Model model) {
+		String email = request.getParameter("email");
+		String session_user_email = (String) session.getAttribute("session_user_email");
+		int userCheck = service.userCheckEmail(email);
+
+		String from = "laigasus98@gmail.com";// 관리자 이메일 보낼 이메일 laigasus98@gmail.com
+		Properties p = new Properties(); // 정보를 담을 객체
+
+		p.put("mail.smtp.host", "smtp.gmail.com");
+		p.put("mail.smtp.port", "465"); // gmail은 port 465 사용 구글에서 네이버로 보내면 구글것만 있으면 되는거야
+		p.put("mail.smtp.starttls.enable", "true");
+		p.put("mail.smtp.auth", "true");
+		p.put("mail.smtp.debug", "true");
+		p.put("mail.smtp.socketFactory.port", "465"); // gmail은 port 465 사용
+		p.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
+		p.put("mail.smtp.socketFactory.fallback", "false");
+
+		DBConnect conn = new DBConnect();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		int check = 1;
+		Random random = new Random(); // 랜덤 객체 생성(디폴트 시드값 : 현재시간)
+		random.setSeed(System.currentTimeMillis()); // 시드값 설정을 따로 할수도 있음 일단은 시간에 따라 변화
+
+		String password = Integer.toString(random.nextInt(9999999)); // 9999999이하 난수
+
+		String sql = "update toon_user set pw=? where email=? "; // email=?2 인 이메일에 비번을 pw ?1 로 수정 이떄 pw는 데이터베이스에 칼럼이름과
+																	// 일치해야함
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, password);
+			pstmt.setString(2, email);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {// 오류시
+			System.out.println("Database 연결중 에러가 발생 했습니다.");
+			e.printStackTrace();
+		} finally {
+			try {
+				if (conn != null && !conn.isClosed()) {
+					conn.close();
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+
+		// 여기부터는 이메일을 보내는 코드입니다.
+		try {
+			Authenticator auth = new SMTPAuthenticatior();
+			Session ses = Session.getInstance(p, auth);
+
+			ses.setDebug(true);
+			MimeMessage msg = new MimeMessage(ses); // 메일의 내용을 담을 객체
+
+			msg.setSubject("툰스토어에서 임시비밀번호를 보냈습니다."); // 제목 받는 사람에게 가장먼저 보여질 제목입니다.
+
+			StringBuffer buffer = new StringBuffer(); // 버퍼로 이메일 보내는 내용을 적습니다.
+
+			buffer.append("회원님의 비밀번호가 : "); // buffer.append("보내는사람 : ");
+			buffer.append(password); //
+			buffer.append("로 변경 되었습니다."); //
+
+			Address fromAddr = new InternetAddress(from);
+			msg.setFrom(fromAddr);
+
+			Address toAddr = new InternetAddress(email);
+			msg.addRecipient(Message.RecipientType.TO, toAddr); // 받는 사람
+
+			msg.setContent(buffer.toString(), "text/html;charset=UTF-8"); // 내용
+			Transport.send(msg); // 전송
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		model.addAttribute(check);
 
 		return "";
 	}
@@ -395,8 +521,33 @@ public class UserController2 {
 	// register_control.jsp
 	// 페이지 설명 추가
 	@GetMapping("/register_control")
-	public String registerControlGET() {
+	public String registerControlGET(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model)
+			throws IOException {
+		request.setCharacterEncoding("utf-8");
+		String email = request.getParameter("email");
+		String password = request.getParameter("password");
+		String password_confirm = request.getParameter("password_confirm");
+		
+		response.setContentType("text/html; charset=euc-kr");
+		PrintWriter out = response.getWriter();
+		
+		out.println("<script>alert('인증번호가 틀립니다'); </script>");
+		out.flush();
 
+		if (password.equals(password_confirm)) {
+			out.println("<script>");
+			out.println("alert('회원가입을 완료하였습니다');");
+			out.println("location.href = 'login.jsp';");
+			out.println("</script>");
+			session.setAttribute("user_email", email);
+			session.setAttribute("user_password", password);
+		}else {
+			out.println("<script>");
+			out.println("alert('입력한 비밀번호가 일치하지 않습니다');");
+			out.println("location.href = 'register.jsp';");
+			out.println("</script>");
+			out.println("");
+		}
 		return "";
 	}
 

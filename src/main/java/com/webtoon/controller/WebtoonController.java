@@ -76,7 +76,6 @@ public class WebtoonController {
 	@GetMapping("/naver_search_result")
 	public String naverSearchResultGET(HttpServletRequest request, Model model) {
 		String searchParam = (String) request.getParameter("q");
-		// <%@ page import="com.external.module.CalculateDate"%>
 		ArrayList<WebtoonVO> articles = service.searchBoard(searchParam);
 		model.addAttribute(articles);
 
