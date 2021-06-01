@@ -1,12 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 	<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<%@ page import="com.board.model.*" %>
-<%
-	request.setCharacterEncoding("utf-8");
-	int content_number = Integer.parseInt(request.getParameter("content_number"));
-	BoardVO articles=BoardDAO.getInstance().contentBoard(content_number);
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +14,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<jsp:include page="nav.jsp">
+	<jsp:include page="../etc/nav.jsp">
 		<jsp:param name="name" value="value" />
 	</jsp:include>
 	<header>
@@ -34,8 +28,9 @@
 				<img src="img/button/arrow.svg" /> 글쓰기
 			</h1>
 			<form method="post" action="jajak-update-control.jsp" enctype="multipart/form-data">
+			<c:forEach items="articles" var="article">
 				<div id="jajak-upload-form">
-					<input type="text" name="title" placeholder="제목" value=<%= articles.getBd_title() %> required/>
+					<input type="text" name="title" placeholder="제목" value=${article.getBd_title() } required/>
 					<hr>
 					<div class="toolbar">
 						<div class="dropdown-fontsize">
@@ -68,14 +63,15 @@
 						</a>
 					</div>
 					<textarea id="my-textarea" style="display:none" name="content"></textarea>
-					<input name="bd_num" value=<%=content_number %> style="display:none"/>
-					<div class="editor" contenteditable="true"><%= articles.getBd_content() %></div>
+					<input name="bd_num" value=${content_number} style="display:none"/>
+					<div class="editor" contenteditable="true">${articles.getBd_content()}</div>
 					<button type="submit" class="blue">수정</button>
 				</div>
+			</c:forEach>
 			</form>
 		</div>
 	</section>
-	<jsp:include page="footer.jsp">
+	<jsp:include page="../etc/footer.jsp">
 		<jsp:param name="name" value="value" />
 	</jsp:include>
 	<a href="#nav-container" id="top"><img src="img/button/top.svg" /></a>

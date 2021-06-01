@@ -14,7 +14,7 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
-	<jsp:include page="nav.jsp">
+	<jsp:include page="../etc/nav.jsp">
 		<jsp:param name="name" value="value" />
 	</jsp:include>
 	<header>
@@ -27,9 +27,10 @@
 			<h1>
 				<img src="img/button/arrow.svg" /> 글쓰기
 			</h1>
-			<form method="post" action="jajak-upload-control.jsp" enctype="multipart/form-data">
+			<form method="post" action="jajak-upload-control" enctype="multipart/form-data">
 				<div id="jajak-upload-form">
 					<input type="text" name="title" placeholder="제목" required/>
+					<input type="hidden" >
 					<hr>
 					<div class="toolbar">
 						<div class="dropdown-fontsize">
@@ -68,7 +69,7 @@
 			</form>
 		</div>
 	</section>
-	<jsp:include page="footer.jsp">
+	<jsp:include page="../etc/footer.jsp">
 		<jsp:param name="name" value="value" />
 	</jsp:include>
 	<a href="#nav-container" id="top"><img src="img/button/top.svg" /></a>
