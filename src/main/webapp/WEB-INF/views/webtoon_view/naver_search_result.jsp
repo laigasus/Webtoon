@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
-<%@ page import="com.external.module.CalculateDate"%>
-<%@page import="com.naver.model.*"%>
-<%String searchParam=(String)request.getParameter("q");%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
   <head>
     <title>네이버 웹툰 - 툰스토어</title>
   </head>
   <body>
-    <jsp:include page="nav.jsp">
+    <jsp:include page="../etc/nav.jsp">
       <jsp:param name="name" value="value" />
     </jsp:include>
     <header>
@@ -22,20 +21,19 @@ pageEncoding="UTF-8"%>
       <div class="container">
         <h1><img src="img/button/arrow.svg" /> 검색결과</h1>    
         <div class="list-container">		
-        <%
-            for(naverVO articles: naverDAO.getInstance().searchBoard(searchParam)){
-        %>
-        <a href="toon_list.jsp?URL=<%=articles.getUrl()%>">  
-            <img src="<%=articles.getThumb()%>" />
+        <c:forEach items="${articles}" var="article" >
+                <a href="toon_list.jsp?URL=${article.getUrl()}">  
+            <img src="${article.getThumb()}" />
             <ul>
-              <li class="title"><%=articles.getTitle()%></li>
+              <li class="title">${article.getTitle()}</li>
             </ul>
-          </a>			
-		<% }%>
+          </a>	
+        </c:forEach>
+		
         </div>
       </div>
     </section>
-    <jsp:include page="footer.jsp">
+    <jsp:include page="../etc/footer.jsp">
       <jsp:param name="name" value="value" />
     </jsp:include>
     <a href="#nav-container" id="top"><img src="img/button/top.svg" /></a>

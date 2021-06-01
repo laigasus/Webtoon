@@ -1,69 +1,53 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-pageEncoding="UTF-8"%>
-<%@ page import="com.external.module.CalculateDate"%>
-<%@page import="com.naver.model.*"%>
-<%String choosedDay=(String)request.getParameter("choosedDay");%>
+	pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+
 <!DOCTYPE html>
 <html>
-  <head>
-    <title>네이버 웹툰 - 툰스토어</title>
-  </head>
-  <body>
-    <jsp:include page="nav.jsp">
-      <jsp:param name="name" value="value" />
-    </jsp:include>
-    <header>
-      <div class="container"> 네이버<br>웹툰<img src="img/menu/site.svg" />
-      </div>
-    </header>
-    <section>
-      <div class="container">
-        <h1><img src="img/button/arrow.svg"/> 네이버 웹툰</h1>
-        <%       
-        String[] weekArr={"", "", "", "", "", "", ""};        
-        for(int i=1; i<=weekArr.length; i++){
-        	if(choosedDay==null){
-        		if(i==CalculateDate.dayOfWeek){
-            		weekArr[i-1]="active";
-            		break;
-            	}
-        	}else{
-        		if(choosedDay.equals(CalculateDate.dayOfWeekKor[i-1])){
-        			weekArr[i-1]="active";
-        			break;
-        		}
-        	}        	
-        }
-        %>
-        <ul id="day-tab">
-        <%for(int i=0; i<7; i++){%>
-        <li class="<%=weekArr[i]%>">
-        <a href="naver.jsp?choosedDay=<%=CalculateDate.dayOfWeekKor[i]%>">
-        <%=CalculateDate.dayOfWeekKor[i]%></a> <img src="img/day/<%=CalculateDate.dayOfWeekKor[i]%>.svg" /></li>
-        <% }%>
-        </ul>
-        <div class="list-container">				
-        <%
-            for(naverVO articles: naverDAO.getInstance().listBoard(CalculateDate.calcDayOfWeek("kor", choosedDay))){
-        %>
-        <a class="toonlist-a" href="toon_list.jsp?URL=<%=articles.getUrl()%>">
-            <img src="<%=articles.getThumb()%>" />
-            <ul>
-              <li class="title"><%=articles.getTitle()%></li>
-              <!-- <li class="genre">액션 / 미스터리</li>
-              <li class="author">신영우</li> -->
-            </ul>
-        </a>			
-		<% }%>
-        </div>
-      </div>
-    </section>
+<head>
+<title>네이버 웹툰 - 툰스토어</title>
+</head>
+<body>
+	<jsp:include page="../etc/nav.jsp">
+		<jsp:param name="name" value="value" />
+	</jsp:include>
+	<header>
+		<div class="container">
+			네이버<br>웹툰<img src="img/menu/site.svg" />
+		</div>
+	</header>
+	<section>
+		<div class="container">
+			<h1>
+				<img src="img/button/arrow.svg" /> 네이버 웹툰
+			</h1>
 
-    <jsp:include page="footer.jsp">
-      <jsp:param name="name" value="value" />
-    </jsp:include>
-    <a href="#nav-container" id="top"><img src="img/button/top.svg" /></a>
-    <script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/script.js"></script>
-  </body>
+			<ul id="day-tab">
+				<c:forEach begin="0" items="${weekArr}" var="i"
+					end="${weekArr.length}" step="1">
+					<li class="${weekArr[i]}"><a
+						href="naver.jsp?choosedDay=${CalculateDate.dayOfWeekKor[i]}">${CalculateDate.dayOfWeekKor[i]}</a>
+						<img src="img/day/${CalculateDate.dayOfWeekKor[i]}.svg" /></li>
+				</c:forEach>
+			</ul>
+			<div class="list-container">
+				<c:forEach items="${articles}" var="article">
+					<a class="toonlist-a" href="toon_list.jsp?URL=${article.getUrl()}">
+						<img src="${article.getThumb()}" />
+						<ul>
+							<li class="title">${article.getTitle()}</li>
+						</ul>
+					</a>
+				</c:forEach>
+			</div>
+		</div>
+	</section>
+
+	<jsp:include page="../etc/footer.jsp">
+		<jsp:param name="name" value="value" />
+	</jsp:include>
+	<a href="#nav-container" id="top"><img src="img/button/top.svg" /></a>
+	<script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
+	<script src="js/script.js"></script>
+</body>
 </html>

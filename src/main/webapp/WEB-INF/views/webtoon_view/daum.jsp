@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <!DOCTYPE html>
 <html>
   <head>
@@ -7,7 +8,7 @@ pageEncoding="UTF-8"%>
     <meta charset="utf-8" />
   </head>
   <body>
-    <jsp:include page="nav.jsp">
+    <jsp:include page="../etc/nav.jsp">
       <jsp:param name="name" value="value" />
     </jsp:include>
     <header>
@@ -151,7 +152,7 @@ pageEncoding="UTF-8"%>
         </div>
       </div>
     </section>
-    <jsp:include page="footer.jsp">
+    <jsp:include page="../etc/footer.jsp">
       <jsp:param name="name" value="value" />
     </jsp:include>
     <a href="#nav-container" id="top"><img src="img/button/top.svg" /></a>

@@ -2,6 +2,7 @@
 <%@page import="com.user.model.UserVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%@page import="com.board.model.*" %>
 <%
 String admin_user_email="";

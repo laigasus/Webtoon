@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%-- session에 등록된 check 값에 따라 이메일 중복여부 확인 --%>
 <%
 	if(session.getAttribute("check")==null){
