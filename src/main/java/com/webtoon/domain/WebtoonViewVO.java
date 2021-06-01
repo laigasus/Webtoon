@@ -1,25 +1,35 @@
 package com.webtoon.domain;
 
-/*
-create table webtoon_view(
-num int not null primary key auto_increment,
-url varchar(255),
-img varchar(2000)
-);
- */
+/*CREATE TABLE `webtoon_view` (
+		  `num` int NOT NULL AUTO_INCREMENT,
+		  `url` varchar(255) DEFAULT NULL,
+		  `img` varchar(2000) DEFAULT NULL,
+		  PRIMARY KEY (`num`)
+		);
+*/
 
 public class WebtoonViewVO {
-
+	private int num;
 	private String url;
 	private String img;
 
 	public WebtoonViewVO() {
+
 	}
 
-	public WebtoonViewVO(String url, String img) {
+	public WebtoonViewVO(int num, String url, String img) {
 		super();
+		this.num = num;
 		this.url = url;
 		this.img = img;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
 	}
 
 	public String getUrl() {

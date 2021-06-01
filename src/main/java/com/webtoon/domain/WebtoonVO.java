@@ -1,19 +1,18 @@
 package com.webtoon.domain;
 
-/*
-create table webtoon(
-no		INT(10)		not null primary key auto_increment,
-day		tinyint(1)	default 0,
-title	varchar(30),
-url		varchar(255),
-thumb	varchar(2000)
-);
- */
+/*CREATE TABLE `webtoon` (
+		  `no` int NOT NULL AUTO_INCREMENT,
+		  `day` tinyint(1) DEFAULT '0',
+		  `title` varchar(30) DEFAULT NULL,
+		  `url` varchar(255) DEFAULT NULL,
+		  `thumb` varchar(2000) DEFAULT NULL,
+		  PRIMARY KEY (`no`)
+		);
+*/
 
 public class WebtoonVO {
-
 	private int no;
-	private String day;
+	private int day;
 	private String title;
 	private String url;
 	private String thumb;
@@ -21,8 +20,9 @@ public class WebtoonVO {
 	public WebtoonVO() {
 	}
 
-	public WebtoonVO(String day, String title, String url, String thumb) {
+	public WebtoonVO(int no, int day, String title, String url, String thumb) {
 		super();
+		this.no = no;
 		this.day = day;
 		this.title = title;
 		this.url = url;
@@ -33,11 +33,15 @@ public class WebtoonVO {
 		return no;
 	}
 
-	public String getDay() {
+	public void setNo(int no) {
+		this.no = no;
+	}
+
+	public int getDay() {
 		return day;
 	}
 
-	public void setDay(String day) {
+	public void setDay(int day) {
 		this.day = day;
 	}
 
@@ -64,5 +68,4 @@ public class WebtoonVO {
 	public void setThumb(String thumb) {
 		this.thumb = thumb;
 	}
-
 }

@@ -5,9 +5,9 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.webtoon.domain.ListVO;
-import com.webtoon.domain.NaverVO;
-import com.webtoon.domain.ViewVO;
+import com.webtoon.domain.WebtoonListVO;
+import com.webtoon.domain.WebtoonVO;
+import com.webtoon.domain.WebtoonViewVO;
 import com.webtoon.mapper.NaverMapper;
 
 @Service("NaverService")
@@ -20,28 +20,28 @@ public class NaverServiceImpl implements NaverService {
 	////////////////////////////////////////////////////////////////
 
 	@Override
-	public ArrayList<NaverVO> listBoard(int YoIll) {
+	public ArrayList<WebtoonVO> listBoard(int YoIll) {
 		// TODO Auto-generated method stub
 		webtoonService.webtoonCrawling();
 		return naverMapper.listBoard(YoIll);
 	}
 
 	@Override
-	public ArrayList<NaverVO> searchBoard(String searchParam) {
+	public ArrayList<WebtoonVO> searchBoard(String searchParam) {
 		// TODO Auto-generated method stub
 		webtoonService.webtoonCrawling();
 		return naverMapper.searchBoard(searchParam);
 	}
 
 	@Override
-	public ArrayList<ListVO> toonList(String URL, String id) {
+	public ArrayList<WebtoonListVO> toonList(String URL, String id) {
 		// TODO Auto-generated method stub
 		webtoonService.webtoonListCrawling(URL, id);
 		return naverMapper.toonList(URL, id);
 	}
 
 	@Override
-	public ArrayList<ViewVO> toonView(String url) {
+	public ArrayList<WebtoonViewVO> toonView(String url) {
 		// TODO Auto-generated method stub
 		webtoonService.webtoonViewCrawling(url);
 		return naverMapper.toonView(url);
