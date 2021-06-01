@@ -1,7 +1,6 @@
 package com.webtoon.mapper;
 
-import java.net.PasswordAuthentication;
-import java.util.List;
+import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Select;
@@ -54,7 +53,7 @@ public interface UserMapper {
 	// 원래 매개변수가 아무것도 없었음. 채움
 	// 관리자로써 회원의 목록를 출력하는 메서드
 	@Select("SELECT * FROM toon_user ORDER BY email DESC")
-	public List<UserVO> listUser();
+	public ArrayList<UserVO> listUser();
 
 //	// 비밀번호 변경시 이메일을통해 변경된 비밀번호를 전송하는 메서드
 //	// SQL문이 없어!!!!!!!!!!!!!!!!!!!!!

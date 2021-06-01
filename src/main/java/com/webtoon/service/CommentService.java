@@ -1,6 +1,6 @@
 package com.webtoon.service;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import com.webtoon.domain.CommentVO;
 
@@ -9,7 +9,7 @@ public interface CommentService {
 	void regist(int bd_num, String cm_writer, String cm_content, String email);
 
 	// 댓글 목록을 가지고 오는 메서드
-	List<CommentVO> listComment(int bd_num);
+	ArrayList<CommentVO> listComment(int bd_num);
 
 	// 글 수정 요청을 처리할 메서드
 	void updateComment(String cm_writer, String cm_content, int bd_num, int cm_id);

@@ -1,15 +1,7 @@
 package com.webtoon.service;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.List;
-
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,12 +25,12 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> listBoard(int startRow, int pageSize) {
+	public ArrayList<BoardVO> listBoard(int startRow, int pageSize) {
 		return boardMapper.listBoard(startRow, pageSize);
 	}
 
 	@Override
-	public List<BoardVO> myListBoard(String email) {
+	public ArrayList<BoardVO> myListBoard(String email) {
 		return boardMapper.myListBoard(email);
 	}
 
@@ -58,7 +50,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> searchBoard(String search, String category) {
+	public ArrayList<BoardVO> searchBoard(String search, String category) {
 		return boardMapper.searchBoard(search, category);
 	}
 
@@ -68,7 +60,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<BoardVO> AdminListBoard() {
+	public ArrayList<BoardVO> AdminListBoard() {
 		return boardMapper.AdminListBoard();
 	}
 

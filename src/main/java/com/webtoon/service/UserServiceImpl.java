@@ -1,6 +1,6 @@
 package com.webtoon.service;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.mail.PasswordAuthentication;
 
@@ -95,7 +95,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<UserVO> listUser() {
+	public ArrayList<UserVO> listUser() {
 		// TODO Auto-generated method stub
 		return userMapper.listUser();
 	}

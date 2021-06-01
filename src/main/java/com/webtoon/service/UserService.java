@@ -1,7 +1,8 @@
 package com.webtoon.service;
 
+import java.util.ArrayList;
+
 import javax.mail.PasswordAuthentication;
-import java.util.List;
 
 import com.webtoon.domain.UserVO;
 
@@ -31,7 +32,7 @@ public interface UserService {
 	public void updateUser(UserVO vo);
 
 	// 관리자로써 회원의 목록를 출력하는 메서드
-	public List<UserVO> listUser();
+	public ArrayList<UserVO> listUser();
 	
 	// 비밀번호 변경시 이메일을통해 변경된 비밀번호를 전송하는 메서드
 	public PasswordAuthentication getPasswordAuthentication();

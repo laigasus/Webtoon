@@ -1,6 +1,6 @@
 package com.webtoon.mapper;
 
-import java.util.List;
+import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
@@ -17,7 +17,7 @@ public interface CommentMapper {
 
 	// 댓글 목록을 가지고 오는 메서드
 	@Select("SELECT * FROM board_comment WHERE bd_num=#{bd_num}")
-	List<CommentVO> listComment(int bd_num);
+	ArrayList<CommentVO> listComment(int bd_num);
 
 	// 글 수정 요청을 처리할 메서드
 	@Update("UPDATE board_comment SET " + "cm_content=#{cm_content} " + "WHERE bd_num=#{bd_num} AND cm_id=#{cm_id}")
