@@ -20,7 +20,7 @@ public interface BoardMapper {
 	// 글 목록을 가지고 오는 메서드
 	// 원래 Sql "SELECT * FROM toon_board WHERE bd_email !='root@naver.com' ORDER BY
 	// bd_num DESC LIMIT ?,?;
-	@Select("SELECT * FROM toon_board WHERE bd_email !='root@naver.com' ORDER BY bd_num DESC LIMIT ${startRow},${pageSize};")
+	@Select("SELECT * FROM toon_board WHERE bd_email !='root@naver.com' ORDER BY bd_num DESC LIMIT ${startRow}, ${pageSize};")
 	ArrayList<BoardVO> listBoard(@Param("startRow") int startRow, @Param("pageSize") int pageSize);
 
 	// 내가 쓴 글 목록을 가지고 오는 메서드

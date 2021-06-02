@@ -1,13 +1,13 @@
 package com.webtoon.controller;
 
-import java.io.UnsupportedEncodingException;
+import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.webtoon.service.CommentService;
@@ -21,10 +21,10 @@ public class CommentController {
 	// comment_like_control.jsp
 	// 댓글 좋아요 컨트롤
 	@GetMapping("/comment_like_control")
-	public String commentLikeControlGET(HttpServletRequest request, HttpSession session, Model model)
-			throws UnsupportedEncodingException {
+	public String commentLikeControlGET(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+			throws IOException {
 		request.setCharacterEncoding("utf-8");
-		
+
 		System.out.println("comment_like_control");
 
 		int bd_num = Integer.parseInt(request.getParameter("bd_num"));
@@ -32,10 +32,7 @@ public class CommentController {
 		String writer = request.getParameter("writer");
 		service.likeComment(bd_num, cm_id);
 
-		model.addAttribute("bd_num", bd_num);
-		model.addAttribute("writer", writer);
-
-		return "comment_like_control";
+		return ("forward:jajak_content?Bd_num=" + bd_num + "&nick=" + writer + "#comment-h1");
 	}
 
 	/////////////////////////////////////////////////

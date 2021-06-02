@@ -1,12 +1,14 @@
 package com.webtoon.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,44 +127,42 @@ public class BoardController {
 		return "jajak";
 	}
 
-	@GetMapping("/jajak_content_control")
+	@GetMapping("/jajak_comment_control")
 	public String jajakContentControlGET(HttpServletRequest request, HttpSession session, Model model)
-			throws UnsupportedEncodingException {
+		throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
-		
-		System.out.println("jajakcontentControl GET 들어옴");
-		int Bd_num = Integer.parseInt(request.getParameter("Bd_num"));
-		
-		
-		return "jajak_content_control";
+			
+			System.out.println("jajakcontentControl GET 들어옴");
+			int bd_num = Integer.parseInt(request.getParameter("bd_num"));
+			
+			return "jajak_content_control";
 	}
-	
+
 	// jajak_content_control.jsp
 	// 커뮤니티 글에서 댓글 적을때
-	@PostMapping("/jajak_content_control")
-	public String jajakContentControlPOST(HttpServletRequest request, HttpSession session, Model model)
-			throws UnsupportedEncodingException {
+	@PostMapping("/jajak_comment_control")
+	public String jajakContentControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			Model model) throws IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=euc-kr");
+		PrintWriter out = response.getWriter();
 
 		String session_user_email = (String) session.getAttribute("session_user_email");
-		String cm_content = (String) request.getParameter("cm_content");
-		int Bd_num = Integer.parseInt(request.getParameter("Bd_num"));
-		String cm_writer = (String) request.getParameter("nick");
-		
+
 		if (session_user_email != null) {
-			
-			System.out.println("cm_con Bd_num cm_writer  " + cm_content+"   "+Bd_num+"   "+cm_writer );
-
-			commentService.regist(Bd_num, cm_writer, cm_content, session_user_email);
-
-			return "jajak_content_control";
-		}else {
-			
-			
-			return "jajak_content";	
+			out.print("<script>");
+			out.print("alert('로그인해주세요');");
+			out.print("</script>");
+			out.flush();
+			return "login";
+		} else {
+			String cm_content = (String) request.getParameter("cm_content");
+			int bd_num = Integer.parseInt(request.getParameter("bd_num"));
+			String cm_writer = (String) request.getParameter("nick");
+			commentService.regist(bd_num, cm_writer, cm_content, session_user_email);
+			return ("redirect:jajak_content?bd_num=" + bd_num);
 		}
-		
-		
+
 	}
 
 	/////////////////////////////////////////////////
@@ -195,32 +195,28 @@ public class BoardController {
 		String writer = (String) userService.getUserInfo(articles.getBd_email()).getNick(); //
 		System.out.println("writer " + writer);
 
-		Boolean commentEmpty = commentService.listComment(bd_num).isEmpty();
-
 		ArrayList<CommentVO> comments = commentService.listComment(bd_num);
-//		String commentor = userService.getUserInfo(((CommentVO) comments).getEmail()).getNick();
+		Boolean commentEmpty = comments.isEmpty();
 
-		CommentVO best = commentService.bestComment(bd_num);
-
-		System.out.println("best " + best);
-
-		if (best != null) {
+		if (commentEmpty) {
+			System.out.println("댓글이 없어요");
+		} else {
+			CommentVO best = commentService.bestComment(bd_num);
 			String best_commentor = userService.getUserInfo(best.getEmail()).getNick();
+			model.addAttribute("best", best);
 			model.addAttribute("best_commentor", best_commentor);
+			System.out.println("best " + best);
 		}
+
 		System.out.println("articles  " + articles);
 
 		model.addAttribute("articles", articles);
-		model.addAttribute("Bd_num", bd_num);
+		model.addAttribute("bd_num", bd_num);
 		model.addAttribute("email", email);
 		model.addAttribute("nick", nick);
 		model.addAttribute("writer", writer);
 		model.addAttribute("commentEmpty", commentEmpty);
-		model.addAttribute("best", best);
-		if (best != null) {
-		}
 		model.addAttribute("comments", comments);
-		
 
 		return "jajak_content";
 	}
@@ -228,7 +224,7 @@ public class BoardController {
 	// 댓글을 이걸로 구현해야 할수도 있음
 	@PostMapping("/jajak_content")
 	public String jajakContentPOST() {
-		
+
 		return "jajak_content";
 	}
 
@@ -285,7 +281,7 @@ public class BoardController {
 			service.regist(email, writer, title, content, absoluteImgPath);
 			System.out.println("check  " + check);
 			model.addAttribute("check", check);
-		} 
+		}
 
 		return "jajak_upload_control";
 	}
@@ -314,9 +310,11 @@ public class BoardController {
 	// jajak_update_control.jsp
 	// 커뮤니티 글 수정
 	@PostMapping("/jajak_update_control")
-	public String jajakUpdateControlPOST(HttpServletRequest request, HttpSession session, Model model)
-			throws IOException {
+	public String jajakUpdateControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			Model model) throws IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=euc-kr");
+		PrintWriter out = response.getWriter();
 
 		String email = (String) session.getAttribute("session_user_email");
 		String writer = (String) session.getAttribute("session_user_nick");
@@ -337,7 +335,7 @@ public class BoardController {
 			file = multi.getFilesystemName(str); // 업로드된 파일 이름 가져옴
 			originalFile = multi.getOriginalFileName(str); // 원래 파일 이름 가져옴
 			String absoluteImgPath = null;
-			
+
 			String title = multi.getParameter("title");// 제목 가져옴
 			String content = multi.getParameter("content");// 본문 가져옴
 			System.out.println("multi  " + multi.toString());
@@ -348,9 +346,13 @@ public class BoardController {
 
 			System.out.println("check====  " + check);
 			model.addAttribute("check", check);
+			return "redirect:jajak";
+		} else {
+			out.println("<script>");
+			out.println("alert(\"로그인해주세요\");");
+			out.println("</script>");
+			return "login";
 		}
-
-		return "jajak_update_control";
 	}
 
 	////////////////
@@ -360,14 +362,13 @@ public class BoardController {
 	public String jajak_content_deleteControlGET(HttpServletRequest request) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("UTF-8");
 
-		int Bd_num = Integer.parseInt(request.getParameter("Bd_num"));
+		int bd_num = Integer.parseInt(request.getParameter("bd_num"));
 
-		service.deleteBoard(Bd_num);
+		service.deleteBoard(bd_num);
 
 		return "redirect:/jajak";
 	}
-	
-	
+
 	/////////////////////////////////////////////////
 
 	// my_post.jsp

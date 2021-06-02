@@ -6,7 +6,7 @@
 <head></head>
 <body>
 <c:choose>
-	<c:when test="${session_user_email}==null">
+	<c:when test="${session_user_email==null}">
 		<script>
 			alert('로그인해주세요');
 			location.href = '/login';
