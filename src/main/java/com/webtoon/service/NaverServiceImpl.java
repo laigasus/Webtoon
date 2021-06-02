@@ -13,8 +13,9 @@ import com.webtoon.mapper.NaverMapper;
 @Service("naverService")
 public class NaverServiceImpl implements NaverService {
 
+	@Autowired
 	private WebtoonService webtoonService;
-	
+
 	@Autowired
 	private NaverMapper naverMapper;
 	////////////////////////////////////////////////////////////////

@@ -15,7 +15,7 @@ pageEncoding="UTF-8"%>
       <div>
       	<jsp:include page="email_duplicate.jsp" flush="false"/>
       </div>
-      <form action="/jdbc" method="post">
+      <form action="/register_control" method="post">
         <div class="form-input">
           <input type="email" name="email" placeholder="이메일" required />
         </div>

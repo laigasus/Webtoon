@@ -23,7 +23,7 @@ public interface NaverMapper {
 	// String URL, String id 이건 매개변수 2개 받는데 하나를 쓰넹 뭐지..;;;;
 	// 선택한 만화의 에피소드 목록들을 출력하는 메서드
 	@Select("SELECT * FROM webtoon_list where id=#{id} ORDER BY num ASC")
-	public ArrayList<WebtoonListVO> toonList(@Param("URL") String URL,@Param("id") String id);
+	public ArrayList<WebtoonListVO> toonList(@Param("URL") String URL, @Param("id") String id);
 
 	// String url
 	// 해당 에피소드의 이미지들을 만화부 형식으로 출력하는 메서드

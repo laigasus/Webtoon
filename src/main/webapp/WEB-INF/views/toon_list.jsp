@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<%
-	
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +35,7 @@
 						<dd>${InfoArr.get(3)}</dd>
 					</dl>
 					<button type="button" class="blue"
-						onclick="/location.href='cart'">장바구니 담기</button>
+						onclick="location.href='/cart'">장바구니 담기</button>
 					<br>
 					<form style="display: none" method="post"
 						action="/my_webtoon_add" id="frm">

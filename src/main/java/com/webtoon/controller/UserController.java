@@ -41,6 +41,7 @@ public class UserController {
 
 	@Autowired
 	private UserService service;
+	@Autowired
 	private WebtoonService webtoonService;
 
 	// admin_page_control.jsp
@@ -529,7 +530,12 @@ public class UserController {
 	// register_control.jsp
 	// 페이지 설명 추가
 	@GetMapping("/register_control")
-	public String registerControlGET(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+	public String registerControlGET() {
+		return "register_control";
+	}
+
+	@PostMapping("/register_control")
+	public void registerControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		String email = request.getParameter("email");
@@ -556,12 +562,7 @@ public class UserController {
 			out.println("</script>");
 			out.println("");
 		}
-		return "register_control";
-	}
-
-	@PostMapping("/register_control")
-	public String registerControlPOST() {
-		return "register_control";
+		
 	}
 	/////////////////////////////////////////////////
 
@@ -569,7 +570,6 @@ public class UserController {
 	// 페이지 설명 추가
 	@GetMapping("/register")
 	public String registerGET() {
-
 		return "register";
 	}
 

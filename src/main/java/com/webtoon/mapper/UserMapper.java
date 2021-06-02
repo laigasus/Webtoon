@@ -39,7 +39,7 @@ public interface UserMapper {
 	// String email, String pw
 	// 비밀번호를 변경하는 메서드
 	@Update("UPDATE toon_user SET pw=#{password} WHERE email=#[email}")
-	public void changePassword(@Param("email") String email,@Param("pw") String pw);
+	public void changePassword(@Param("email") String email, @Param("pw") String pw);
 
 	// String email
 	// 회원 탈퇴를 처리할 메서드
