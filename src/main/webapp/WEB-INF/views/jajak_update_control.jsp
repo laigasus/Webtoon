@@ -3,7 +3,9 @@
     <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <c:choose>
 <c:when test="${check}">
-	<script>location.href='/jajak'</script>
+	<script>
+	location.href='/jajak';
+	</script>
 </c:when>
 <c:otherwise>
 	<script>

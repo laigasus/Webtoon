@@ -125,32 +125,46 @@ public class BoardController {
 		return "jajak";
 	}
 
-	// jajak_content_control.jsp
-	// 커뮤니티 글에서 댓글 적을때
 	@GetMapping("/jajak_content_control")
 	public String jajakContentControlGET(HttpServletRequest request, HttpSession session, Model model)
 			throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
+		
+		System.out.println("jajakcontentControl GET 들어옴");
+		int Bd_num = Integer.parseInt(request.getParameter("Bd_num"));
+		
+		
+		return "jajak_content_control";
+	}
+	
+	// jajak_content_control.jsp
+	// 커뮤니티 글에서 댓글 적을때
+	@PostMapping("/jajak_content_control")
+	public String jajakContentControlPOST(HttpServletRequest request, HttpSession session, Model model)
+			throws UnsupportedEncodingException {
+		request.setCharacterEncoding("utf-8");
 
 		String session_user_email = (String) session.getAttribute("session_user_email");
-
+		String cm_content = (String) request.getParameter("cm_content");
+		int Bd_num = Integer.parseInt(request.getParameter("Bd_num"));
+		String cm_writer = (String) request.getParameter("nick");
+		
 		if (session_user_email != null) {
-			String cm_content = (String) request.getParameter("cm_content");
-			int Bd_num = Integer.parseInt(request.getParameter("Bd_num"));
-			String cm_writer = (String) request.getParameter("nick");
+			
+			System.out.println("cm_con Bd_num cm_writer  " + cm_content+"   "+Bd_num+"   "+cm_writer );
 
 			commentService.regist(Bd_num, cm_writer, cm_content, session_user_email);
+
+			return "jajak_content_control";
+		}else {
+			
+			
+			return "jajak_content";	
 		}
-
-		model.addAttribute("session_user_email", session_user_email); // 필요 없을수도
-
-		return "jajak_content_control";
+		
+		
 	}
 
-	@PostMapping("/jajak_content_control")
-	public String jajakContentControlPOST() {
-		return "jajak_content_control";
-	}
 	/////////////////////////////////////////////////
 
 	/////////////////////////////////////////////////

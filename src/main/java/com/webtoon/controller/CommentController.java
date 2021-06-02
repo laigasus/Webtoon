@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import com.webtoon.service.CommentService;
 
@@ -25,8 +24,10 @@ public class CommentController {
 	public String commentLikeControlGET(HttpServletRequest request, HttpSession session, Model model)
 			throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
+		
+		System.out.println("comment_like_control");
 
-		int bd_num = Integer.parseInt(request.getParameter("Bd_num"));
+		int bd_num = Integer.parseInt(request.getParameter("bd_num"));
 		int cm_id = Integer.parseInt(request.getParameter("cm_id"));
 		String writer = request.getParameter("writer");
 		service.likeComment(bd_num, cm_id);
@@ -37,10 +38,6 @@ public class CommentController {
 		return "comment_like_control";
 	}
 
-	@PostMapping("/comment_like_control")
-	public String commentLikeControlPOST() {
-		return "comment_like_control";
-	}
 	/////////////////////////////////////////////////
 
 }

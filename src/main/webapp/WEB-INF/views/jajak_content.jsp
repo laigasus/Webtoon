@@ -42,8 +42,8 @@ pageEncoding="UTF-8"%>
       	
       	<form action="jajak_content_control" method="post">
 			<input type="hidden" name="Bd_num" value="${Bd_num}">
-			<input type="hidden" name="nick" value="${nick}">
-      	<br><h1 id="comment-h1"><img src="${path}/resources/img/button/arrow.svg" /> 댓글 </h1><br>
+			<input type="hidden" name="nick" value="${nick}"><br>
+   			<h1 id="comment-h1"><img src="${path}/resources/img/button/arrow.svg" /> 댓글 </h1><br>
 			<table style="text-align:center; ">
 			<c:choose>
 			<c:when test="${commentEmpty}">
@@ -59,7 +59,6 @@ pageEncoding="UTF-8"%>
 			<tbody>
 			<c:choose>
 			<c:when test="${best eq best}">
-				<c:forEach items="${best}" var="best">
 					<tr style="background-color: #ffe2f4;">
 						<td width="10%">${best_commentor}<br>
 						${best.getCm_date()}</td>
@@ -68,12 +67,11 @@ pageEncoding="UTF-8"%>
 						<a href="comment_like_control?bd_num=${Bd_num}&cm_id=${best.getCm_id()}&writer=${writer}"> 
 						<img src="${path}/resources/img/love.svg"></a></td>
 					</tr>
-				</c:forEach>
 			</c:when>
 			</c:choose>
 				<c:forEach items="${comments}" var="comment">
 					<tr>
-						<td width="10%">"작성자"<br>
+						<td width="10%">${comment.getCm_writer()}<br>
 						${comment.getCm_date()}</td>
 						<td width="50%">${comment.getCm_content()}</td>
 						<td width="5%">${comment.getCm_like()}
