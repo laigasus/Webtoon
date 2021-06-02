@@ -45,7 +45,7 @@ public interface BoardMapper {
 	// SELECT * FROM toon_board WHERE bd_title LIKE ? AND bd_email
 	// !='root@naver.com'
 	//
-	@Select("SELECT * FROM toon_board WHERE ${category} LIKE ${search} AND bd_email !='root@naver.com'")
+	@Select("SELECT * FROM toon_board WHERE ${category} LIKE '%${search}%' AND bd_email !='root@naver.com'")
 	ArrayList<BoardVO> searchBoard(@Param("search") String search,@Param("category") String category);
 
 	// 관리자의 글을 가지고 오는 메서드

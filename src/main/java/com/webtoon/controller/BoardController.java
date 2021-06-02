@@ -97,8 +97,22 @@ public class BoardController {
 		return "jajak";
 	}
 
+	/// jajak 메인에서 검색시 사용
 	@PostMapping("/jajak")
-	public String jajakPOST() {
+	public String jajakPOST(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("utf-8");
+		/////////////////////////////////////////////// 페이지에 맞는 게시글
+		String category = (String) request.getParameter("category");
+		String search = (String) request.getParameter("search");
+		if (category == null || search == null) {
+			category = "제목";
+			search = "";
+		}
+		
+		ArrayList<BoardVO> articles=service.searchBoard(search, category);
+		
+		model.addAttribute("articles",articles);
+		
 		return "jajak";
 	}
 
@@ -124,6 +138,7 @@ public class BoardController {
 		return "jajak_content_control";
 	}
 
+	
 	@PostMapping("/jajak_content_control")
 	public String jajakContentControlPOST() {
 		return "jajak_content_control";

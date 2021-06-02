@@ -23,10 +23,10 @@
 				<img src="${path}/resources/img/button/arrow.svg" /> 커뮤니티
 			</h1>
 			<ul class="tabs" id="jajak-tab">
-				<form action="/jajak">
+				<form method="post" action="/jajak">
 					<select name="category">
-						<option selected value="제목">제목</option>
-						<option value="작성자">작성자</option>
+						<option selected value="bd_title">제목</option>
+						<option value="bd_writer">작성자</option>
 					</select> 
 					<input type="text" name="search" placeholder="검색어 입력" />
 					<button id="jajak-serach-button" type="submit">검색</button>
