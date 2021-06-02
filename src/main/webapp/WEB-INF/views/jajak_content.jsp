@@ -17,18 +17,17 @@ pageEncoding="UTF-8"%>
     <section>
       <div class="container">
         <h1><img src="${path}/resources/img/button/arrow.svg"/> 커뮤니티 </h1>
-		<c:forEach items="${articles}" var="article">
 			<div class="jajak_content_header">
-				<h3>${article.getBd_title()}</h3>
-				<div class="jajak_content_header_infor">등록일:${article.getBd_date()}조회수:${article.getBd_view()}작성자:${article.getBd_writer()}</div>
+				<h3>${articles.getBd_title()}</h3>
+				<div class="jajak_content_header_infor">등록일:${articles.getBd_date()}조회수:${articles.getBd_view()}작성자:${articles.getBd_writer()}</div>
 				<br>
 				<hr>
 				<br><br>
-				${article.getBd_content()}
+				${articles.getBd_content()}
 			</div>
 			<br><br>
 			<c:choose>
-			<c:when test="${email eq article.getBd_email()}">
+			<c:when test="${email eq articles.getBd_email()}">
 				<div class="jajak_content_footer ">
 					<button class="red" onclick="alert('글이 삭제되었습니다'); location.href='jajak_content_delete.jsp?Bd_num=${Bd_num}'">삭제</button>
 					<button class="blue" onclick="location.href='jajak-update.jsp?content_number=${Bd_num}'">수정</button>
@@ -40,8 +39,8 @@ pageEncoding="UTF-8"%>
 		      	</div>
 			</c:when>
 			</c:choose>
-      	</c:forEach>
-      	<form action="jajak_content_control.jsp" method="post">
+      	
+      	<form action="jajak_content_control" method="post">
 			<input type="hidden" name="Bd_num" value="${Bd_num}">
 			<input type="hidden" name="nick" value="${nick}">
       	<br><h1 id="comment-h1"><img src="${path}/resources/img/button/arrow.svg" /> 댓글 </h1><br>
@@ -58,6 +57,8 @@ pageEncoding="UTF-8"%>
 			<thead>
 			</thead>
 			<tbody>
+			<c:choose>
+			<c:when test="${best eq best}">
 				<c:forEach items="${best}" var="best">
 					<tr style="background-color: #ffe2f4;">
 						<td width="10%">${best_commentor}<br>
@@ -68,6 +69,8 @@ pageEncoding="UTF-8"%>
 						<img src="${path}/resources/img/love.svg"></a></td>
 					</tr>
 				</c:forEach>
+			</c:when>
+			</c:choose>
 				<c:forEach items="${comments}" var="comment">
 					<tr>
 						<td width="10%">"작성자"<br>

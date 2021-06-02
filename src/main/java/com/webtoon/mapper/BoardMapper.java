@@ -13,9 +13,9 @@ import com.webtoon.domain.BoardVO;
 public interface BoardMapper {
 	// 글 등록 메서드
 	@Select("insert into toon_board values(null, #{bd_title}, #{bd_writer},#{bd_date},#{bd_view},#{bd_content},#{bd_img},#{bd_email})")
-	public void regist(@Param("title") String title, @Param("writer") String writer, @Param("time") Timestamp time,
-			@Param("view") int view, @Param("content") String content, @Param("absoluteImgPath") String absoluteImgPath,
-			@Param("email") String email);
+	public void regist(@Param("bd_title") String title, @Param("bd_writer") String writer, @Param("bd_date") Timestamp time,
+			@Param("bd_view") int view, @Param("bd_content") String content, @Param("bd_img") String absoluteImgPath,
+			@Param("bd_email") String email);
 
 	// 글 목록을 가지고 오는 메서드
 	// 원래 Sql "SELECT * FROM toon_board WHERE bd_email !='root@naver.com' ORDER BY

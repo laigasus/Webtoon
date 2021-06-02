@@ -86,7 +86,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<a href="/jajak-upload">
+			<a href="/jajak_upload">
 				<button class="blue">게시글 올리기</button>
 			</a>
 		</div>

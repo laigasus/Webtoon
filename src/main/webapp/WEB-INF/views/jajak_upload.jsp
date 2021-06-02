@@ -27,8 +27,9 @@
 			<h1>
 				<img src="${path}/resources/img/button/arrow.svg" /> 글쓰기
 			</h1>
-			<form method="post" action="jajak-upload-control" enctype="multipart/form-data">
+			<form method="post" action="jajak_upload_control" enctype="multipart/form-data">
 				<div id="jajak-upload-form">
+					<input type="text" name="bd_num">
 					<input type="text" name="title" placeholder="제목" required/>
 					<input type="hidden" >
 					<hr>

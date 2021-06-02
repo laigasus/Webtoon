@@ -28,13 +28,15 @@ public class BoardController {
 
 	@Autowired
 	private BoardService service;
+	@Autowired
 	private UserService userService;
+	@Autowired
 	private CommentService commentService;
 
 	// jajak.jsp
 	// 커뮤니티 메인페이
 	@GetMapping("/jajak")
-	public String jajakGET(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
+	public String jajakGET(HttpSession session,HttpServletRequest request, Model model) throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
 		/////////////////////////////////////////////// 페이지에 맞는 게시글
 		String category = (String) request.getParameter("category");
@@ -94,6 +96,13 @@ public class BoardController {
 		}
 		//////////////// 페이징 끝
 
+		////////////////임시로 강제로그인 
+		session.setAttribute("session_user_email", "root@naver.com");
+		session.setAttribute("session_user_password", "root");
+		session.setAttribute("session_user_nick", "관리");
+		
+		////////////////임시로 강제로그인 
+		
 		return "jajak";
 	}
 
@@ -108,10 +117,10 @@ public class BoardController {
 			category = "제목";
 			search = "";
 		}
-		ArrayList<BoardVO> articles=service.searchBoard(search, category);
-		
-		model.addAttribute("articles",articles);
-		
+		ArrayList<BoardVO> articles = service.searchBoard(search, category);
+
+		model.addAttribute("articles", articles);
+
 		return "jajak";
 	}
 
@@ -137,7 +146,6 @@ public class BoardController {
 		return "jajak_content_control";
 	}
 
-	
 	@PostMapping("/jajak_content_control")
 	public String jajakContentControlPOST() {
 		return "jajak_content_control";
@@ -176,28 +184,44 @@ public class BoardController {
 
 		BoardVO articles = service.contentBoard(bd_num);
 		service.viewIncrease(articles.getBd_num(), articles.getBd_view());
-		String writer = userService.getUserInfo(articles.getBd_email()).getNick();
+		System.out.println("articles " + articles);
+		System.out.println("articles.getBd_email " + articles.getBd_email());
+
+		System.out.println("getuserIfo()" + userService.getUserInfo(articles.getBd_email()));
+		System.out.println("getNick()" + userService.getUserInfo(articles.getBd_email()).getNick());
+
+		String writer = (String) userService.getUserInfo(articles.getBd_email()).getNick(); //
+		System.out.println("writer " + writer);
+
 		Boolean commentEmpty = commentService.listComment(bd_num).isEmpty();
 
 		ArrayList<CommentVO> comments = commentService.listComment(bd_num);
 //		String commentor = userService.getUserInfo(((CommentVO) comments).getEmail()).getNick();
 
 		CommentVO best = commentService.bestComment(bd_num);
-		String best_commentor = userService.getUserInfo(best.getEmail()).getNick();
 
-		model.addAttribute("articles", articles);
+		System.out.println("best " + best);
+
+		if (best != null) {
+			String best_commentor = userService.getUserInfo(best.getEmail()).getNick();
+			model.addAttribute("best_commentor", best_commentor);
+		}
+		System.out.println("articles  " + articles);
+		
+		model.addAttribute("articles",articles);
 		model.addAttribute("Bd_num", bd_num);
 		model.addAttribute("email", email);
 		model.addAttribute("nick", nick);
 		model.addAttribute("writer", writer);
 		model.addAttribute("commentEmpty", commentEmpty);
 		model.addAttribute("best", best);
-		model.addAttribute("best_commentor", best_commentor);
+		if (best != null) {
+		}
 		model.addAttribute("comments", comments);
 
 		return "jajak_content";
 	}
-
+	//댓글을 이걸로 구현해야 할수도 있음
 	@PostMapping("/jajak_content")
 	public String jajakContentPOST() {
 		return "jajak_content";
@@ -205,64 +229,66 @@ public class BoardController {
 
 	
 	// jajak_upload.jsp
-		// 관리자 페이지 제어 이벤트 페이지
-		@GetMapping("/jajak_upload")
-		public String jajakUploadGET() {
-
-			return "jajak_upload";
-		}
-		// 게시글 올리기 확인 버튼을 눌렀을때
-		@PostMapping("/jajak_upload")
-		public String jajakUploadPOST() {
-
-			return "redirect:jajak";
-		}
+	// 관리자 페이지 제어 이벤트 페이지
+	@GetMapping("/jajak_upload")
+	public String jajakUploadGET() {
 		
-		// jajak_upload_control.jsp
-		// 관리자 페이지 제어 이벤트 페이지
-		@GetMapping("/jajak_upload_control")
-		public String jajakUploadControlGET(HttpServletRequest request, HttpSession session, Model model)
-				throws IOException {
-			request.setCharacterEncoding("utf-8");
+		return "jajak_upload";
+	}
 
-			String email = (String) session.getAttribute("session_user_email");
-			String writer = (String) session.getAttribute("session_user_nick");
-			boolean check;
-			if (email == null) {
-				check = false;
-			} else {
-				check = true;
-			}
-			String path = request.getSession().getServletContext().getRealPath("fileFolder");
-			int size = 1024 * 1024 * 10; // 저장가능한 파일 크기 이미지,파일 업로드 기능 확장시 사용
-			String file = ""; // 업로드한 파일 이름(변경될 수 있음)
-			String originalFile = ""; // 이름이 변경되었다면 변경되기 전 실제 파일 이름
-			if (check) {
-				MultipartRequest multi = new MultipartRequest(request, path, size, "utf-8", new DefaultFileRenamePolicy());
-				Enumeration<?> files = multi.getFileNames();
-				String str = null; // 파일 이름을 받아와 저장
-				file = multi.getFilesystemName(str); // 업로드된 파일 이름 가져옴
-				originalFile = multi.getOriginalFileName(str); // 원래 파일 이름 가져옴
-				String absoluteImgPath = null;
-				String title = multi.getParameter("title");// 제목 가져옴
-				String content = multi.getParameter("content");// 본문 가져옴
-				int bd_num = Integer.parseInt(multi.getParameter("bd_num"));
-				service.updateBoard(title, content, absoluteImgPath, bd_num);
-			} else {
-				model.addAttribute("check", check);
-			}
+	// 게시글 올리기 확인 버튼을 눌렀을때
+	@PostMapping("/jajak_upload")
+	public String jajakUploadPOST() {
 
-			return "jajak_upload_control";
+		return "redirect:jajak";
+	}
+
+	@GetMapping("/jajak_upload_control")
+	public String jajakUploadControlPOST() {
+		return "jajak_upload_control";
+	}
+	
+	// jajak_upload_control.jsp
+	// 관리자 페이지 제어 이벤트 페이지
+	@PostMapping("/jajak_upload_control")
+	public String jajakUploadControlGET(HttpServletRequest request, HttpSession session, Model model)
+			throws IOException {
+		request.setCharacterEncoding("utf-8");
+
+		String email = (String) session.getAttribute("session_user_email");
+		String writer = (String) session.getAttribute("session_user_nick");
+		System.out.println("email "+ email);
+		System.out.println("writer "+ writer);
+		boolean check;
+		if (email == null) {
+			check = false;
+		} else {
+			check = true;
+		}
+		String path = request.getSession().getServletContext().getRealPath("fileFolder");
+		int size = 1024 * 1024 * 10; // 저장가능한 파일 크기 이미지,파일 업로드 기능 확장시 사용
+		String file = ""; // 업로드한 파일 이름(변경될 수 있음)
+		String originalFile = ""; // 이름이 변경되었다면 변경되기 전 실제 파일 이름
+		if (check) {
+			MultipartRequest multi = new MultipartRequest(request,path,size,"utf-8",new DefaultFileRenamePolicy());
+			Enumeration<?> files = multi.getFileNames();
+			String str = null; //파일 이름을 받아와 저장
+			file = multi.getFilesystemName(str); //업로드된 파일 이름 가져옴
+			originalFile = multi.getOriginalFileName(str); // 원래 파일 이름 가져옴
+			String absoluteImgPath = null; //path+'\\'+file; 이미지 업로드 기능 확장시 사용
+			String title = multi.getParameter("title");//제목 가져옴
+			String content = multi.getParameter("content");//본문 가져옴
+			service.regist(email,writer,title,content,absoluteImgPath);
+		} else {
+			System.out.println("check  " + check);
+			model.addAttribute("check", check);
 		}
 
-		@PostMapping("/jajak_upload_control")
-		public String jajakUploadControlPOST() {
-			return "jajak_upload_control";
-		}
-
+		return "jajak_upload_control";
+	}
 
 	
-	
+
 	// jajak_update_control.jsp
 	// 커뮤니티 글 수정
 	@GetMapping("/jajak_update_control")
@@ -272,6 +298,8 @@ public class BoardController {
 
 		String email = (String) session.getAttribute("session_user_email");
 		String writer = (String) session.getAttribute("session_user_nick");
+		System.out.println("email "+ email);
+		System.out.println("writer "+ writer);
 		boolean check;
 		if (email == null) {
 			check = false;
@@ -291,12 +319,16 @@ public class BoardController {
 			String absoluteImgPath = null;
 			String title = multi.getParameter("title");// 제목 가져옴
 			String content = multi.getParameter("content");// 본문 가져옴
+			System.out.println("multi  "+ multi);
+			System.out.println("multi.getParameter(\"title\")  "+ multi.getParameter("title"));
+			System.out.println("multi.getParameter(\"bd_num\")  "+ multi.getParameter("bd_num"));
 			int bd_num = Integer.parseInt(multi.getParameter("bd_num"));
 			service.updateBoard(title, content, absoluteImgPath, bd_num);
 		} else {
+			System.out.println("check  " + check);
 			model.addAttribute("check", check);
 		}
-
+		
 		return "jajak_update_control";
 	}
 
@@ -326,8 +358,6 @@ public class BoardController {
 		return "jajak_update";
 	}
 	/////////////////////////////////////////////////
-
-
 
 	// my_post.jsp
 	// 페이지 설명 추가

@@ -93,4 +93,11 @@ public class CommentVO {
 		this.email = email;
 	}
 
+	@Override
+	public String toString() {
+		return "CommentVO [bd_num=" + bd_num + ", cm_id=" + cm_id + ", cm_writer=" + cm_writer + ", cm_date=" + cm_date
+				+ ", cm_content=" + cm_content + ", cm_like=" + cm_like + ", email=" + email + "]";
+	}
+
+	
 }
