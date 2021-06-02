@@ -73,6 +73,7 @@ public class WebtoonServiceImpl implements WebtoonService {
 
 	@Override
 	public void webtoonCrawling() {
+		System.out.println("크롤링 실행");
 		deleteQuery(WebtoonVO.class.getSimpleName());
 
 		Document doc = null;

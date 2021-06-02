@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 
 <c:choose>
-	<c:when test="!${login}.equals('')&&${likeCheck}==1">
+	<c:when test="${!(login eq '' && lickCheck==1)}">
 		<script>
 			alert("좋아요를 취소하였습니다.");
 		</script>

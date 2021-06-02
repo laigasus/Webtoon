@@ -35,12 +35,12 @@
 		<div id="user-bar">
 			<div class="container">
 				<c:choose>
-					<c:when test="${login}==null">
+					<c:when test="${login == null}">
 						<a href="/login"><button class="blue">로그인</button></a>
 						<a href="/register"><button class="red">회원가입</button></a>
 					</c:when>
 					<c:when
-						test="${login}.equals('root@naver.com') && ${password}.equals('root')">
+						test="${login eq 'root@naver.com' && password eq 'root'}">
 						<a href="/logout"><button class="red">로그아웃</button></a>
 						<a href="/admin_page"><button class="blue">관리자페이지</button></a>
 					</c:when>

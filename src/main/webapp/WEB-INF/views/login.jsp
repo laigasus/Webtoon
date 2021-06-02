@@ -15,8 +15,8 @@
 </head>
 <body>
 	<div class="container">
-		<a href="/index"><img src="img/menu/user.svg" /></a>
-		<form action=".login_control" method="post">
+		<a href="/index"><img src="${path}/resources/img/menu/user.svg" /></a>
+		<form action="/login_control" method="post">
 			<div class="form-input">
 				<input type="email" name="email" placeholder="이메일" value="${saveId}"
 					required />

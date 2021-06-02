@@ -29,8 +29,12 @@ public class CalculateDate {
 			for (int i = 0; i < 7; i++) {
 				hash.put(dayOfWeekEng[i], ((i + 1) + 5) % 7);
 			}
+		}else {
+			System.out.println("요일 이상!!!");
 		}
 
+		
+		
 		if (choosedDay == null)
 			return ((dayOfWeek + 5) % 7);
 		else

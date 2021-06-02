@@ -2,7 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <c:choose>
-	<c:when test="!${email}.equals(null)">
+	<c:when test="${!(email eq null)}">
 		<script>
 			alert('비밀번호를 다시 입력해주세요');
 			location.href = '/deleteAccount';

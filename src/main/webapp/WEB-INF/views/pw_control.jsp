@@ -4,9 +4,9 @@
 
 
 <c:choose>
-	<c:when test="${session_user_email}==null">
+	<c:when test="${session_user_email==null}">
 		<c:choose>
-			<c:when test="${userCheck}==1">
+			<c:when test="${userCheck==1}">
 				<script>
 					alert('회원님의 임시비밀번호가 이메일로 보내졌습니다.');
 				</script>
@@ -21,7 +21,7 @@
 	</c:when>
 	<c:otherwise>
 		<c:choose>
-			<c:when test="${session_user_email}.equals(${email})">
+			<c:when test="${session_user_email eq email}">
 				<script>
 					alert('회원님의 임시비밀번호가 이메일로 보내졌습니다.');
 				</script>
@@ -48,7 +48,7 @@
 </head>
 <body>
 	<c:choose>
-		<c:when test="${check}==0">
+		<c:when test="${check==0}">
 			<script>
 				alert("잘못된 값을 입력하셨습니다.");
 				location.href = "/pw_find";

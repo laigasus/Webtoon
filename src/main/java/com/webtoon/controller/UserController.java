@@ -209,8 +209,13 @@ public class UserController {
 	// login_control.jsp
 	// 페이지 설명 추가
 	@GetMapping("/login_control")
-	public String loginControlGET(HttpServletRequest request, HttpSession session, Model model)
-			throws UnsupportedEncodingException {
+	public String loginControlGET(){
+		return "login_control";
+		
+	}
+
+	@PostMapping("/login_control")
+	public String loginControlPOST(HttpServletRequest request, HttpSession session, Model model) throws UnsupportedEncodingException{
 		request.setCharacterEncoding("UTF-8");
 
 		String email = request.getParameter("email");
@@ -257,11 +262,6 @@ public class UserController {
 		model.addAttribute(check);
 		model.addAttribute(result);
 		return "redirect:index";
-	}
-
-	@PostMapping("/login_control")
-	public String loginControlPOST() {
-		return "login_control";
 	}
 	/////////////////////////////////////////////////
 

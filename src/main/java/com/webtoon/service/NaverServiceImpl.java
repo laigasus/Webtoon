@@ -13,16 +13,17 @@ import com.webtoon.mapper.NaverMapper;
 @Service("NaverService")
 public class NaverServiceImpl implements NaverService {
 
+	private WebtoonService webtoonService;
+	
 	@Autowired
 	private NaverMapper naverMapper;
-	private WebtoonService webtoonService;
-
 	////////////////////////////////////////////////////////////////
 
 	@Override
 	public ArrayList<WebtoonVO> listBoard(int YoIll) {
 		// TODO Auto-generated method stub
 		webtoonService.webtoonCrawling();
+		System.out.println("네이버 서비스 실행");
 		return naverMapper.listBoard(YoIll);
 	}
 

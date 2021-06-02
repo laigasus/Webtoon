@@ -4,15 +4,15 @@
 
 
 <c:choose>
-	<c:when test="${check}.equals('checked')">
+	<c:when test="${check eq 'checked'}">
 		<c:choose>
-			<c:when test="${result}==-1">
+			<c:when test="${result==-1}">
 				<script>
 					alert('없는 이메일입니다');
 					location.href = '/login';
 				</script>
 			</c:when>
-			<c:when test="${result}==0">
+			<c:when test="${result==0}">
 				<script>
 					alert('비밀번호를 다시 입력해주세요');
 					history.back();
@@ -25,13 +25,13 @@
 	</c:when>
 	<c:otherwise>
 		<c:choose>
-			<c:when test="${result}==-1">
+			<c:when test="${result==-1}">
 				<script>
 					alert('없는 이메일입니다');
 					location.href = '/login';
 				</script>
 			</c:when>
-			<c:when test="${result}==0">
+			<c:when test="${result==0}">
 				<script>
 					alert('비밀번호를 다시 입력해주세요');
 					history.back();

@@ -4,14 +4,14 @@
 <%-- session에 등록된 check 값에 따라 이메일 중복여부 확인 --%>
 
 <c:choose>
-	<c:when test="${check}==null">
+	<c:when test="${check==null}">
 		<form id="emailduplicate-form" action="/email_duplicate_control">
 			<input type="email" name="email" placeholder="이메일" /> <input
 				class="inputSearch" type="submit" value="검색" />
 		</form>
 		<p>이메일 중복을 체크해주세요.</p>
 	</c:when>
-	<c:when test="${check}==true">
+	<c:when test="${check==true}">
 		<form id="emailduplicate-form" action="/email_duplicate_control">
 			<input type="email" name="email" placeholder="이메일" /> <input
 				type="submit" value="검색" />

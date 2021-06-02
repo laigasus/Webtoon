@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 
 <c:choose>
-	<c:when test="${result}==0">
+	<c:when test="${result==0}">
         <script>
         alert('비밀번호를 다시 입력해주세요');
         location.href='/deleteAccount';
