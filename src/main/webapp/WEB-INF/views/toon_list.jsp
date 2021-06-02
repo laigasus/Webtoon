@@ -64,7 +64,7 @@
 					<tbody>
 						<c:forEach items="${articles}" var="article">
 							<tr class="cursorpointer"
-								onClick="/location.href='detail?URL=${article.getUrl()}'">
+								onClick="location.href='/detail?URL=${article.getUrl()}'">
 								<td width="10%"><img src="${article.getThumb()}" /></td>
 								<td width="50%">${article.getTitle()}</td>
 								<td width="10%">${article.getDay()}</td>

@@ -21,14 +21,9 @@
 			<h1>
 				<img src="${path}/resources/img/button/arrow.svg" /> 네이버 웹툰
 			</h1>
-			<h1>${dayOfWeekEng[0]}</h1>
-			<h1>${dayOfWeekEng[1]}</h1>
-			<h1>${dayOfWeekEng[2]}</h1>
-			<h1>${dayOfWeekEng[3]}</h1>
-			
 			
 			<ul id="day-tab">
-				<c:forEach var="i" begin="0" end="${fn:length(weekArr)}" step="1">
+				<c:forEach var="i" begin="0" end="${fn:length(weekArr)-1}" step="1">
 					<li class="${weekArr[i]}"><a
 						href="/naver?choosedDay=${dayOfWeekKor[i]}">${dayOfWeekKor[i]}</a>
 						<img src="${path}/resources/img/day/${dayOfWeekKor[i]}.svg" /></li>

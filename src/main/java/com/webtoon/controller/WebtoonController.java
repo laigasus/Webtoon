@@ -38,16 +38,18 @@ public class WebtoonController {
 	/////////////////////////////////////////////////
 
 	// detail.jsp
-	// 이게 뭐꼬....
+	// 웹툰 에피소드 선택시 컷씬들을 볼 수 있는 페이지
 	@GetMapping("/detail")
 	public String detailGET(HttpServletRequest request, Model model) {
 		String URL = (String) request.getParameter("URL");
 		URL = "https://comic.naver.com" + URL;
 
 		ArrayList<String> InfoArr = service.toonInfo(URL);
-		model.addAttribute(InfoArr);
-
 		ArrayList<WebtoonViewVO> articles = service.toonView(URL);
+
+		model.addAttribute("InfoArr", InfoArr);
+		model.addAttribute("articles", articles);
+
 		return "detail";
 	}
 
@@ -77,7 +79,7 @@ public class WebtoonController {
 	public String naverSearchResultGET(HttpServletRequest request, Model model) {
 		String searchParam = (String) request.getParameter("q");
 		ArrayList<WebtoonVO> articles = service.searchBoard(searchParam);
-		model.addAttribute(articles);
+		model.addAttribute("articles", articles);
 
 		return "naver_search_result";
 	}
@@ -97,16 +99,16 @@ public class WebtoonController {
 		System.out.println("choosedDay: " + choosedDay);
 		String[] weekArr = { "", "", "", "", "", "", "" };
 
-		for (int i = 1; i <= weekArr.length; i++) {
+		for (int i = 0; i < weekArr.length; i++) {
 			if (choosedDay == null) {
-				if (i == CalculateDate.dayOfWeek) {
-					choosedDay = CalculateDate.calcTodayYoill(i - 1, "eng");
-					weekArr[i - 1] = "active";
+				if (i == CalculateDate.dayOfWeek-1) {
+					choosedDay = CalculateDate.calcTodayYoill(i, "kor");
+					weekArr[i] = "active";
 					break;
 				}
 			} else {
-				if (choosedDay.equals(CalculateDate.dayOfWeekEng[i - 1])) {
-					weekArr[i - 1] = "active";
+				if (choosedDay.equals(CalculateDate.dayOfWeekKor[i])) {
+					weekArr[i] = "active";
 					break;
 				}
 			}
@@ -114,12 +116,12 @@ public class WebtoonController {
 		System.out.println("weekArr: " + weekArr);
 		System.out.println("choosedDay: " + choosedDay);
 
-		String[] dayOfWeekEng = CalculateDate.dayOfWeekEng;
+		String[] dayOfWeekKor = CalculateDate.dayOfWeekKor;
 
-		System.out.println("요일값: " + CalculateDate.calcDayOfWeek("eng", choosedDay));
-		ArrayList<WebtoonVO> articles = service.listBoard(CalculateDate.calcDayOfWeek("eng", choosedDay));
+		System.out.println("요일값: " + CalculateDate.calcDayOfWeek("kor", choosedDay));
+		ArrayList<WebtoonVO> articles = service.listBoard(CalculateDate.calcDayOfWeek("kor", choosedDay));
 		System.out.println("컨트롤러 실행!");
-		model.addAttribute("dayOfWeekEng", dayOfWeekEng);
+		model.addAttribute("dayOfWeekKor", dayOfWeekKor);
 		model.addAttribute("choosedDay", choosedDay);
 		model.addAttribute("weekArr", weekArr);
 		model.addAttribute("articles", articles);
@@ -137,18 +139,15 @@ public class WebtoonController {
 	// 네이버 만화를 골랐을때의 에피소드들과 해당 만화의 정보를 담고 있음
 	@GetMapping("/toon_list")
 	public String toonListGET(HttpServletRequest request, Model model, WebtoonListVO vo) {
-		ArrayList<WebtoonListVO> toonList = service.toonList(vo.getUrl(), vo.getId());
-		model.addAttribute("toonList", toonList);
 
 		String URL = (String) request.getParameter("URL");
 		URL = "https://comic.naver.com" + URL;
 		String titleId = URL.substring(49, 55);
 		ArrayList<String> InfoArr = service.toonInfo(URL);
 		ArrayList<WebtoonListVO> articles = service.toonList(URL, titleId);
-		CalculateDate CalculateDate = new CalculateDate();
-		model.addAttribute(CalculateDate);
-		model.addAttribute(InfoArr);
-		model.addAttribute(articles);
+
+		model.addAttribute("InfoArr", InfoArr);
+		model.addAttribute("articles", articles);
 
 		return "toon_list";
 	}

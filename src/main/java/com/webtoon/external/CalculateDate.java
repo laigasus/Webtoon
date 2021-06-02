@@ -44,11 +44,11 @@ public class CalculateDate {
 		
 		if(language.equals("kor")) {
 			for (int i = 0; i < 7; i++) {
-				hash.put(((i + 1) + 5) % 7, dayOfWeekKor[i]);
+				hash.put(i, dayOfWeekKor[i]);
 			}
 		}else if(language.equals("eng")) {
 			for (int i = 0; i < 7; i++) {
-				hash.put(((i + 1) + 5) % 7, dayOfWeekEng[i]);
+				hash.put(i, dayOfWeekEng[i]);
 			}
 		}else {
 		}
