@@ -56,9 +56,9 @@ public class BoardController {
 		BoardService forPage = service;
 		count = forPage.getCountBoard(); // 총 레코드갯수 반환
 		List<BoardVO> list = null;
-		if (count > 0) {
-			list = forPage.listBoard(startRow, pageSize);
-		}
+//		if (count > 0) {
+//			list = forPage.listBoard(startRow, pageSize);
+//		}
 		System.out.println(startRow);
 
 		ArrayList<BoardVO> articlesAdmin = service.AdminListBoard();

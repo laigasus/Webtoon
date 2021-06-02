@@ -45,7 +45,7 @@
 				</thead>
 				<tbody>
 				<c:choose>
-				<c:when test="${currentPage eq 1}">
+				<c:when test="${1 eq 1}">
 					<c:forEach items="${articlesAdmin}" var="article">
 						<tr style="background-color: #fff7fa; color: red;">
 							<td width="10%">[공지]</td>
