@@ -26,6 +26,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.webtoon.domain.MyWebtoonVO;
 import com.webtoon.domain.UserVO;
@@ -209,23 +211,28 @@ public class UserController {
 	// login_control.jsp
 	// 페이지 설명 추가
 	@GetMapping("/login_control")
-	public String loginControlGET(){
+	public String loginControlGET() {
 		return "login_control";
-		
+
 	}
 
 	@PostMapping("/login_control")
-	public String loginControlPOST(HttpServletRequest request, HttpSession session, Model model) throws UnsupportedEncodingException{
+	@RequestMapping("/login_control")
+	public String loginControlPOST(HttpServletRequest request, HttpSession session, Model model)
+			throws UnsupportedEncodingException {
 		request.setCharacterEncoding("UTF-8");
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String check = request.getParameter("saveCheck"); // 아이디비번저장 체크박스가 체크되었는지를 확인하여서 체크되면 "saveCheck"="1" 를가져오고 아니면
 															// null
+
 		if (check == null) { // equals 오류방지
 			check = "";
 		}
 		int result = service.userCheck(email, password);
+		System.out.println("result: " + result);
+		System.out.println("check: " + check);
 
 		if (check.equals("checked")) { // check가 됐으면
 			if (result == -1) {
@@ -261,7 +268,7 @@ public class UserController {
 
 		model.addAttribute(check);
 		model.addAttribute(result);
-		return "redirect:index";
+		return "redirect:/";
 	}
 	/////////////////////////////////////////////////
 
@@ -291,7 +298,7 @@ public class UserController {
 	public String logoutGET(HttpServletRequest request, HttpSession session) {
 		session.invalidate();
 		// response.sendRedirect("index.jsp");
-		return "redirect:index";
+		return "redirect:/";
 	}
 
 	@PostMapping("/logout")
@@ -575,15 +582,14 @@ public class UserController {
 	// nav.jsp
 	// 페이지 설명 추가
 	@GetMapping("/nav")
-	public String navGET(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			Model model) throws UnsupportedEncodingException {
+	public String navGET(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model)
+			throws UnsupportedEncodingException {
 		request.setCharacterEncoding("UTF-8");
 		String login = (String) session.getAttribute("session_user_email");
 		String password = (String) session.getAttribute("session_user_password");
 		String nick = (String) session.getAttribute("session_user_nick");
 		UserVO vo = service.getUserInfo(login);
-		
-		
+
 		model.addAttribute(vo);
 		return "nav";
 	}

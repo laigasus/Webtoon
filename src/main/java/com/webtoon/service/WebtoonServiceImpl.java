@@ -16,7 +16,7 @@ import com.webtoon.domain.WebtoonVO;
 import com.webtoon.domain.WebtoonViewVO;
 import com.webtoon.mapper.WebtoonMapper;
 
-@Service("WebtoonService")
+@Service("webtoonService")
 public class WebtoonServiceImpl implements WebtoonService {
 
 	@Autowired

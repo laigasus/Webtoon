@@ -3,6 +3,7 @@ package com.webtoon.mapper;
 import java.util.ArrayList;
 
 import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -23,7 +24,7 @@ public interface UserMapper {
 	// String email, String pw
 	// 로그인 유효성을 검증하는 메서드
 	@Select("SELECT * FROM toon_user WHERE email=#{email}")
-	public UserVO userCheck(String email, String pw);
+	public UserVO userCheck(@Param("email") String email, @Param("password") String password);
 
 	// String email
 	// 이메일을 받아 존재하는 이메일인지 확인하는 메서드(유효: 1, 중복: -1)

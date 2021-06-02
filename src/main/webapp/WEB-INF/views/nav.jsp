@@ -16,7 +16,7 @@
 <body>
 	<nav>
 		<div class="container">
-			<a href="/index"><img id="logo" src="${path}/resources/img/logo.svg" /></a>
+			<a href="/"><img id="logo" src="${path}/resources/img/logo.svg" /></a>
 			<ul id="nav-container">
 				<li><a href="/naver">네이버</a></li>
 				<li><a href="/daum">다음</a></li>

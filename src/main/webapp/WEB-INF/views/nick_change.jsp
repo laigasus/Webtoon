@@ -14,7 +14,7 @@ pageEncoding="UTF-8"%>
   <body>
     <div class="container">
       <br>
-      <a href="/index"><img src="${path}/resources/img/menu/user.svg" /></a>
+      <a href="/"><img src="${path}/resources/img/menu/user.svg" /></a>
       <form action="/nick_change_control" method="post">
         <div class="form-input">
           <input type="text" name="nickname" placeholder="닉네임" required />

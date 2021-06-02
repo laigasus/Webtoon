@@ -10,7 +10,7 @@ import com.webtoon.domain.WebtoonVO;
 import com.webtoon.domain.WebtoonViewVO;
 import com.webtoon.mapper.NaverMapper;
 
-@Service("NaverService")
+@Service("naverService")
 public class NaverServiceImpl implements NaverService {
 
 	private WebtoonService webtoonService;

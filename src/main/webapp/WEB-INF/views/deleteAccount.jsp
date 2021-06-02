@@ -10,7 +10,7 @@
 </head>
 <body>
 	<div class="container">
-		<a href="/index"><img src="${path}/resources/img/menu/user.svg" /></a>
+		<a href="/"><img src="${path}/resources/img/menu/user.svg" /></a>
 		<form action="/deleteAccount_control" method="post">
 			<h2 style="color: white;">회원 탈퇴</h2>
 			<div class="form-input">

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.webtoon.domain.CommentVO;
 import com.webtoon.mapper.CommentMapper;
 
-@Service("CommentService")
+@Service("commentService")
 public class CommentServiceImpl implements CommentService {
 
 	@Autowired

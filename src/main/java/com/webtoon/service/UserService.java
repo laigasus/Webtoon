@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javax.mail.PasswordAuthentication;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.webtoon.domain.UserVO;
 
 public interface UserService {
@@ -33,7 +35,7 @@ public interface UserService {
 
 	// 관리자로써 회원의 목록를 출력하는 메서드
 	public ArrayList<UserVO> listUser();
-	
+
 	// 비밀번호 변경시 이메일을통해 변경된 비밀번호를 전송하는 메서드
 	public PasswordAuthentication getPasswordAuthentication();
 }

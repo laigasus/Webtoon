@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import com.webtoon.domain.BoardVO;
 import com.webtoon.mapper.BoardMapper;
 
-@Service("BoardService")
+@Service("boardService")
 public class BoardServiceImpl implements BoardService {
 
 	@Autowired

@@ -11,7 +11,7 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <div class="regcontainer">
-      <a href="/index"><img src="${path}/resources/img/menu/user.svg" /></a>
+      <a href="/"><img src="${path}/resources/img/menu/user.svg" /></a>
       <div>
       	<jsp:include page="email_duplicate.jsp" flush="false"/>
       </div>

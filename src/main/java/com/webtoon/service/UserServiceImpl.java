@@ -4,13 +4,14 @@ import java.util.ArrayList;
 
 import javax.mail.PasswordAuthentication;
 
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webtoon.domain.UserVO;
 import com.webtoon.mapper.UserMapper;
 
-@Service("UserService")
+@Service("userService")
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -37,12 +38,15 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int userCheck(String email, String pw) {
+	public int userCheck(String email, String password) {
 		// TODO Auto-generated method stub
-		UserVO vo = userMapper.userCheck(email, pw);
+		System.out.println("email: " + email);
+		System.out.println("password: " + password);
+		UserVO vo = userMapper.userCheck(email, password);
+		System.out.println("email: " + vo.getEmail());
 		int check = 0;
 		if (vo.getEmail().equals(email)) {
-			if (vo.getPw().equals(pw)) {
+			if (vo.getPw().equals(password)) {
 				check = 1; // 로그인 성공
 			} else {
 				check = 0; // 없는 비밀번호

@@ -12,7 +12,7 @@
 	<c:otherwise>
 		<script>
 			alert('회원탈퇴가 완료되었습니다');
-			location.href='/index';
+			location.href='/';
 		</script>
     </c:otherwise>
 </c:choose>
