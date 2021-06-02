@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,13 +20,18 @@
 			<h1>
 				<img src="${path}/resources/img/button/arrow.svg" /> 네이버 웹툰
 			</h1>
-
+			<h1>${dayOfWeekEng[0]}</h1>
+			<h1>${dayOfWeekEng[1]}</h1>
+			<h1>${dayOfWeekEng[2]}</h1>
+			<h1>${dayOfWeekEng[3]}</h1>
+			
+			
 			<ul id="day-tab">
 				<c:forEach begin="0" items="${weekArr}" var="i"
 					end="${weekArr.length}" step="1">
 					<li class="${weekArr[i]}"><a
-						href="/naver?choosedDay=${CalculateDate.dayOfWeekKor[i]}">${CalculateDate.dayOfWeekKor[i]}</a>
-						<img src="${path}/resources/img/day/${CalculateDate.dayOfWeekKor[i]}.svg" /></li>
+						href="/naver?choosedDay=${dayOfWeekKor[i]}">${dayOfWeekKor[i]}</a>
+						<img src="${path}/resources/img/day/${dayOfWeekKor[i]}.svg" /></li>
 				</c:forEach>
 			</ul>
 			<div class="list-container">

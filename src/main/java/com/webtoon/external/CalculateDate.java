@@ -30,15 +30,30 @@ public class CalculateDate {
 				hash.put(dayOfWeekEng[i], ((i + 1) + 5) % 7);
 			}
 		}else {
-			System.out.println("요일 이상!!!");
 		}
-
-		
 		
 		if (choosedDay == null)
 			return ((dayOfWeek + 5) % 7);
 		else
 			return hash.get(choosedDay);
+
+	}
+	
+	public static String calcTodayYoill(int num, String language) throws Exception {
+		Hashtable<Integer, String> hash = new Hashtable<Integer, String>();
+		
+		if(language.equals("kor")) {
+			for (int i = 0; i < 7; i++) {
+				hash.put(((i + 1) + 5) % 7, dayOfWeekKor[i]);
+			}
+		}else if(language.equals("eng")) {
+			for (int i = 0; i < 7; i++) {
+				hash.put(((i + 1) + 5) % 7, dayOfWeekEng[i]);
+			}
+		}else {
+		}
+
+		return hash.get(num);
 
 	}
 }

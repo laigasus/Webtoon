@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.Update;
 
 import com.webtoon.domain.MyWebtoonVO;
 
@@ -43,10 +44,8 @@ public interface WebtoonMapper {
 	// String webtoonTitle, String login
 	// 사용자가 원하는 만화를 북마크하는 메서드(삭제)
 	@Delete("delete from my_toon where mt_title=#{webtoonTitle} AND mt_user=#{login}")
-	public void myWebtoonDelete(@Param("webtoonTitle") String webtoonTitle, @Param("login") String login); // mt_title
-																											// 이랑
-																											// mt_user 로
-																											// 구분해서 삭제
+	public void myWebtoonDelete(@Param("webtoonTitle") String webtoonTitle, @Param("login") String login);
+	// mt_title이랑 mt_user 로구분해서 삭제
 
 	// String title
 	// 크롤링한 데이터를 처리하는데 필요한 메서드(선택). webtoon 테이블 select문
@@ -55,7 +54,7 @@ public interface WebtoonMapper {
 
 	// String tableName
 	// 크롤링한 데이터를 처리하는데 필요한 메서드(삭제). webtoon 테이블 delete문
-	@Delete("TRUNCATE #{tableName}")
+	@Delete("TRUNCATE TABLE ${tableName} ")
 	public void deleteQuery(@Param("tableName") String tableName);
 
 //	// 원래 없어서 추가했음

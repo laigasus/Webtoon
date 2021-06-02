@@ -74,7 +74,7 @@ public class WebtoonServiceImpl implements WebtoonService {
 	@Override
 	public void webtoonCrawling() {
 		System.out.println("크롤링 실행");
-		deleteQuery(WebtoonVO.class.getSimpleName());
+		deleteQuery("webtoon");
 
 		Document doc = null;
 		Elements elemList = new Elements();
@@ -133,7 +133,7 @@ public class WebtoonServiceImpl implements WebtoonService {
 
 	@Override
 	public void webtoonListCrawling(String URL, String id) {
-		deleteQuery(WebtoonListVO.class.getSimpleName());
+		deleteQuery("webtoon_list");
 
 		Document doc = null;
 		Elements elemList = new Elements();
@@ -194,7 +194,7 @@ public class WebtoonServiceImpl implements WebtoonService {
 
 	@Override
 	public void webtoonViewCrawling(String URL) {
-		deleteQuery(WebtoonViewVO.class.getSimpleName());
+		deleteQuery("webtoon_view");
 
 		Document doc = null;
 		Elements elemList = new Elements();
