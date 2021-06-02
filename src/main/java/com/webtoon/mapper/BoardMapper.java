@@ -36,7 +36,7 @@ public interface BoardMapper {
 	// 글 수정 요청을 처리할 메서드
 	@Update("UPDATE toon_board SET bd_title=#{bd_title}, bd_content=#{bd_content}, bd_img=#{bd_img} WHERE bd_num=#{bd_num}")
 	void updateBoard(@Param("bd_title") String bd_title, @Param("bd_content") String bd_content,
-			@Param("absoluteImgPath") String absoluteImgPath, @Param("bd_num") int bd_num);
+			@Param("bd_img") String absoluteImgPath, @Param("bd_num") int bd_num);
 
 	// 글 삭제 요청을 처리할 메서드
 	@Delete("DELETE FROM toon_board WHERE bd_num=#{bd_num}")

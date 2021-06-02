@@ -29,13 +29,13 @@ pageEncoding="UTF-8"%>
 			<c:choose>
 			<c:when test="${email eq articles.getBd_email()}">
 				<div class="jajak_content_footer ">
-					<button class="red" onclick="alert('글이 삭제되었습니다'); location.href='jajak_content_delete.jsp?Bd_num=${Bd_num}'">삭제</button>
-					<button class="blue" onclick="location.href='jajak-update.jsp?content_number=${Bd_num}'">수정</button>
+					<button class="red" onclick="alert('글이 삭제되었습니다'); location.href='jajak_content_delete?Bd_num=${Bd_num}'">삭제</button>
+					<button class="blue" onclick="location.href='jajak_update?content_number=${Bd_num}'">수정</button>
 		      	</div>
 			</c:when>
 			<c:when test="${email eq 'root@naver.com'}">
 				<div class="jajak_content_footer ">
-					<button class="red" onclick="alert('글이 삭제되었습니다'); location.href='jajak_content_delete.jsp?Bd_num=${Bd_num}'">삭제</button>
+					<button class="red" onclick="alert('글이 삭제되었습니다'); location.href='jajak_content_delete?Bd_num=${Bd_num}'">삭제</button>
 		      	</div>
 			</c:when>
 			</c:choose>
@@ -65,7 +65,7 @@ pageEncoding="UTF-8"%>
 						${best.getCm_date()}</td>
 						<td width="50%">${best.getCm_content()}</td>
 						<td width="5%">${best.getCm_like()}
-						<a href="comment_like_control.jsp?bd_num=${Bd_num}&cm_id=${best.getCm_id()}&writer=${writer}"> 
+						<a href="comment_like_control?bd_num=${Bd_num}&cm_id=${best.getCm_id()}&writer=${writer}"> 
 						<img src="${path}/resources/img/love.svg"></a></td>
 					</tr>
 				</c:forEach>
@@ -77,7 +77,7 @@ pageEncoding="UTF-8"%>
 						${comment.getCm_date()}</td>
 						<td width="50%">${comment.getCm_content()}</td>
 						<td width="5%">${comment.getCm_like()}
-						<a href="comment_like_control.jsp?bd_num=${Bd_num}&cm_id=${comment.getCm_id()}&writer=${writer}">   
+						<a href="comment_like_control?bd_num=${Bd_num}&cm_id=${comment.getCm_id()}&writer=${writer}">   
 						<img src="${path}/resources/img/love.svg"></a></td>
 					</tr>
 				</c:forEach>

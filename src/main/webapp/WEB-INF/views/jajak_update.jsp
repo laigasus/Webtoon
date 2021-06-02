@@ -27,10 +27,10 @@
 			<h1>
 				<img src="${path}/resources/img/button/arrow.svg" /> 글쓰기
 			</h1>
-			<form method="post" action="/jajak-update-control" enctype="multipart/form-data">
-			<c:forEach items="${articles }" var="article">
+			<form method="post" action="/jajak_update_control" enctype="multipart/form-data">
 				<div id="jajak-upload-form">
-					<input type="text" name="title" placeholder="제목" value=${article.getBd_title() } required/>
+					<input type="text" name="title" placeholder="제목" value=${articles.getBd_title() } required/>
+					<input type="text" name="bd_num" value=${articles.getBd_num() } style="display:none;" />
 					<hr>
 					<div class="toolbar">
 						<div class="dropdown-fontsize">
@@ -63,11 +63,9 @@
 						</a>
 					</div>
 					<textarea id="my-textarea" style="display:none" name="content"></textarea>
-					<input name="bd_num" value=${content_number} style="display:none"/>
 					<div class="editor" contenteditable="true">${articles.getBd_content()}</div>
 					<button type="submit" class="blue">수정</button>
 				</div>
-			</c:forEach>
 			</form>
 		</div>
 	</section>
