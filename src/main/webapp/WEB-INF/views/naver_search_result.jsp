@@ -22,7 +22,7 @@ pageEncoding="UTF-8"%>
         <h1><img src="${path}/resources/img/button/arrow.svg" /> 검색결과</h1>    
         <div class="list-container">		
         <c:forEach items="${articles}" var="article" >
-                <a href="toon_list.jsp?URL=${article.getUrl()}">  
+                <a href="/toon_list?URL=${article.getUrl()}">  
             <img src="${article.getThumb()}" />
             <ul>
               <li class="title">${article.getTitle()}</li>

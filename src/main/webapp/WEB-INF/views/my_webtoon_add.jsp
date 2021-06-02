@@ -11,7 +11,7 @@
 	<c:otherwise>
 		<script>
 			alert("로그인 해주세요");
-			location.href = "login.jsp";
+			location.href = "/login";
 		</script>
 	</c:otherwise>
 </c:choose>

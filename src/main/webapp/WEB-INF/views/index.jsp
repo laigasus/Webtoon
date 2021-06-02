@@ -18,9 +18,9 @@ pageEncoding="UTF-8"%>
       <div class="container">
         <div id="slide-1">
           <button class="left"><img src="${path}/resources/img/button/slider/back.svg"/></button>
-          <img src="img/slides/slide-1.png" />
+          <img src="${path}/resources/img/slides/slide-1.png" />
           <button class="right">
-            <img src="img/button/slider/next.svg" />
+            <img src="${path}/resources/img/button/slider/next.svg" />
           </button>
         </div>
         <div id="slide-2">

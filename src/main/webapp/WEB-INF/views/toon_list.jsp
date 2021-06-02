@@ -37,10 +37,10 @@
 						<dd>${InfoArr.get(3)}</dd>
 					</dl>
 					<button type="button" class="blue"
-						onclick="location.href='cart.jsp'">장바구니 담기</button>
+						onclick="/location.href='cart'">장바구니 담기</button>
 					<br>
 					<form style="display: none" method="post"
-						action="my_webtoon_add.jsp" id="frm">
+						action="/my_webtoon_add" id="frm">
 						<input name="imgSrc" value="${InfoArr.get(0)}" /> <input
 							name="webtoonTitle" value="${InfoArr.get(1)}" /> <input id="url"
 							name="webtoonUrl" value="" />
@@ -66,7 +66,7 @@
 					<tbody>
 						<c:forEach items="${articles}" var="article">
 							<tr class="cursorpointer"
-								onClick="location.href='detail.jsp?URL=${article.getUrl()}'">
+								onClick="/location.href='detail?URL=${article.getUrl()}'">
 								<td width="10%"><img src="${article.getThumb()}" /></td>
 								<td width="50%">${article.getTitle()}</td>
 								<td width="10%">${article.getDay()}</td>

@@ -9,7 +9,7 @@
 <body>
 	<script>
 		alert('회원탈퇴가 완료되었습니다');
-		location.href = 'admin_page.jsp';
+		location.href = '/admin_page';
 	</script>
 </body>
 </html>

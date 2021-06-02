@@ -18,8 +18,8 @@ pageEncoding="UTF-8"%>
             <div>
               <h1>Also on TOON store</h1>
               <ul>
-                <li><a href="mypage.jsp">내 계정</a></li>
-                <li><a href="faq.jsp">자주 묻는 질문</a></li>
+                <li><a href="/mypage">내 계정</a></li>
+                <li><a href="/faq">자주 묻는 질문</a></li>
               </ul>
             </div>
             <div>

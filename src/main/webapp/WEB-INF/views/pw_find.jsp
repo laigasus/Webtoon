@@ -14,8 +14,8 @@ pageEncoding="UTF-8"%>
   <body>
     <div class="container">
       <br>
-      <a href="index.jsp"><img src="${path}/resources/img/menu/user.svg" /></a>
-      <form action="pw_control.jsp" method="post">
+      <a href="/index"><img src="${path}/resources/img/menu/user.svg" /></a>
+      <form action="/pw_control" method="post">
         <div class="form-input">
           <input type="email" name="email" placeholder="이메일" required />
         </div>        

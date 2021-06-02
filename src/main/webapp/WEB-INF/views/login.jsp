@@ -15,8 +15,8 @@
 </head>
 <body>
 	<div class="container">
-		<a href="index.jsp"><img src="img/menu/user.svg" /></a>
-		<form action="login_control.jsp" method="post">
+		<a href="/index"><img src="img/menu/user.svg" /></a>
+		<form action=".login_control" method="post">
 			<div class="form-input">
 				<input type="email" name="email" placeholder="이메일" value="${saveId}"
 					required />
@@ -30,7 +30,7 @@
 			</div>
 			<input type="submit" value="로그인" />
 			<div class="link">
-				<a href="pw_find.jsp">비밀번호 찾기</a> <a href="register.jsp">회원가입</a>
+				<a href="/pw_find">비밀번호 찾기</a> <a href="/register">회원가입</a>
 			</div>
 		</form>
 	</div>

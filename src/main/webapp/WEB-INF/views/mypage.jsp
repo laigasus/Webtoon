@@ -36,9 +36,9 @@ pageEncoding="UTF-8"%>
 			</div>
         </div>
         <br><br><div style=" float:right">
-        <button class="red" onclick="location.href='nick_change.jsp'">닉네임 변경</button>
-        <button class="green" onclick="location.href='pw_find.jsp'">내 비밀번호 변경</button>
-        <button class="blue" onclick="location.href='deleteAccount.jsp'">회원 탈퇴</button>
+        <button class="red" onclick="location.href='/nick_change'">닉네임 변경</button>
+        <button class="green" onclick="location.href='/pw_find'">내 비밀번호 변경</button>
+        <button class="blue" onclick="location.href='/deleteAccount'">회원 탈퇴</button>
         </div>       
       </div>
     </section>

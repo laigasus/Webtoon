@@ -23,7 +23,7 @@
 				<img src="${path}/resources/img/button/arrow.svg" /> 커뮤니티
 			</h1>
 			<ul class="tabs" id="jajak-tab">
-				<form action="jajak.jsp">
+				<form action="/jajak">
 					<select name="category">
 						<option selected value="제목">제목</option>
 						<option value="작성자">작성자</option>
@@ -50,7 +50,7 @@
 						<tr style="background-color: #fff7fa; color: red;">
 							<td width="10%">[공지]</td>
 							<td width="50%"><a
-								href="jajak_content.jsp?Bd_num=${article.getBd_num()}&nick=${article.getBd_writer()}"
+								href="/jajak_content?Bd_num=${article.getBd_num()}&nick=${article.getBd_writer()}"
 								class="black_a" style="color: red;">${article.getBd_title()}</a></td>
 							<td width="10%">${article.getBd_view()}
 							<td width="15%">${article.getBd_writer()}</td>
@@ -68,7 +68,7 @@
 						<tr>
 							<td width="10%">${article.getBd_num()}</td>
 							<td width="50%"><a
-								href="jajak_content.jsp?Bd_num=${article.getBd_num()}&nick=${article.getBd_writer()}"
+								href="/jajak_content?Bd_num=${article.getBd_num()}&nick=${article.getBd_writer()}"
 								class="black_a">${article.getBd_title() }</a></td>
 							<td width="10%">${article.getBd_view()}
 							<td width="15%">${article.getBd_writer()}</td>
@@ -86,7 +86,7 @@
 					</tr>
 				</tbody>
 			</table>
-			<a href="jajak-upload.jsp">
+			<a href="/jajak-upload">
 				<button class="blue">게시글 올리기</button>
 			</a>
 		</div>

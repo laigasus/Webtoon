@@ -13,7 +13,7 @@ pageEncoding="UTF-8"%>
       <jsp:param name="name" value="value" />
     </jsp:include>
     <header>
-      <div class="container">웹툰<br>소개<img src="img/menu/detail.svg" /></div>
+      <div class="container">웹툰<br>소개<img src="${path}/resources/img/menu/detail.svg" /></div>
     </header>
     <section>
       <div class="container" id="detail">
@@ -30,7 +30,7 @@ pageEncoding="UTF-8"%>
               <dt>작가</dt>
               <dd>${InfoArr.get(3)}</dd>
             </dl>
-            <button type="button" class="blue" onclick="location.href='cart.jsp'">장바구니 담기</button><br>
+            <button type="button" class="blue" onclick="location.href='/cart'">장바구니 담기</button><br>
             <div class="like-button-div">
             <button type="button" class="red">좋아요 ♥</button>
           	</div>
@@ -47,7 +47,7 @@ pageEncoding="UTF-8"%>
     <jsp:include page="footer.jsp">
       <jsp:param name="name" value="value" />
     </jsp:include>
-    <a href="#nav-container" id="top"><img src="img/button/top.svg" /></a>
+    <a href="#nav-container" id="top"><img src="${path}/resources/img/button/top.svg" /></a>
     <script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
     <script src="js/script.js"></script>
   </body>

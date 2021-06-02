@@ -6,7 +6,7 @@
 	<c:when test="${session_user_email}==null">
 		<script>
 			alert('로그인해주세요');
-			location.href = 'login.jsp';
+			location.href = '/login';
 		</script>
 	</c:when>
 	<c:otherwise>

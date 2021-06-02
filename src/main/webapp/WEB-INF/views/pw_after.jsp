@@ -14,7 +14,7 @@
 </head>
 <body>
 	<div class="container">
-		<br> <a href="index.jsp"><img src="${path}/resources/img/menu/user.svg" /></a> <br>
+		<br> <a href="/index"><img src="${path}/resources/img/menu/user.svg" /></a> <br>
 		<br> 회원님의 비밀번호가 이메일로 전송되었습니다.
 	</div>
 </body>

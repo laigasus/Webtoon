@@ -9,7 +9,7 @@
 			<c:when test="${result}==-1">
 				<script>
 					alert('없는 이메일입니다');
-					location.href = 'login.jsp';
+					location.href = '/login';
 				</script>
 			</c:when>
 			<c:when test="${result}==0">
@@ -28,7 +28,7 @@
 			<c:when test="${result}==-1">
 				<script>
 					alert('없는 이메일입니다');
-					location.href = 'login.jsp';
+					location.href = '/login';
 				</script>
 			</c:when>
 			<c:when test="${result}==0">

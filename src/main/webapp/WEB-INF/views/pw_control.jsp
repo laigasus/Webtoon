@@ -14,7 +14,7 @@
 			<c:otherwise>
 				<script>
 					alert('유효하지 않은 이메일입니다.');
-					location.href = 'pw_find.jsp';
+					location.href = '/pw_find';
 				</script>
 			</c:otherwise>
 		</c:choose>
@@ -29,7 +29,7 @@
 			<c:otherwise>
 				<script>
 					alert('유효하지 않은 이메일입니다.');
-					location.href = 'pw_find.jsp';
+					location.href = '/pw_find';
 				</script>
 			</c:otherwise>
 		</c:choose>
@@ -51,13 +51,13 @@
 		<c:when test="${check}==0">
 			<script>
 				alert("잘못된 값을 입력하셨습니다.");
-				location.href = "pw_find.jsp";
+				location.href = "/pw_find";
 			</script>
 		</c:when>
 		<c:otherwise>
 			<script>
 				alert("비밀번호 변경 완료");
-				location.href = "pw_after.jsp";
+				location.href = "/pw_after";
 			</script>
 		</c:otherwise>
 	</c:choose>

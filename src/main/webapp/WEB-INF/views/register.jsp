@@ -11,11 +11,11 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <div class="regcontainer">
-      <a href="index.jsp"><img src="${path}/resources/img/menu/user.svg" /></a>
+      <a href="/index"><img src="${path}/resources/img/menu/user.svg" /></a>
       <div>
       	<jsp:include page="email_duplicate.jsp" flush="false"/>
       </div>
-      <form action="jdbc.jsp" method="post">
+      <form action="/jdbc" method="post">
         <div class="form-input">
           <input type="email" name="email" placeholder="이메일" required />
         </div>

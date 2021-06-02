@@ -26,13 +26,13 @@
 				<c:forEach begin="0" items="${weekArr}" var="i"
 					end="${weekArr.length}" step="1">
 					<li class="${weekArr[i]}"><a
-						href="naver.jsp?choosedDay=${CalculateDate.dayOfWeekKor[i]}">${CalculateDate.dayOfWeekKor[i]}</a>
+						href="/naver?choosedDay=${CalculateDate.dayOfWeekKor[i]}">${CalculateDate.dayOfWeekKor[i]}</a>
 						<img src="${path}/resources/img/day/${CalculateDate.dayOfWeekKor[i]}.svg" /></li>
 				</c:forEach>
 			</ul>
 			<div class="list-container">
 				<c:forEach items="${articles}" var="article">
-					<a class="toonlist-a" href="toon_list.jsp?URL=${article.getUrl()}">
+					<a class="toonlist-a" href="/toon_list?URL=${article.getUrl()}">
 						<img src="${article.getThumb()}" />
 						<ul>
 							<li class="title">${article.getTitle()}</li>

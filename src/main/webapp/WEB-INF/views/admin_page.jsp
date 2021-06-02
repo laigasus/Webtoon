@@ -24,7 +24,7 @@
 			<h1>
 				<img src="${path}/resources/img/button/arrow.svg" /> 커뮤니티
 			</h1>
-			<form action="admin_page_control.jsp" method="get">
+			<form action="/admin_page_control" method="get">
 				<table>
 					<thead>
 						<tr>

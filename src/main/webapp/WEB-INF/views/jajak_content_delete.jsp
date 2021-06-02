@@ -3,5 +3,5 @@
     <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 
 <script>
-	location.href='mypage.jsp';
+	location.href='/mypage';
 </script>
