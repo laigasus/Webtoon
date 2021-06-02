@@ -119,10 +119,10 @@ public class WebtoonController {
 		System.out.println("요일값: " + CalculateDate.calcDayOfWeek("eng", choosedDay));
 		ArrayList<WebtoonVO> articles = service.listBoard(CalculateDate.calcDayOfWeek("eng", choosedDay));
 		System.out.println("컨트롤러 실행!");
-		model.addAttribute(dayOfWeekEng);
-		model.addAttribute(choosedDay);
-		model.addAttribute(weekArr);
-		model.addAttribute(articles);
+		model.addAttribute("dayOfWeekEng", dayOfWeekEng);
+		model.addAttribute("choosedDay", choosedDay);
+		model.addAttribute("weekArr", weekArr);
+		model.addAttribute("articles", articles);
 
 		return "naver";
 	}

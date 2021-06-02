@@ -12,7 +12,7 @@ pageEncoding="UTF-8"%>
       <jsp:param name="name" value="value" />
     </jsp:include>
     <header>
-      <div class="container">다음<br>웹툰<img src="img/menu/site.svg"/></div>
+      <div class="container">다음<br>웹툰<img src="${path}/resources/img/menu/site.svg"/></div>
     </header>
     <section>
       <div class="container">

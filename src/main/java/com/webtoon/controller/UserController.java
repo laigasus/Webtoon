@@ -47,12 +47,22 @@ public class UserController {
 	// admin_page_control.jsp
 	// 관리자 페이지 제어 이벤트 페이지
 	@GetMapping("/admin_page_control")
-	public String adminPageControlGET(HttpServletRequest request) {
+	public String adminPageControlGET(HttpServletRequest request, HttpServletResponse response) throws IOException {
+
+		response.setContentType("text/html; charset=euc-kr");
+		PrintWriter out = response.getWriter();
+
 		String email[] = request.getParameterValues("email");
 		for (int i = 0; i < email.length; i++) {
 			service.deleteUser(email[i]);
 		}
-		return "admin_page_control";
+
+		out.println("<script>");
+		out.println("alert('회원탈퇴가 완료되었습니다');");
+		out.println("</script>");
+		out.flush();
+
+		return "admin_page";
 	}
 
 	@PostMapping("/admin_page_control")
@@ -84,7 +94,6 @@ public class UserController {
 	public String adminUserMypageGET(HttpServletRequest request, HttpSession session, Model model) {
 		String admin_user_email = request.getParameter("admin_user_email");
 		session.setAttribute("admin_user_email", admin_user_email);
-		// response.sendRedirect("mypage.jsp");
 		return "redirect:mypage";
 	}
 
@@ -97,22 +106,33 @@ public class UserController {
 	// deleteAccount_control.jsp
 	// 페이지 설명 추가
 	@GetMapping("/deleteAccount_control")
-	public String deleteAccountControlGET(HttpServletRequest request, HttpSession session, Model model)
-			throws UnsupportedEncodingException {
+	public String deleteAccountControlGET(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			Model model) throws IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=euc-kr");
+		PrintWriter out = response.getWriter();
 
 		String email = (String) request.getAttribute("session_user_email");
 		String password = request.getParameter("password");
 
 		int result = service.userCheck(email, password);
 		if (result == 0) {
+			out.println("<script>");
+			out.println("alert('비밀번호를 다시 입력해주세요');");
+			out.println("</script>");
+			out.flush();
+			return "deleteAccount_control";
 
 		} else {
 			service.deleteUser(email);
+			out.println("<script>");
+			out.println("alert('회원탈퇴가 완료되었습니다');");
+			out.println("</script>");
+			out.flush();
 			session.invalidate();
+			return "/";
 		}
-		model.addAttribute(result);
-		return "deleteAccount_control";
+
 	}
 
 	@PostMapping("/deleteAccount_control")
@@ -150,13 +170,11 @@ public class UserController {
 			// 중복 이메일이 있으면 false를 등록
 			session.setAttribute("check", false);
 			return "redirect:register";
-			// response.sendRedirect("register.jsp");
 		} else {
 			// 이메일 사용가능시 세션에 확인한 이메일과 check에 true값을 등록
 			session.setAttribute("check", true);
 			session.setAttribute("checkedemail", email);
 			return "redirect:email_duplicate";
-			// response.sendRedirect("email_duplicate.jsp");
 		}
 
 	}
@@ -179,13 +197,11 @@ public class UserController {
 			// 중복 이메일이 있으면 false를 등록
 			session.setAttribute("check", false);
 			return "redirect:register";
-			// response.sendRedirect("register.jsp");
 		} else {
 			// 이메일 사용가능시 세션에 확인한 이메일과 check에 true값을 등록
 			session.setAttribute("check", true);
 			session.setAttribute("checkedemail", checkedEmail);
 			return "redirect:email_duplicate";
-			// response.sendRedirect("email_duplicate.jsp");
 		}
 	}
 
@@ -218,15 +234,16 @@ public class UserController {
 	}
 
 	@PostMapping("/login_control")
-	@RequestMapping("/login_control")
-	public String loginControlPOST(HttpServletRequest request, HttpSession session, Model model)
-			throws UnsupportedEncodingException {
+	public String loginControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			Model model) throws IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=euc-kr");
+		PrintWriter out = response.getWriter();
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String check = request.getParameter("saveCheck"); // 아이디비번저장 체크박스가 체크되었는지를 확인하여서 체크되면 "saveCheck"="1" 를가져오고 아니면
-															// null
+		String check = request.getParameter("saveCheck");
+		// 아이디비번저장 체크박스가 체크되었는지를 확인하여서 체크되면 "saveCheck"="1" 를가져오고 아니면 null
 
 		if (check == null) { // equals 오류방지
 			check = "";
@@ -237,8 +254,20 @@ public class UserController {
 
 		if (check.equals("checked")) { // check가 됐으면
 			if (result == -1) {
+				out.println("<script>");
+				out.println("alert('없는 이메일입니다');");
+				out.println("</script>");
+				out.flush();
+
+				return "login";
 
 			} else if (result == 0) {
+				out.println("<script>");
+				out.println("alert('비밀번호를 다시 입력해주세요');");
+				out.println("</script>");
+				out.flush();
+
+				return "login";
 
 			} else { // 로그인 성공
 				UserVO vo = service.getUserInfo(email);
@@ -248,12 +277,24 @@ public class UserController {
 				session.setAttribute("chSave", "checked"); // chSave가 "checked" 을 가지면 login.jsp에서 체크상태가 유지됨
 				session.setAttribute("saveId", email);
 				session.setAttribute("savePw", password);
-				// response.sendRedirect("index.jsp");
 			}
+			return "redirect:/";
 		} else { // 체크 되면
 			if (result == -1) {
+				out.println("<script>");
+				out.println("alert('없는 이메일입니다');");
+				out.println("</script>");
+				out.flush();
+
+				return "login";
 
 			} else if (result == 0) {
+				out.println("<script>");
+				out.println("alert('비밀번호를 다시 입력해주세요');");
+				out.println("</script>");
+				out.flush();
+
+				return "login";
 
 			} else { // 로그인 성공
 				UserVO vo = service.getUserInfo(email);
@@ -263,13 +304,9 @@ public class UserController {
 				session.removeAttribute("chSave"); // 체크 안됐으니 지우기
 				session.removeAttribute("saveId");
 				session.removeAttribute("savePw");
-				// response.sendRedirect("index.jsp");
 			}
+			return "redirect:/";
 		}
-
-		model.addAttribute(check);
-		model.addAttribute(result);
-		return "redirect:/";
 	}
 	/////////////////////////////////////////////////
 
@@ -317,9 +354,12 @@ public class UserController {
 	}
 
 	@PostMapping("/my_webtoon_add")
-	public String myWebtoonAddPOST(HttpServletRequest request, HttpSession session, Model model)
-			throws UnsupportedEncodingException {
+	public String myWebtoonAddPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			Model model) throws IOException {
 		request.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html; charset=euc-kr");
+		PrintWriter out = response.getWriter();
+
 		String imgSrc = request.getParameter("imgSrc");
 		String webtoonTitle = request.getParameter("webtoonTitle");
 		String webtoonUrl = request.getParameter("webtoonUrl");
@@ -333,12 +373,23 @@ public class UserController {
 
 		if (!login.equals("") && likeCheck == 1) { // 좋아요를 이미 눌렀고 로그인을 한상황
 			webtoonService.myWebtoonDelete(webtoonTitle, login); // insert into 4가지 인자 삽입
+			out.println("<script>");
+			out.println("alert('좋아요를 취소하였습니다.');");
+			out.println("</script>");
+			out.flush();
 		} else if (!login.equals("")) { // 좋아요 안눌렀고 로그인 한상황
 			webtoonService.myWebtoonUpload(imgSrc, webtoonTitle, webtoonUrl, login); // insert into 4가지 인자 삽입
 		} else {
 			// 로그인 해주세요 실행
+			out.println("<script>");
+			out.println("alert('로그인 해주세요');");
+			out.println("</script>");
+			out.flush();
+			return "login";
 		}
-		return "my_webtoon_add";
+		// 이전페이지로 되돌아감
+		String referer = request.getHeader("Referer");
+		return "redirect:" + referer;
 	}
 	/////////////////////////////////////////////////
 
@@ -388,7 +439,7 @@ public class UserController {
 		service.updateUser(vo);
 		session.removeAttribute("session_user_nick");
 		session.setAttribute("session_user_nick", nickname);
-		return "nick_change_control";
+		return "/mypage";
 	}
 
 	@PostMapping("/nick_change_control")
@@ -428,10 +479,43 @@ public class UserController {
 	// pw_control.jsp
 	// 페이지 설명 추가
 	@GetMapping("/pw_control")
-	public String pwControlGET(HttpServletRequest request, HttpSession session, Model model) {
+	public String pwControlGET(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			Model model) throws IOException {
+		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=euc-kr");
+		PrintWriter out = response.getWriter();
+
 		String email = request.getParameter("email");
 		String session_user_email = (String) session.getAttribute("session_user_email");
 		int userCheck = service.userCheckEmail(email);
+
+		if (session_user_email == null) { // 로그인중 비번을 몰라서 왔을때
+			if (userCheck == 1) { // 이메일일치
+				out.println("<script>");
+				out.println("alert('회원님의 임시비밀번호가 이메일로 보내졌습니다.');");
+				out.println("</script>");
+				out.flush();
+			} else { // userCheck -1 받았던가 걍 실패
+				out.println("<script>");
+				out.println("alert('유효하지 않은 이메일입니다.');");
+				out.println("location.href = 'pw_find.jsp';");
+				out.println("</script>");
+				out.flush();
+			}
+		} else { // 이미 로그인을 했을때 비번을 바꾸려고 할때
+			if (session_user_email.equals(email)) {
+				out.println("<script>");
+				out.println("alert('회원님의 임시비밀번호가 이메일로 보내졌습니다.');");
+				out.println("</script>");
+				out.flush();
+			} else {
+				out.println("<script>");
+				out.println("alert('유효하지 않은 이메일입니다.');");
+				out.println("location.href = 'pw_find.jsp';");
+				out.println("</script>");
+				out.flush();
+			}
+		}
 
 		String from = "laigasus98@gmail.com";// 관리자 이메일 보낼 이메일 laigasus98@gmail.com
 		Properties p = new Properties(); // 정보를 담을 객체
@@ -454,8 +538,8 @@ public class UserController {
 
 		String password = Integer.toString(random.nextInt(9999999)); // 9999999이하 난수
 
-		String sql = "update toon_user set pw=? where email=? "; // email=?2 인 이메일에 비번을 pw ?1 로 수정 이떄 pw는 데이터베이스에 칼럼이름과
-																	// 일치해야함
+		String sql = "update toon_user set pw=? where email=? ";
+		// email=?2 인 이메일에 비번을 pw ?1 로 수정 이떄 pw는 데이터베이스에 칼럼이름과 일치해야함
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setString(1, password);
@@ -502,9 +586,19 @@ public class UserController {
 			e.printStackTrace();
 		}
 
-		model.addAttribute(check);
-
-		return "pw_control";
+		if (check == 0) {
+			out.println("<script>");
+			out.println("alert('잘못된 값을 입력하셨습니다.');");
+			out.println("</script>");
+			out.flush();
+			return "pw_find";
+		} else {
+			out.println("<script>");
+			out.println("alert('비밀번호 변경 완료');");
+			out.println("</script>");
+			out.flush();
+			return "pw_find";
+		}
 	}
 
 	@PostMapping("/pw_control")
@@ -562,7 +656,7 @@ public class UserController {
 			out.println("</script>");
 			out.println("");
 		}
-		
+
 	}
 	/////////////////////////////////////////////////
 

@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +28,7 @@
 			
 			
 			<ul id="day-tab">
-				<c:forEach begin="0" items="${weekArr}" var="i"
-					end="${weekArr.length}" step="1">
+				<c:forEach var="i" begin="0" end="${fn:length(weekArr)}" step="1">
 					<li class="${weekArr[i]}"><a
 						href="/naver?choosedDay=${dayOfWeekKor[i]}">${dayOfWeekKor[i]}</a>
 						<img src="${path}/resources/img/day/${dayOfWeekKor[i]}.svg" /></li>

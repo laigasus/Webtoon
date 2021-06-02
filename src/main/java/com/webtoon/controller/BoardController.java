@@ -129,13 +129,13 @@ public class BoardController {
 
 	@GetMapping("/jajak_comment_control")
 	public String jajakContentControlGET(HttpServletRequest request, HttpSession session, Model model)
-		throws UnsupportedEncodingException {
+			throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
-			
-			System.out.println("jajakcontentControl GET 들어옴");
-			int bd_num = Integer.parseInt(request.getParameter("bd_num"));
-			
-			return "jajak_content_control";
+
+		System.out.println("jajakcontentControl GET 들어옴");
+		int bd_num = Integer.parseInt(request.getParameter("bd_num"));
+
+		return "jajak_content_control";
 	}
 
 	// jajak_content_control.jsp
@@ -251,9 +251,11 @@ public class BoardController {
 	// jajak_upload_control.jsp
 	// 관리자 페이지 제어 이벤트 페이지
 	@PostMapping("/jajak_upload_control")
-	public String jajakUploadControlGET(HttpServletRequest request, HttpSession session, Model model)
-			throws IOException {
+	public String jajakUploadControlGET(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			Model model) throws IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=euc-kr");
+		PrintWriter out = response.getWriter();
 
 		String email = (String) session.getAttribute("session_user_email");
 		String writer = (String) session.getAttribute("session_user_nick");
@@ -281,9 +283,18 @@ public class BoardController {
 			service.regist(email, writer, title, content, absoluteImgPath);
 			System.out.println("check  " + check);
 			model.addAttribute("check", check);
+
+			return "jajak";
+
+		} else {
+			out.println("<script>");
+			out.println("alert('로그인해주세요');");
+			out.println("</script>");
+			out.flush();
+			
+			return "login";
 		}
 
-		return "jajak_upload_control";
 	}
 
 	// jajak_update.jsp
@@ -351,6 +362,7 @@ public class BoardController {
 			out.println("<script>");
 			out.println("alert(\"로그인해주세요\");");
 			out.println("</script>");
+			out.flush();
 			return "login";
 		}
 	}
@@ -366,7 +378,7 @@ public class BoardController {
 
 		service.deleteBoard(bd_num);
 
-		return "redirect:/jajak";
+		return "redirect:/mypage";
 	}
 
 	/////////////////////////////////////////////////
