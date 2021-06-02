@@ -35,18 +35,18 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public BoardVO contentBoard(int bId) {
-		return boardMapper.contentBoard(bId);
+	public BoardVO contentBoard(int bd_num) {
+		return boardMapper.contentBoard(bd_num);
 	}
 
 	@Override
-	public void updateBoard(String bd_title, String bd_content, String absoluteImgPath, int bId) {
-		boardMapper.updateBoard(bd_title, bd_content, absoluteImgPath, bId);
+	public void updateBoard(String bd_title, String bd_content, String absoluteImgPath, int bd_num) {
+		boardMapper.updateBoard(bd_title, bd_content, absoluteImgPath, bd_num);
 	}
 
 	@Override
-	public void deleteBoard(int bId) {
-		boardMapper.deleteBoard(bId);
+	public void deleteBoard(int bd_num) {
+		boardMapper.deleteBoard(bd_num);
 	}
 
 	@Override
@@ -55,8 +55,8 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void viewIncrease(int bId, int bView) {
-		boardMapper.viewIncrease(bId, bView);
+	public void viewIncrease(int bd_num, int bView) {
+		boardMapper.viewIncrease(bd_num, bView);
 	}
 
 	@Override

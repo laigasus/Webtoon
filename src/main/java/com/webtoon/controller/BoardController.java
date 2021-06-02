@@ -108,7 +108,6 @@ public class BoardController {
 			category = "제목";
 			search = "";
 		}
-		
 		ArrayList<BoardVO> articles=service.searchBoard(search, category);
 		
 		model.addAttribute("articles",articles);
@@ -168,26 +167,26 @@ public class BoardController {
 			throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
 
-		int Bd_num = Integer.parseInt(request.getParameter("Bd_num"));
+		int bd_num = Integer.parseInt(request.getParameter("bd_num"));
 		String nick = (String) session.getAttribute("session_user_nick");
 		String email = (String) session.getAttribute("session_user_email");
 		if (email == null) {
 			email = "";
 		}
 
-		BoardVO articles = service.contentBoard(Bd_num);
+		BoardVO articles = service.contentBoard(bd_num);
 		service.viewIncrease(articles.getBd_num(), articles.getBd_view());
 		String writer = userService.getUserInfo(articles.getBd_email()).getNick();
-		Boolean commentEmpty = commentService.listComment(Bd_num).isEmpty();
+		Boolean commentEmpty = commentService.listComment(bd_num).isEmpty();
 
-		ArrayList<CommentVO> comments = commentService.listComment(Bd_num);
+		ArrayList<CommentVO> comments = commentService.listComment(bd_num);
 //		String commentor = userService.getUserInfo(((CommentVO) comments).getEmail()).getNick();
 
-		CommentVO best = commentService.bestComment(Bd_num);
+		CommentVO best = commentService.bestComment(bd_num);
 		String best_commentor = userService.getUserInfo(best.getEmail()).getNick();
 
 		model.addAttribute("articles", articles);
-		model.addAttribute("Bd_num", Bd_num);
+		model.addAttribute("Bd_num", bd_num);
 		model.addAttribute("email", email);
 		model.addAttribute("nick", nick);
 		model.addAttribute("writer", writer);
@@ -204,6 +203,66 @@ public class BoardController {
 		return "jajak_content";
 	}
 
+	
+	// jajak_upload.jsp
+		// 관리자 페이지 제어 이벤트 페이지
+		@GetMapping("/jajak_upload")
+		public String jajakUploadGET() {
+
+			return "jajak_upload";
+		}
+		// 게시글 올리기 확인 버튼을 눌렀을때
+		@PostMapping("/jajak_upload")
+		public String jajakUploadPOST() {
+
+			return "redirect:jajak";
+		}
+		
+		// jajak_upload_control.jsp
+		// 관리자 페이지 제어 이벤트 페이지
+		@GetMapping("/jajak_upload_control")
+		public String jajakUploadControlGET(HttpServletRequest request, HttpSession session, Model model)
+				throws IOException {
+			request.setCharacterEncoding("utf-8");
+
+			String email = (String) session.getAttribute("session_user_email");
+			String writer = (String) session.getAttribute("session_user_nick");
+			boolean check;
+			if (email == null) {
+				check = false;
+			} else {
+				check = true;
+			}
+			String path = request.getSession().getServletContext().getRealPath("fileFolder");
+			int size = 1024 * 1024 * 10; // 저장가능한 파일 크기 이미지,파일 업로드 기능 확장시 사용
+			String file = ""; // 업로드한 파일 이름(변경될 수 있음)
+			String originalFile = ""; // 이름이 변경되었다면 변경되기 전 실제 파일 이름
+			if (check) {
+				MultipartRequest multi = new MultipartRequest(request, path, size, "utf-8", new DefaultFileRenamePolicy());
+				Enumeration<?> files = multi.getFileNames();
+				String str = null; // 파일 이름을 받아와 저장
+				file = multi.getFilesystemName(str); // 업로드된 파일 이름 가져옴
+				originalFile = multi.getOriginalFileName(str); // 원래 파일 이름 가져옴
+				String absoluteImgPath = null;
+				String title = multi.getParameter("title");// 제목 가져옴
+				String content = multi.getParameter("content");// 본문 가져옴
+				int bd_num = Integer.parseInt(multi.getParameter("bd_num"));
+				service.updateBoard(title, content, absoluteImgPath, bd_num);
+			} else {
+				model.addAttribute("check", check);
+			}
+
+			return "jajak_upload_control";
+		}
+
+		@PostMapping("/jajak_upload_control")
+		public String jajakUploadControlPOST() {
+			return "jajak_upload_control";
+		}
+
+
+	
+	
 	// jajak_update_control.jsp
 	// 커뮤니티 글 수정
 	@GetMapping("/jajak_update_control")
@@ -268,65 +327,7 @@ public class BoardController {
 	}
 	/////////////////////////////////////////////////
 
-	// jajak_upload_control.jsp
-	// 관리자 페이지 제어 이벤트 페이지
-	@GetMapping("/jajak_upload_control")
-	public String jajakUploadControlGET(HttpServletRequest request, HttpSession session, Model model)
-			throws IOException {
-		request.setCharacterEncoding("utf-8");
 
-		String email = (String) session.getAttribute("session_user_email");
-		String writer = (String) session.getAttribute("session_user_nick");
-		boolean check;
-		if (email == null) {
-			check = false;
-		} else {
-			check = true;
-		}
-		String path = request.getSession().getServletContext().getRealPath("fileFolder");
-		int size = 1024 * 1024 * 10; // 저장가능한 파일 크기 이미지,파일 업로드 기능 확장시 사용
-		String file = ""; // 업로드한 파일 이름(변경될 수 있음)
-		String originalFile = ""; // 이름이 변경되었다면 변경되기 전 실제 파일 이름
-		if (check) {
-			MultipartRequest multi = new MultipartRequest(request, path, size, "utf-8", new DefaultFileRenamePolicy());
-			Enumeration<?> files = multi.getFileNames();
-			String str = null; // 파일 이름을 받아와 저장
-			file = multi.getFilesystemName(str); // 업로드된 파일 이름 가져옴
-			originalFile = multi.getOriginalFileName(str); // 원래 파일 이름 가져옴
-			String absoluteImgPath = null;
-			String title = multi.getParameter("title");// 제목 가져옴
-			String content = multi.getParameter("content");// 본문 가져옴
-			int bd_num = Integer.parseInt(multi.getParameter("bd_num"));
-			service.updateBoard(title, content, absoluteImgPath, bd_num);
-		} else {
-			model.addAttribute("check", check);
-		}
-
-		return "jajak_upload_control";
-	}
-
-	@PostMapping("/jajak_upload_control")
-	public String jajakUploadControlPOST() {
-		return "jajak_upload_control";
-	}
-
-	/////////////////////////////////////////////////
-	// jajak_upload.jsp
-	// 관리자 페이지 제어 이벤트 페이지
-	@GetMapping("/jajak_upload")
-	public String jajakUploadGET() {
-
-		return "jajak_upload";
-	}
-
-	// 게시글 올리기 확인 버튼을 눌렀을때
-	@PostMapping("/jajak_upload")
-	public String jajakUploadPOST() {
-
-		return "redirect:jajak";
-	}
-
-	/////////////////////////////////////////////////
 
 	// my_post.jsp
 	// 페이지 설명 추가

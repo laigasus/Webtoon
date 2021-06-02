@@ -30,16 +30,17 @@ public interface BoardMapper {
 
 	// 글 상세보기 요청을 처리할 메서드
 	@Select("SELECT * FROM toon_board WHERE bd_num=#{bd_num}")
-	BoardVO contentBoard(@Param("bId") int bId);
+	BoardVO contentBoard(@Param("bd_num") int bd_num);
 
 	// 글 수정 요청을 처리할 메서드
 	@Update("UPDATE toon_board SET " + "bd_title=#{bd_title}, bd_content=#{bd_content},bd_img=#{bd_img} "
 			+ "WHERE bd_num=#{bd_num}")
-	void updateBoard(@Param("bd_title") String bd_title,@Param("bd_content") String bd_content,@Param("absoluteImgPath") String absoluteImgPath,@Param("bId") int bId);
+	void updateBoard(@Param("bd_title") String bd_title,@Param("bd_content") String bd_content,
+			@Param("absoluteImgPath") String absoluteImgPath,@Param("bd_num") int bd_num);
 
 	// 글 삭제 요청을 처리할 메서드
 	@Delete("DELETE FROM toon_board WHERE bd_num=#{bd_num}")
-	void deleteBoard(@Param("bId") int bId);
+	void deleteBoard(@Param("bd_num") int bd_num);
 
 	// 글 검색 요청을 처리할 메서드
 	// SELECT * FROM toon_board WHERE bd_title LIKE ? AND bd_email
@@ -53,8 +54,8 @@ public interface BoardMapper {
 	ArrayList<BoardVO> AdminListBoard();
 
 	// DB에 있는 view의 값을 증가 시켜주는 메서드
-	@Update("UPDATE toon_board SET bd_view=${bView}+1 WHERE bd_num=${bId}")
-	void viewIncrease(@Param("bId") int bId,@Param("bView") int bView);
+	@Update("UPDATE toon_board SET bd_view=${bView}+1 WHERE bd_num=${bd_num}")
+	void viewIncrease(@Param("bd_num") int bd_num,@Param("bView") int bView);
 
 	// 글갯수를 받아온다.
 	@Select("select count(*) from toon_board")
