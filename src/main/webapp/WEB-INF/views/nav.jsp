@@ -7,27 +7,27 @@
 <head>
 <meta charset="UTF-8" />
 <title>nav.jsp</title>
-<link rel="stylesheet" href="css/bootstrap.css" />
-<link rel="stylesheet" href="css/bootstrap-theme.css" />
-<link rel="stylesheet" type="text/css" href="css/style.css" />
+<link rel="stylesheet" href="${path}/resources/css/bootstrap.css" />
+<link rel="stylesheet" href="${path}/resources/css/bootstrap-theme.css" />
+<link rel="stylesheet" type="text/css" href="${path}/resources/css/style.css" />
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<nav>
 		<div class="container">
-			<a href="index.jsp"><img id="logo" src="img/logo.svg" /></a>
+			<a href="index.jsp"><img id="logo" src="${path}/resources/img/logo.svg" /></a>
 			<ul id="nav-container">
 				<li><a href="naver.jsp">네이버</a></li>
 				<li><a href="daum.jsp">다음</a></li>
 				<li><a href="nate.jsp">네이트</a></li>
 				<li><a href="jajak.jsp">커뮤니티</a></li>
 				<div id="nav-icon">
-					<li id="user"><img src="img/button/nav/user.svg" id="user-img" /><img
-						src="img/button/nav/close.svg" id="user-close" />
+					<li id="user"><img src="${path}/resources/img/button/nav/user.svg" id="user-img" /><img
+						src="${path}/resources/img/button/nav/close.svg" id="user-close" />
 					</li>
-					<li id="search"><img src="img/button/nav/search.svg"
-						id="search-img" /><img src="img/button/nav/close.svg"
+					<li id="search"><img src="${path}/resources/img/button/nav/search.svg"
+						id="search-img" /><img src="${path}/resources/img/button/nav/close.svg"
 						id="search-close" /></li>
 				</div>
 			</ul>
@@ -56,7 +56,7 @@
 		<div id="search-bar">
 			<div class="container">
 				<form action="naver_search_result.jsp">
-					<img src="img/input/search.svg" /><input type="text" name="q"
+					<img src="${path}/resources/img/input/search.svg" /><input type="text" name="q"
 						placeholder="제목 / 작가" />
 					<button type="submit" class="blue">검색</button>
 				</form>

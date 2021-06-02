@@ -22,18 +22,18 @@ public class CommentController {
 	// comment_like_control.jsp
 	// 댓글 좋아요 컨트롤
 	@GetMapping("/comment_like_control")
-	public String commentLikeControlGET(HttpServletRequest request,HttpSession session ,Model model)
+	public String commentLikeControlGET(HttpServletRequest request, HttpSession session, Model model)
 			throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
-		
-		int bd_num=Integer.parseInt(request.getParameter("Bd_num"));
-		int cm_id=Integer.parseInt(request.getParameter("cm_id"));
-		String writer=request.getParameter("writer");
+
+		int bd_num = Integer.parseInt(request.getParameter("Bd_num"));
+		int cm_id = Integer.parseInt(request.getParameter("cm_id"));
+		String writer = request.getParameter("writer");
 		service.likeComment(bd_num, cm_id);
 
-		model.addAttribute("bd_num",bd_num);
-		model.addAttribute("writer",writer);
-		
+		model.addAttribute("bd_num", bd_num);
+		model.addAttribute("writer", writer);
+
 		return "comment_like_control";
 	}
 
@@ -42,7 +42,5 @@ public class CommentController {
 		return "comment_like_control";
 	}
 	/////////////////////////////////////////////////
-	
-	
 
 }

@@ -49,12 +49,12 @@ public class UserController {
 		for (int i = 0; i < email.length; i++) {
 			service.deleteUser(email[i]);
 		}
-		return "";
+		return "admin_page_control";
 	}
 
 	@PostMapping("/admin_page_control")
 	public String adminPageControlPOST() {
-		return "";
+		return "admin_page_control";
 	}
 	/////////////////////////////////////////////////
 
@@ -65,12 +65,12 @@ public class UserController {
 		ArrayList<UserVO> users = service.listUser();
 		model.addAttribute(users);
 
-		return "";
+		return "admin_page";
 	}
 
 	@PostMapping("/admin_page")
 	public String adminPagePOST() {
-		return "";
+		return "admin_page";
 	}
 	/////////////////////////////////////////////////
 
@@ -82,19 +82,20 @@ public class UserController {
 		String admin_user_email = request.getParameter("admin_user_email");
 		session.setAttribute("admin_user_email", admin_user_email);
 		// response.sendRedirect("mypage.jsp");
-		return "";
+		return "redirect:mypage";
 	}
 
 	@PostMapping("/admin_user_mypage")
 	public String adminUserMypagePOST() {
-		return "";
+		return "admin_user_mypage";
 	}
 	/////////////////////////////////////////////////
 
 	// deleteAccount_control.jsp
 	// 페이지 설명 추가
 	@GetMapping("/deleteAccount_control")
-	public String deleteAccountControlGET(HttpServletRequest request, Model model) throws UnsupportedEncodingException {
+	public String deleteAccountControlGET(HttpServletRequest request, HttpSession session, Model model)
+			throws UnsupportedEncodingException {
 		request.setCharacterEncoding("UTF-8");
 
 		String email = (String) request.getAttribute("session_user_email");
@@ -105,15 +106,15 @@ public class UserController {
 
 		} else {
 			service.deleteUser(email);
-			// session.invalidate();
+			session.invalidate();
 		}
 		model.addAttribute(result);
-		return "";
+		return "deleteAccount_control";
 	}
 
 	@PostMapping("/deleteAccount_control")
 	public String deleteAccountControlPOST() {
-		return "";
+		return "deleteAccount_control";
 	}
 	/////////////////////////////////////////////////
 
@@ -122,12 +123,12 @@ public class UserController {
 	@GetMapping("deleteAccount")
 	public String deleteAccountGET() {
 
-		return "";
+		return "deleteAccount";
 	}
 
 	@PostMapping("/deleteAccount")
 	public String deleteAccountPOST() {
-		return "";
+		return "deleteAccount";
 	}
 	/////////////////////////////////////////////////
 
@@ -145,20 +146,21 @@ public class UserController {
 		if (check) {
 			// 중복 이메일이 있으면 false를 등록
 			session.setAttribute("check", false);
+			return "redirect:register";
 			// response.sendRedirect("register.jsp");
 		} else {
 			// 이메일 사용가능시 세션에 확인한 이메일과 check에 true값을 등록
 			session.setAttribute("check", true);
 			session.setAttribute("checkedemail", email);
+			return "redirect:email_duplicate";
 			// response.sendRedirect("email_duplicate.jsp");
 		}
-		return "";
 
 	}
 
 	@PostMapping("/email_duplicate_control")
 	public String emailDuplicateControlPOST() {
-		return "";
+		return "email_duplicate_control";
 	}
 	/////////////////////////////////////////////////
 
@@ -173,20 +175,20 @@ public class UserController {
 		if (check) {
 			// 중복 이메일이 있으면 false를 등록
 			session.setAttribute("check", false);
+			return "redirect:register";
 			// response.sendRedirect("register.jsp");
 		} else {
 			// 이메일 사용가능시 세션에 확인한 이메일과 check에 true값을 등록
 			session.setAttribute("check", true);
 			session.setAttribute("checkedemail", checkedEmail);
+			return "redirect:email_duplicate";
 			// response.sendRedirect("email_duplicate.jsp");
 		}
-
-		return "";
 	}
 
 	@PostMapping("/email_duplicate_result")
 	public String emailDuplicateResultPOST() {
-		return "";
+		return "email_duplicate_result";
 	}
 	/////////////////////////////////////////////////
 
@@ -195,12 +197,12 @@ public class UserController {
 	@GetMapping("/email_duplicate")
 	public String emailDuplicateGET() {
 
-		return "";
+		return "email_duplicate";
 	}
 
 	@PostMapping("/email_duplicate")
 	public String emailDuplicatePOST() {
-		return "";
+		return "email_duplicate";
 	}
 	/////////////////////////////////////////////////
 
@@ -254,13 +256,12 @@ public class UserController {
 
 		model.addAttribute(check);
 		model.addAttribute(result);
-
-		return "";
+		return "redirect:index";
 	}
 
 	@PostMapping("/login_control")
 	public String loginControlPOST() {
-		return "";
+		return "login_control";
 	}
 	/////////////////////////////////////////////////
 
@@ -275,12 +276,12 @@ public class UserController {
 			saveId = "";
 			savePw = "";
 		}
-		return "";
+		return "login";
 	}
 
 	@PostMapping("/login")
 	public String loginPOST() {
-		return "";
+		return "login";
 	}
 	/////////////////////////////////////////////////
 
@@ -290,12 +291,12 @@ public class UserController {
 	public String logoutGET(HttpServletRequest request, HttpSession session) {
 		session.invalidate();
 		// response.sendRedirect("index.jsp");
-		return "";
+		return "redirect:index";
 	}
 
 	@PostMapping("/logout")
 	public String logoutPOST() {
-		return "";
+		return "logout";
 	}
 	/////////////////////////////////////////////////
 
@@ -304,7 +305,7 @@ public class UserController {
 	@GetMapping("/my_webtoon_add")
 	public String myWebtoonAddGET() {
 
-		return "";
+		return "my_webtoon_add";
 	}
 
 	@PostMapping("/my_webtoon_add")
@@ -329,7 +330,7 @@ public class UserController {
 		} else {
 			// 로그인 해주세요 실행
 		}
-		return "";
+		return "my_webtoon_add";
 	}
 	/////////////////////////////////////////////////
 
@@ -343,12 +344,12 @@ public class UserController {
 				? (String) session.getAttribute("session_user_email")
 				: "";
 		ArrayList<MyWebtoonVO> webtoon = webtoonService.getMyWebtoonList(email);
-		return "";
+		return "my_webtoon_list";
 	}
 
 	@PostMapping("/myWebtoonList")
 	public String myWebtoonListPOST() {
-		return "";
+		return "my_webtoon_list";
 	}
 	/////////////////////////////////////////////////
 
@@ -357,12 +358,12 @@ public class UserController {
 	@GetMapping("/mypage")
 	public String mypageGET() {
 
-		return "";
+		return "mypage";
 	}
 
 	@PostMapping("/mypage")
 	public String mypagePOST() {
-		return "";
+		return "mypage";
 	}
 	/////////////////////////////////////////////////
 
@@ -379,12 +380,12 @@ public class UserController {
 		service.updateUser(vo);
 		session.removeAttribute("session_user_nick");
 		session.setAttribute("session_user_nick", nickname);
-		return "";
+		return "nick_change_control";
 	}
 
 	@PostMapping("/nick_change_control")
 	public String nickChangeControlPOST() {
-		return "";
+		return "nick_change_control";
 	}
 	/////////////////////////////////////////////////
 
@@ -393,12 +394,12 @@ public class UserController {
 	@GetMapping("/nick_change")
 	public String nickChangeGET() {
 
-		return "";
+		return "nick_change";
 	}
 
 	@PostMapping("/nick_change")
 	public String nickChangePOST() {
-		return "";
+		return "nick_change";
 	}
 	/////////////////////////////////////////////////
 
@@ -407,12 +408,12 @@ public class UserController {
 	@GetMapping("/pw_after")
 	public String pwAfterGET() {
 
-		return "";
+		return "pw_after";
 	}
 
 	@PostMapping("/pw_after")
 	public String pwAfterPOST() {
-		return "";
+		return "pw_after";
 	}
 	/////////////////////////////////////////////////
 
@@ -495,12 +496,12 @@ public class UserController {
 
 		model.addAttribute(check);
 
-		return "";
+		return "pw_control";
 	}
 
 	@PostMapping("/pw_control")
 	public String pwControlPOST() {
-		return "";
+		return "pw_control";
 	}
 	/////////////////////////////////////////////////
 
@@ -509,28 +510,28 @@ public class UserController {
 	@GetMapping("/pw_find")
 	public String pwFindGET() {
 
-		return "";
+		return "pw_find";
 	}
 
-	@PostMapping("/admin_page")
+	@PostMapping("/pw_find")
 	public String pwFindPOST() {
-		return "";
+		return "pw_find";
 	}
 	/////////////////////////////////////////////////
 
 	// register_control.jsp
 	// 페이지 설명 추가
 	@GetMapping("/register_control")
-	public String registerControlGET(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model)
-			throws IOException {
+	public String registerControlGET(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			Model model) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		String password_confirm = request.getParameter("password_confirm");
-		
+
 		response.setContentType("text/html; charset=euc-kr");
 		PrintWriter out = response.getWriter();
-		
+
 		out.println("<script>alert('인증번호가 틀립니다'); </script>");
 		out.flush();
 
@@ -541,19 +542,19 @@ public class UserController {
 			out.println("</script>");
 			session.setAttribute("user_email", email);
 			session.setAttribute("user_password", password);
-		}else {
+		} else {
 			out.println("<script>");
 			out.println("alert('입력한 비밀번호가 일치하지 않습니다');");
 			out.println("location.href = 'register.jsp';");
 			out.println("</script>");
 			out.println("");
 		}
-		return "";
+		return "register_control";
 	}
 
 	@PostMapping("/register_control")
 	public String registerControlPOST() {
-		return "";
+		return "register_control";
 	}
 	/////////////////////////////////////////////////
 
@@ -562,12 +563,35 @@ public class UserController {
 	@GetMapping("/register")
 	public String registerGET() {
 
-		return "";
+		return "register";
 	}
 
-	@PostMapping("/admin_page")
+	@PostMapping("/register")
 	public String registerPOST() {
-		return "";
+		return "register";
 	}
 	/////////////////////////////////////////////////
+
+	// nav.jsp
+	// 페이지 설명 추가
+	@GetMapping("/nav")
+	public String navGET(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			Model model) throws UnsupportedEncodingException {
+		request.setCharacterEncoding("UTF-8");
+		String login = (String) session.getAttribute("session_user_email");
+		String password = (String) session.getAttribute("session_user_password");
+		String nick = (String) session.getAttribute("session_user_nick");
+		UserVO vo = service.getUserInfo(login);
+		
+		
+		model.addAttribute(vo);
+		return "nav";
+	}
+
+	@PostMapping("/nav")
+	public String navPOST() {
+		return "nav";
+	}
+	/////////////////////////////////////////////////
+
 }

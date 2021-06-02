@@ -21,17 +21,14 @@ public class CalculateDate {
 	public static int calcDayOfWeek(String language, String choosedDay) throws Exception {
 		Hashtable<String, Integer> hash = new Hashtable<String, Integer>();
 
-		switch (language) {
-		case "kor":
+		if(language.equals("kor")) {
 			for (int i = 0; i < 7; i++) {
 				hash.put(dayOfWeekKor[i], ((i + 1) + 5) % 7);
 			}
-			break;
-		case "eng":
+		}else if(language.equals("eng")) {
 			for (int i = 0; i < 7; i++) {
 				hash.put(dayOfWeekEng[i], ((i + 1) + 5) % 7);
 			}
-			break;
 		}
 
 		if (choosedDay == null)

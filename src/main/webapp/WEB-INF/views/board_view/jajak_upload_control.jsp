@@ -11,5 +11,4 @@
 		location.href="login.jsp";
 	</script>
 </c:otherwise>
-</script>
 </c:choose>
