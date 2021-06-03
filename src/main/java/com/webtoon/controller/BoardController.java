@@ -99,12 +99,7 @@ public class BoardController {
 		}
 		//////////////// 페이징 끝
 
-		//////////////// 임시로 강제로그인
-		session.setAttribute("session_user_email", "root@naver.com");
-		session.setAttribute("session_user_password", "root");
-		session.setAttribute("session_user_nick", "관리");
 
-		//////////////// 임시로 강제로그인
 
 		return "jajak";
 	}

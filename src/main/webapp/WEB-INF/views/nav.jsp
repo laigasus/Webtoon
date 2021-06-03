@@ -35,17 +35,17 @@
 		<div id="user-bar">
 			<div class="container">
 				<c:choose>
-					<c:when test="${login == null}">
+					<c:when test="${session_user_email == null}">
 						<a href="/login"><button class="blue">로그인</button></a>
 						<a href="/register"><button class="red">회원가입</button></a>
 					</c:when>
 					<c:when
-						test="${login eq 'root@naver.com' && password eq 'root'}">
+						test="${session_user_email eq 'root@naver.com'}">
 						<a href="/logout"><button class="red">로그아웃</button></a>
 						<a href="/admin_page"><button class="blue">관리자페이지</button></a>
 					</c:when>
 					<c:otherwise>
-						<span>${vo.getNick()}님 환영합니다</span>
+						<span>${session_user_nick}님 환영합니다</span>
 						<a href="/logout"><button class="red">로그아웃</button></a>
 						<a href="/mypage"><button class="blue">마이페이지</button></a>
 					</c:otherwise>

@@ -336,7 +336,7 @@ public class UserController {
 	public String logoutGET(HttpServletRequest request, HttpSession session) {
 		session.invalidate();
 		// response.sendRedirect("index.jsp");
-		return "redirect:/";
+		return "redirect:/jajak";
 	}
 
 	@PostMapping("/logout")
