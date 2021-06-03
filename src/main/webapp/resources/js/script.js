@@ -64,17 +64,17 @@ $(document).ready(function(){
 
 	$("#user")		// 네비게이션 회원 버튼 마우스 오버 효과
 	.mouseover(function(){	// 마우스를 오버할 때
-		$("#user-img").attr("src", "img/button/nav/user-hover.svg");
+		$("#user-img").attr("src", "http://localhost:8081/resources/img/button/nav/user-hover.svg");
 	})
 	.mouseout(function(){	// 마우스가 벗어났을 때
-		$("#user-img").attr("src", "img/button/nav/user.svg");
+		$("#user-img").attr("src", "http://localhost:8081/resources/img/button/nav/user.svg");
 	});
 
 	$("#search")	// 네비게이션 검색 버튼 마우스 오버 효과
 	.mouseover(function(){	// 마우스를 오버할 때
-		$("#search-img").attr("src", "img/button/nav/search-hover.svg");
+		$("#search-img").attr("src", "http://localhost:8081/resources/img/button/nav/search-hover.svg");
 	})
 	.mouseout(function(){	// 마우스가 벗어났을 때
-		$("#search-img").attr("src", "img/button/nav/search.svg");
+		$("#search-img").attr("src", "http://localhost:8081/resources/img/button/nav/search.svg");
 	});
 });
