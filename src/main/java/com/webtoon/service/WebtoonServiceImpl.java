@@ -11,9 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.webtoon.domain.MyWebtoonVO;
-import com.webtoon.domain.WebtoonListVO;
-import com.webtoon.domain.WebtoonVO;
-import com.webtoon.domain.WebtoonViewVO;
 import com.webtoon.mapper.WebtoonMapper;
 
 @Service("webtoonService")
@@ -41,12 +38,15 @@ public class WebtoonServiceImpl implements WebtoonService {
 
 	@Override
 	public int myWebtoonCheck(String webtoonTitle, String login) {
+		System.out.println("webtoonTitle: " + webtoonTitle);
+		System.out.println("login: " + login);
+
 		MyWebtoonVO vo = webtoonMapper.myWebtoonCheck(webtoonTitle, login);
-		int check = 0;
-		if (vo.getWebtoonTitle().equals(webtoonTitle) && vo.getUserEmail().equals(login)) {
-			check = 1;
-		} else {
+		int check;
+		if (vo == null) {
 			check = 0;
+		} else {
+			check = 1;
 		}
 		return check;
 	}
@@ -73,7 +73,6 @@ public class WebtoonServiceImpl implements WebtoonService {
 
 	@Override
 	public void webtoonCrawling() {
-		System.out.println("크롤링 실행");
 		deleteQuery("webtoon");
 
 		Document doc = null;
@@ -278,10 +277,12 @@ public class WebtoonServiceImpl implements WebtoonService {
 
 							Elements title = detail.select("h2");
 							Elements author = detail.select("h2 > span");
+							// title이 제목과 작가이름이 같이 붙어서 나오기 떄문에 작가명을 떼어냄
+							String titleConv = title.text().replace(" " + author.text(), "");
 							Elements genre = detail.select("p > .genre");
 
 							infoArr.add(IMG.attr("src"));
-							infoArr.add(title.text());
+							infoArr.add(titleConv);
 							infoArr.add(genre.text());
 							infoArr.add(author.text());
 
@@ -298,6 +299,14 @@ public class WebtoonServiceImpl implements WebtoonService {
 
 	@Override
 	public ArrayList<MyWebtoonVO> getMyWebtoonList(String email) {
+
+		for (MyWebtoonVO webtoon : webtoonMapper.getMyWebtoonList(email)) {
+			System.out.println("getWebtoonTitle: " + webtoon.getMt_title());
+			System.out.println("getUserEmail: " + webtoon.getMt_user());
+			System.out.println("getWebtoonUrl: " + webtoon.getMt_url());
+			System.out.println("getImgSrc" + webtoon.getMt_imgsrc());
+		}
+
 		return webtoonMapper.getMyWebtoonList(email);
 	}
 }

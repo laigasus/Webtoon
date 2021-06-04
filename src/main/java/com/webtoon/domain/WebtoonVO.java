@@ -68,4 +68,10 @@ public class WebtoonVO {
 	public void setThumb(String thumb) {
 		this.thumb = thumb;
 	}
+
+	@Override
+	public String toString() {
+		return "WebtoonVO [no=" + no + ", day=" + day + ", title=" + title + ", url=" + url + ", thumb=" + thumb + "]";
+	}
+
 }

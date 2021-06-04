@@ -3,57 +3,41 @@ package com.webtoon.external;
 public class ErrorList {
 	public static String errMsg;
 
-	public static String printError(int errorCode) {
-		switch (errorCode) {
-		case 400:
+	public static String printError(Object errorCode) {
+		if (errorCode.equals(400)) {
 			errMsg = "잘못된 요청";
-			break;
-		case 401:
+		} else if (errorCode.equals(401)) {
 			errMsg = "접근 권한 없음";
-			break;
-		case 403:
+		} else if (errorCode.equals(403)) {
 			errMsg = "접근 금지";
-			break;
-		case 404:
+		} else if (errorCode.equals(404)) {
 			errMsg = "페이지를 찾을 수 없음";
-			break;
-		case 405:
+		} else if (errorCode.equals(405)) {
 			errMsg = "메소드 허용 안됨";
-			break;
-		case 407:
+		} else if (errorCode.equals(407)) {
 			errMsg = "프록시 인증 필요";
-			break;
-		case 408:
+		} else if (errorCode.equals(408)) {
 			errMsg = "요청시간 초과";
-			break;
-		case 409:
+		} else if (errorCode.equals(409)) {
 			errMsg = "호환되지 않는 파일";
-			break;
-		case 413:
+		} else if (errorCode.equals(413)) {
 			errMsg = "요청된 문서가 서버가 다룰수 있는 크기보다 큼";
-			break;
-		case 414:
+		} else if (errorCode.equals(414)) {
 			errMsg = "요청한 URL이 너무 김";
-			break;
-		case 500:
+		} else if (errorCode.equals(500)) {
 			errMsg = "내부 서버 오류";
-			break;
-		case 501:
+		} else if (errorCode.equals(501)) {
 			errMsg = "요구되는 기능이 서버에 없음";
-			break;
-		case 502:
+		} else if (errorCode.equals(502)) {
 			errMsg = "게이트웨이 상태 나쁨";
-			break;
-		case 503:
+		} else if (errorCode.equals(503)) {
 			errMsg = "서비스를 사용할 수 없음";
-			break;
-		case 505:
+		} else if (errorCode.equals(505)) {
 			errMsg = "해당 HTTP버전을 지원 안함";
-			break;
-		default:
+		} else {
 			errMsg = "알 수 없는 오류 발생";
-			break;
 		}
+
 		return errMsg;
 	}
 }

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
@@ -26,13 +25,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
+import com.webtoon.domain.BoardVO;
 import com.webtoon.domain.MyWebtoonVO;
 import com.webtoon.domain.UserVO;
 import com.webtoon.external.DBConnect;
 import com.webtoon.external.SMTPAuthenticatior;
+import com.webtoon.service.BoardService;
 import com.webtoon.service.UserService;
 import com.webtoon.service.WebtoonService;
 
@@ -40,9 +39,11 @@ import com.webtoon.service.WebtoonService;
 public class UserController {
 
 	@Autowired
-	private UserService service;
+	private UserService userService;
 	@Autowired
 	private WebtoonService webtoonService;
+	@Autowired
+	private BoardService boardService;
 
 	// admin_page_control.jsp
 	// 관리자 페이지 제어 이벤트 페이지
@@ -54,7 +55,7 @@ public class UserController {
 
 		String email[] = request.getParameterValues("email");
 		for (int i = 0; i < email.length; i++) {
-			service.deleteUser(email[i]);
+			userService.deleteUser(email[i]);
 		}
 
 		out.println("<script>");
@@ -75,7 +76,7 @@ public class UserController {
 	// 관리자 페이지 제어 페이지
 	@GetMapping("/admin_page")
 	public String adminPageGET(Model model) {
-		ArrayList<UserVO> users = service.listUser();
+		ArrayList<UserVO> users = userService.listUser();
 		model.addAttribute(users);
 
 		return "admin_page";
@@ -106,8 +107,13 @@ public class UserController {
 	// deleteAccount_control.jsp
 	// 페이지 설명 추가
 	@GetMapping("/deleteAccount_control")
-	public String deleteAccountControlGET(HttpServletRequest request, HttpServletResponse response, HttpSession session,
-			Model model) throws IOException {
+	public String deleteAccountControlGET() {
+		return "deleteAccount_control";
+	}
+
+	@PostMapping("/deleteAccount_control")
+	public String deleteAccountControlPOST(HttpServletRequest request, HttpServletResponse response,
+			HttpSession session, Model model) throws IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=euc-kr");
 		PrintWriter out = response.getWriter();
@@ -115,7 +121,7 @@ public class UserController {
 		String email = (String) request.getAttribute("session_user_email");
 		String password = request.getParameter("password");
 
-		int result = service.userCheck(email, password);
+		int result = userService.userCheck(email, password);
 		if (result == 0) {
 			out.println("<script>");
 			out.println("alert('비밀번호를 다시 입력해주세요');");
@@ -124,20 +130,13 @@ public class UserController {
 			return "deleteAccount_control";
 
 		} else {
-			service.deleteUser(email);
+			userService.deleteUser(email);
 			out.println("<script>");
 			out.println("alert('회원탈퇴가 완료되었습니다');");
 			out.println("</script>");
 			out.flush();
-			session.invalidate();
 			return "/";
 		}
-
-	}
-
-	@PostMapping("/deleteAccount_control")
-	public String deleteAccountControlPOST() {
-		return "deleteAccount_control";
 	}
 	/////////////////////////////////////////////////
 
@@ -158,15 +157,20 @@ public class UserController {
 	// email_duplicate_control.jsp
 	// 페이지 설명 추가
 	@GetMapping("/email_duplicate_control")
-	public String emailDuplicateControlGET(HttpServletRequest request, HttpSession session, Model model)
+	public String emailDuplicateControlGET() {
+		return "/email_duplicate_control";
+	}
+
+	@PostMapping("/email_duplicate_control")
+	public String emailDuplicateControlPOST(HttpServletRequest request, HttpSession session, Model model)
 			throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
 		String email = request.getParameter("email");
 		// 전달 받은 이메일이 db에서 중복된 이메일인지 확인 후 true or false return
-		boolean check = service.CheckDuplicate(email);
+		boolean check = userService.CheckDuplicate(email);
 		session.setAttribute("check", check);
 
-		if (check) {
+		if (check == false) {
 			// 중복 이메일이 있으면 false를 등록
 			session.setAttribute("check", false);
 			return "redirect:register";
@@ -174,14 +178,9 @@ public class UserController {
 			// 이메일 사용가능시 세션에 확인한 이메일과 check에 true값을 등록
 			session.setAttribute("check", true);
 			session.setAttribute("checkedemail", email);
-			return "redirect:email_duplicate";
+			return "redirect:register";
 		}
 
-	}
-
-	@PostMapping("/email_duplicate_control")
-	public String emailDuplicateControlPOST() {
-		return "email_duplicate_control";
 	}
 	/////////////////////////////////////////////////
 
@@ -248,7 +247,7 @@ public class UserController {
 		if (check == null) { // equals 오류방지
 			check = "";
 		}
-		int result = service.userCheck(email, password);
+		int result = userService.userCheck(email, password);
 		System.out.println("result: " + result);
 		System.out.println("check: " + check);
 
@@ -270,7 +269,7 @@ public class UserController {
 				return "login";
 
 			} else { // 로그인 성공
-				UserVO vo = service.getUserInfo(email);
+				UserVO vo = userService.getUserInfo(email);
 				session.setAttribute("session_user_email", email);
 				session.setAttribute("session_user_password", password);
 				session.setAttribute("session_user_nick", vo.getNick());
@@ -297,7 +296,7 @@ public class UserController {
 				return "login";
 
 			} else { // 로그인 성공
-				UserVO vo = service.getUserInfo(email);
+				UserVO vo = userService.getUserInfo(email);
 				session.setAttribute("session_user_email", email);
 				session.setAttribute("session_user_password", password);
 				session.setAttribute("session_user_nick", vo.getNick());
@@ -334,9 +333,7 @@ public class UserController {
 	// 페이지 설명 추가
 	@GetMapping("/logout")
 	public String logoutGET(HttpServletRequest request, HttpSession session) {
-		session.invalidate();
-		// response.sendRedirect("index.jsp");
-		return "redirect:/jajak";
+		return "redirect:/";
 	}
 
 	@PostMapping("/logout")
@@ -363,22 +360,22 @@ public class UserController {
 		String imgSrc = request.getParameter("imgSrc");
 		String webtoonTitle = request.getParameter("webtoonTitle");
 		String webtoonUrl = request.getParameter("webtoonUrl");
-		String login;
+		String userEmail;
 		if (session.getAttribute("session_user_email") == null) {
-			login = "";
+			userEmail = "";
 		} else {
-			login = (String) session.getAttribute("session_user_email");
+			userEmail = (String) session.getAttribute("session_user_email");
 		}
-		int likeCheck = webtoonService.myWebtoonCheck(webtoonTitle, login); // like좋아요 했으면 1반환
+		int likeCheck = webtoonService.myWebtoonCheck(webtoonTitle, userEmail); // like좋아요 했으면 1반환
 
-		if (!login.equals("") && likeCheck == 1) { // 좋아요를 이미 눌렀고 로그인을 한상황
-			webtoonService.myWebtoonDelete(webtoonTitle, login); // insert into 4가지 인자 삽입
+		if (!userEmail.equals("") && likeCheck == 1) { // 좋아요를 이미 눌렀고 로그인을 한상황
+			webtoonService.myWebtoonDelete(webtoonTitle, userEmail); // insert into 4가지 인자 삽입
 			out.println("<script>");
 			out.println("alert('좋아요를 취소하였습니다.');");
 			out.println("</script>");
 			out.flush();
-		} else if (!login.equals("")) { // 좋아요 안눌렀고 로그인 한상황
-			webtoonService.myWebtoonUpload(imgSrc, webtoonTitle, webtoonUrl, login); // insert into 4가지 인자 삽입
+		} else if (!userEmail.equals("")) { // 좋아요 안눌렀고 로그인 한상황
+			webtoonService.myWebtoonUpload(webtoonTitle, userEmail, imgSrc, webtoonUrl); // insert into 4가지 인자 삽입
 		} else {
 			// 로그인 해주세요 실행
 			out.println("<script>");
@@ -398,11 +395,7 @@ public class UserController {
 	@GetMapping("/my_webtoon_list")
 	public String my_webtoonListGET(HttpServletRequest request, HttpSession session, Model model)
 			throws UnsupportedEncodingException {
-		request.setCharacterEncoding("utf-8");
-		String email = (session.getAttribute("session_user_email") != null)
-				? (String) session.getAttribute("session_user_email")
-				: "";
-		ArrayList<MyWebtoonVO> webtoon = webtoonService.getMyWebtoonList(email);
+
 		return "my_webtoon_list";
 	}
 
@@ -415,7 +408,32 @@ public class UserController {
 	// mypage.jsp
 	// 페이지 설명 추가
 	@GetMapping("/mypage")
-	public String mypageGET() {
+	public String mypageGET(HttpServletRequest request, HttpSession session, Model model)
+			throws UnsupportedEncodingException {
+		// 자신이 올린 글 목록 출력
+		request.setCharacterEncoding("utf-8");
+		String admin_user_email = (String) session.getAttribute("admin_user_email");
+		String email = "";
+		if (admin_user_email == null) {
+			admin_user_email = "";
+		} // 널이여도 equals 오류없게
+			// 사용자가 로그인하여 세션에 닉네임이나 이메일 둘중 프라이머리키가 등록되어있는 상태
+		if (admin_user_email.equals("")) { // 일반사용자가 접근
+			email = (session.getAttribute("session_user_email") != null)
+					? (String) session.getAttribute("session_user_email")
+					: "";
+		} else { // 관리자가 들어온 마이페이지
+			email = admin_user_email;
+		}
+		if (!email.equals(null)) {
+			ArrayList<BoardVO> post = boardService.myListBoard(email);
+			model.addAttribute("post", post);
+
+		}
+		//////////////////////////////////////////
+		System.out.println("email: " + email);
+		ArrayList<MyWebtoonVO> webtoons = webtoonService.getMyWebtoonList(email);
+		model.addAttribute("webtoons", webtoons);
 
 		return "mypage";
 	}
@@ -429,22 +447,32 @@ public class UserController {
 	// nick_change_control.jsp
 	// 페이지 설명 추가
 	@GetMapping("/nick_change_control")
-	public String nickChangeControlGET(HttpServletRequest request, HttpSession session, Model model)
-			throws UnsupportedEncodingException {
+	public String nickChangeControlGET() {
+		return "nick_change_control";
+	}
+
+	@PostMapping("/nick_change_control")
+	public String nickChangeControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			Model model) throws IOException {
 		request.setCharacterEncoding("utf-8");
+		response.setContentType("text/html; charset=euc-kr");
+		PrintWriter out = response.getWriter();
+
 		String email = (String) session.getAttribute("session_user_email");
 		String password = (String) session.getAttribute("session_user_password");
 		String nickname = request.getParameter("nickname");
 		UserVO vo = new UserVO(email, nickname, password);
-		service.updateUser(vo);
+
+		userService.updateUser(vo);
 		session.removeAttribute("session_user_nick");
 		session.setAttribute("session_user_nick", nickname);
-		return "/mypage";
-	}
 
-	@PostMapping("/nick_change_control")
-	public String nickChangeControlPOST() {
-		return "nick_change_control";
+		out.println("<script>");
+		out.println("alert('닉네임이 성공적으로 변경되었습니다.');");
+		out.println("</script>");
+		out.flush();
+
+		return "/mypage";
 	}
 	/////////////////////////////////////////////////
 
@@ -479,7 +507,12 @@ public class UserController {
 	// pw_control.jsp
 	// 페이지 설명 추가
 	@GetMapping("/pw_control")
-	public String pwControlGET(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+	public String pwControlGET() {
+		return "pw_control";
+	}
+
+	@PostMapping("/pw_control")
+	public String pwControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=euc-kr");
@@ -487,7 +520,7 @@ public class UserController {
 
 		String email = request.getParameter("email");
 		String session_user_email = (String) session.getAttribute("session_user_email");
-		int userCheck = service.userCheckEmail(email);
+		int userCheck = userService.userCheckEmail(email);
 
 		if (session_user_email == null) { // 로그인중 비번을 몰라서 왔을때
 			if (userCheck == 1) { // 이메일일치
@@ -518,6 +551,7 @@ public class UserController {
 		}
 
 		String from = "laigasus98@gmail.com";// 관리자 이메일 보낼 이메일 laigasus98@gmail.com
+		// 요즘 이메일은 보안상 기본적으로 SMTP를 지원하지 않는다. 해당 플랫폼 설정에서 포트를 개방해야 이메일을 받을 수 있음!!
 		Properties p = new Properties(); // 정보를 담을 객체
 
 		p.put("mail.smtp.host", "smtp.gmail.com");
@@ -531,7 +565,7 @@ public class UserController {
 
 		DBConnect conn = new DBConnect();
 		PreparedStatement pstmt = null;
-		ResultSet rs = null;
+
 		int check = 1;
 		Random random = new Random(); // 랜덤 객체 생성(디폴트 시드값 : 현재시간)
 		random.setSeed(System.currentTimeMillis()); // 시드값 설정을 따로 할수도 있음 일단은 시간에 따라 변화
@@ -591,19 +625,14 @@ public class UserController {
 			out.println("alert('잘못된 값을 입력하셨습니다.');");
 			out.println("</script>");
 			out.flush();
-			return "pw_find";
+			return "login";
 		} else {
 			out.println("<script>");
 			out.println("alert('비밀번호 변경 완료');");
 			out.println("</script>");
 			out.flush();
-			return "pw_find";
+			return "login";
 		}
-	}
-
-	@PostMapping("/pw_control")
-	public String pwControlPOST() {
-		return "pw_control";
 	}
 	/////////////////////////////////////////////////
 
@@ -629,32 +658,34 @@ public class UserController {
 	}
 
 	@PostMapping("/register_control")
-	public void registerControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+	public String registerControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
 		request.setCharacterEncoding("utf-8");
+
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
+		String nickname = request.getParameter("nickname");
 		String password_confirm = request.getParameter("password_confirm");
 
+		UserVO new_account = new UserVO(email, nickname, password);
 		response.setContentType("text/html; charset=euc-kr");
 		PrintWriter out = response.getWriter();
 
-		out.println("<script>alert('인증번호가 틀립니다'); </script>");
-		out.flush();
-
 		if (password.equals(password_confirm)) {
+			userService.insertUser(new_account);
 			out.println("<script>");
 			out.println("alert('회원가입을 완료하였습니다');");
-			out.println("location.href = 'login.jsp';");
 			out.println("</script>");
+			out.flush();
 			session.setAttribute("user_email", email);
 			session.setAttribute("user_password", password);
+			return "index";
 		} else {
 			out.println("<script>");
 			out.println("alert('입력한 비밀번호가 일치하지 않습니다');");
-			out.println("location.href = 'register.jsp';");
 			out.println("</script>");
-			out.println("");
+			out.flush();
+			return "register";
 		}
 
 	}
@@ -682,7 +713,7 @@ public class UserController {
 		String login = (String) session.getAttribute("session_user_email");
 		String password = (String) session.getAttribute("session_user_password");
 		String nick = (String) session.getAttribute("session_user_nick");
-		UserVO vo = service.getUserInfo(login);
+		UserVO vo = userService.getUserInfo(login);
 
 		model.addAttribute(vo);
 		return "nav";

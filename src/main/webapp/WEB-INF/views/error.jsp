@@ -4,7 +4,7 @@ pageEncoding="UTF-8"%>
 <%@ page isErrorPage = "true" %>
 <%@page import="com.webtoon.external.*"%>
 <%response.setCharacterEncoding("UTF-8");
-int errCode=(int)request.getAttribute("javax.servlet.error.status_code");%>
+Object errCode=request.getAttribute("javax.servlet.error.status_code");%>
 <!DOCTYPE html>
 <html>
   <head>

@@ -10,41 +10,48 @@ mt_url mediumtext not null
 */
 
 public class MyWebtoonVO {
-	private String imgSrc;
-	private String webtoonTitle;
-	private String webtoonUrl;
-	private String userEmail;
 
-	public String getImgSrc() {
-		return imgSrc;
+	private String mt_title;
+	private String mt_user;
+	private String mt_imgsrc;
+	private String mt_url;
+
+	public String getMt_title() {
+		return mt_title;
 	}
 
-	public void setImgSrc(String imgSrc) {
-		this.imgSrc = imgSrc;
+	public void setMt_title(String mt_title) {
+		this.mt_title = mt_title;
 	}
 
-	public String getWebtoonTitle() {
-		return webtoonTitle;
+	public String getMt_user() {
+		return mt_user;
 	}
 
-	public void setWebtoonTitle(String webtoonTitle) {
-		this.webtoonTitle = webtoonTitle;
+	public void setMt_user(String mt_user) {
+		this.mt_user = mt_user;
 	}
 
-	public String getWebtoonUrl() {
-		return webtoonUrl;
+	public String getMt_imgsrc() {
+		return mt_imgsrc;
 	}
 
-	public void setWebtoonUrl(String webtoonUrl) {
-		this.webtoonUrl = webtoonUrl;
+	public void setMt_imgsrc(String mt_imgsrc) {
+		this.mt_imgsrc = mt_imgsrc;
 	}
 
-	public String getUserEmail() {
-		return userEmail;
+	public String getMt_url() {
+		return mt_url;
 	}
 
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
+	public void setMt_url(String mt_url) {
+		this.mt_url = mt_url;
+	}
+
+	@Override
+	public String toString() {
+		return "MyWebtoonVO [mt_title=" + mt_title + ", mt_user=" + mt_user + ", mt_imgsrc=" + mt_imgsrc + ", mt_url="
+				+ mt_url + "]";
 	}
 
 }

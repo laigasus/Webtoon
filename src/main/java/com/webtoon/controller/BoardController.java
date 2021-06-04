@@ -29,7 +29,7 @@ import com.webtoon.service.UserService;
 public class BoardController {
 
 	@Autowired
-	private BoardService service;
+	private BoardService boardService;
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -58,7 +58,7 @@ public class BoardController {
 		int gongziCount = 1; // 공지글의 갯수를 가져옵니다. 기본값 1
 		int startRow = (currentPage - 1) * pageSize; // 현재페이지에 첫 번째 글
 		int count = 0;
-		BoardService forPage = service;
+		BoardService forPage = boardService;
 		count = forPage.getCountBoard(); // 총 레코드갯수 반환
 		List<BoardVO> list = null;
 //		if (count > 0) {
@@ -66,8 +66,8 @@ public class BoardController {
 //		}
 		System.out.println(startRow);
 
-		ArrayList<BoardVO> articlesAdmin = service.AdminListBoard();
-		ArrayList<BoardVO> articles = service.listBoard(startRow, pageSize);
+		ArrayList<BoardVO> articlesAdmin = boardService.AdminListBoard();
+		ArrayList<BoardVO> articles = boardService.listBoard(startRow, pageSize);
 
 		model.addAttribute("articlesAdmin", articlesAdmin);
 		model.addAttribute("articles", articles);
@@ -99,8 +99,6 @@ public class BoardController {
 		}
 		//////////////// 페이징 끝
 
-
-
 		return "jajak";
 	}
 
@@ -115,7 +113,7 @@ public class BoardController {
 			category = "제목";
 			search = "";
 		}
-		ArrayList<BoardVO> articles = service.searchBoard(search, category);
+		ArrayList<BoardVO> articles = boardService.searchBoard(search, category);
 
 		model.addAttribute("articles", articles);
 
@@ -126,9 +124,6 @@ public class BoardController {
 	public String jajakContentControlGET(HttpServletRequest request, HttpSession session, Model model)
 			throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
-
-		System.out.println("jajakcontentControl GET 들어옴");
-		int bd_num = Integer.parseInt(request.getParameter("bd_num"));
 
 		return "jajak_content_control";
 	}
@@ -179,8 +174,8 @@ public class BoardController {
 			email = "";
 		}
 
-		BoardVO articles = service.contentBoard(bd_num);
-		service.viewIncrease(articles.getBd_num(), articles.getBd_view());
+		BoardVO articles = boardService.contentBoard(bd_num);
+		boardService.viewIncrease(articles.getBd_num(), articles.getBd_view());
 		System.out.println("articles " + articles);
 		System.out.println("articles.getBd_email " + articles.getBd_email());
 
@@ -275,7 +270,7 @@ public class BoardController {
 			String absoluteImgPath = null; // path+'\\'+file; 이미지 업로드 기능 확장시 사용
 			String title = multi.getParameter("title");// 제목 가져옴
 			String content = multi.getParameter("content");// 본문 가져옴
-			service.regist(email, writer, title, content, absoluteImgPath);
+			boardService.regist(email, writer, title, content, absoluteImgPath);
 			System.out.println("check  " + check);
 			model.addAttribute("check", check);
 
@@ -286,7 +281,7 @@ public class BoardController {
 			out.println("alert('로그인해주세요');");
 			out.println("</script>");
 			out.flush();
-			
+
 			return "login";
 		}
 
@@ -300,7 +295,7 @@ public class BoardController {
 		request.setCharacterEncoding("utf-8");
 
 		int content_number = Integer.parseInt(request.getParameter("content_number"));
-		BoardVO articles = service.contentBoard(content_number);
+		BoardVO articles = boardService.contentBoard(content_number);
 
 		model.addAttribute("articles", articles);
 
@@ -348,7 +343,7 @@ public class BoardController {
 			System.out.println("multi.getParameter(\"title\")  " + multi.getParameter("title"));
 			System.out.println("request.getParameter(\"r\")  " + multi.getParameter("bd_num"));
 			int bd_num = Integer.parseInt(multi.getParameter("bd_num"));
-			service.updateBoard(title, content, absoluteImgPath, bd_num);
+			boardService.updateBoard(title, content, absoluteImgPath, bd_num);
 
 			System.out.println("check====  " + check);
 			model.addAttribute("check", check);
@@ -371,7 +366,7 @@ public class BoardController {
 
 		int bd_num = Integer.parseInt(request.getParameter("bd_num"));
 
-		service.deleteBoard(bd_num);
+		boardService.deleteBoard(bd_num);
 
 		return "redirect:/mypage";
 	}
@@ -381,26 +376,7 @@ public class BoardController {
 	// my_post.jsp
 	// 페이지 설명 추가
 	@GetMapping("/my_post")
-	public String myPostGET(HttpServletRequest request, HttpSession session, Model model)
-			throws UnsupportedEncodingException {
-		request.setCharacterEncoding("utf-8");
-		String admin_user_email = (String) session.getAttribute("admin_user_email");
-		String email = "";
-		if (admin_user_email == null) {
-			admin_user_email = "";
-		} // 널이여도 equals 오류없게
-			// 사용자가 로그인하여 세션에 닉네임이나 이메일 둘중 프라이머리키가 등록되어있는 상태
-		if (admin_user_email.equals("")) { // 일반사용자가 접근
-			email = (session.getAttribute("session_user_email") != null)
-					? (String) session.getAttribute("session_user_email")
-					: "";
-		} else { // 관리자가 들어온 마이페이지
-			email = admin_user_email;
-		}
-		if (!email.equals(null)) {
-			ArrayList<BoardVO> post = service.myListBoard(email);
-			model.addAttribute(post);
-		}
+	public String myPostGET() {
 
 		return "";
 	}

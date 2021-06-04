@@ -73,7 +73,7 @@
 	<jsp:include page="footer.jsp">
 		<jsp:param name="name" value="value" />
 	</jsp:include>
-	<a href="#nav-container" id="top"><img src="img/button/top.svg" /></a>
+	<a href="#nav-container" id="top"><img src="${path}/resources/img/button/top.svg" /></a>
 </body>
 	<script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
 	<script src="${path}/resources/js/script.js"> </script>

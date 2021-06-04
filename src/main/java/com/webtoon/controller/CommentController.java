@@ -16,12 +16,11 @@ import com.webtoon.service.CommentService;
 public class CommentController {
 
 	@Autowired
-	private CommentService service;
+	private CommentService commentService;
 
-	// comment_like_control.jsp
 	// 댓글 좋아요 컨트롤
 	@GetMapping("/comment_like_control")
-	public String commentLikeControlGET(HttpServletRequest request, HttpServletResponse response, HttpSession session)
+	public String commentService(HttpServletRequest request, HttpServletResponse response, HttpSession session)
 			throws IOException {
 		request.setCharacterEncoding("utf-8");
 
@@ -30,7 +29,7 @@ public class CommentController {
 		int bd_num = Integer.parseInt(request.getParameter("bd_num"));
 		int cm_id = Integer.parseInt(request.getParameter("cm_id"));
 		String writer = request.getParameter("writer");
-		service.likeComment(bd_num, cm_id);
+		commentService.likeComment(bd_num, cm_id);
 
 		return ("forward:jajak_content?Bd_num=" + bd_num + "&nick=" + writer + "#comment-h1");
 	}

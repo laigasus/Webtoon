@@ -101,7 +101,7 @@ public class WebtoonController {
 
 		for (int i = 0; i < weekArr.length; i++) {
 			if (choosedDay == null) {
-				if (i == CalculateDate.dayOfWeek-1) {
+				if (i == CalculateDate.dayOfWeek - 1) {
 					choosedDay = CalculateDate.calcTodayYoill(i, "kor");
 					weekArr[i] = "active";
 					break;

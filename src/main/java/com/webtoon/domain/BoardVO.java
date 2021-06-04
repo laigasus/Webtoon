@@ -101,7 +101,5 @@ public class BoardVO {
 		return "BoardVO [bd_num=" + bd_num + ", bd_writer=" + bd_writer + ", bd_title=" + bd_title + ", bd_content="
 				+ bd_content + ", bd_date=" + bd_date + ", bd_view=" + bd_view + ", bd_email=" + bd_email + "]";
 	}
-	
-	
-	
+
 }

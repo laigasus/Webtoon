@@ -13,20 +13,16 @@ import com.webtoon.domain.BoardVO;
 public interface BoardMapper {
 	// 글 등록 메서드
 	@Select("insert into toon_board values(null, #{bd_title}, #{bd_writer},#{bd_date},#{bd_view},#{bd_content},#{bd_img},#{bd_email})")
-	public void regist(@Param("bd_title") String title, @Param("bd_writer") String writer, @Param("bd_date") Timestamp time,
+	void regist(@Param("bd_title") String title, @Param("bd_writer") String writer, @Param("bd_date") Timestamp time,
 			@Param("bd_view") int view, @Param("bd_content") String content, @Param("bd_img") String absoluteImgPath,
 			@Param("bd_email") String email);
 
 	// 글 목록을 가지고 오는 메서드
-	// 원래 Sql "SELECT * FROM toon_board WHERE bd_email !='root@naver.com' ORDER BY
-	// bd_num DESC LIMIT ?,?;
 	@Select("SELECT * FROM toon_board WHERE bd_email !='root@naver.com' ORDER BY bd_num DESC LIMIT ${startRow}, ${pageSize};")
 	ArrayList<BoardVO> listBoard(@Param("startRow") int startRow, @Param("pageSize") int pageSize);
 
 	// 내가 쓴 글 목록을 가지고 오는 메서드
-	// 원래 sql문 "select * from toon_board where bd_email ='".concat(email) + "' order
-	// by bd_num DESC;"
-	@Select("select * from toon_board where bd_email ='.concat(#{bd_email}) + ' order by bd_num DESC;")
+	@Select("select * from toon_board where bd_email=#{email} order by bd_num DESC;")
 	ArrayList<BoardVO> myListBoard(@Param("email") String email);
 
 	// 글 상세보기 요청을 처리할 메서드
@@ -43,9 +39,6 @@ public interface BoardMapper {
 	void deleteBoard(@Param("bd_num") int bd_num);
 
 	// 글 검색 요청을 처리할 메서드
-	// SELECT * FROM toon_board WHERE bd_title LIKE ? AND bd_email
-	// !='root@naver.com'
-	//
 	@Select("SELECT * FROM toon_board WHERE ${category} LIKE '%${search}%' AND bd_email !='root@naver.com'")
 	ArrayList<BoardVO> searchBoard(@Param("search") String search, @Param("category") String category);
 

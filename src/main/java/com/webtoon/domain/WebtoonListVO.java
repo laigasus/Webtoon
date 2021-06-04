@@ -71,4 +71,10 @@ public class WebtoonListVO {
 		this.day = day;
 	}
 
+	@Override
+	public String toString() {
+		return "WebtoonListVO [id=" + id + ", thumb=" + thumb + ", title=" + title + ", url=" + url + ", day=" + day
+				+ "]";
+	}
+
 }

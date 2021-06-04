@@ -48,4 +48,9 @@ public class WebtoonViewVO {
 		this.img = img;
 	}
 
+	@Override
+	public String toString() {
+		return "WebtoonViewVO [num=" + num + ", url=" + url + ", img=" + img + "]";
+	}
+
 }
