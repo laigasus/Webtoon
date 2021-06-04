@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.webtoon.external.CalculateDate" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/external/CalculateDate.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="336" width="255" x="55" y="-86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.webtoon.external.SMTPAuthenticatior" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/external/SMTPAuthenticatior.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="398" x="350" y="-86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="3" language="java" name="com.webtoon.external" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/external" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="62" width="220" x="788" y="-86"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="4" language="java" name="com.webtoon.external.DBConnect" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/external/DBConnect.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="176" width="344" x="1048" y="-86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.webtoon.external.ErrorList" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/external/ErrorList.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="136" width="191" x="1432" y="-86"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

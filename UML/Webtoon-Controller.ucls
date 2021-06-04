@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.webtoon.controller.UserController" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/controller/UserController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="1036" width="694" x="-155" y="-374"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="2" language="java" name="com.webtoon.controller" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/controller" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="62" width="232" x="579" y="-374"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="3" language="java" name="com.webtoon.controller.WebtoonController" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/controller/WebtoonController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="356" width="464" x="851" y="-374"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="com.webtoon.controller.HomeController" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/controller/HomeController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="116" width="303" x="1355" y="-374"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="com.webtoon.controller.BoardController" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/controller/BoardController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="476" width="681" x="1698" y="-374"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.webtoon.controller.CommentController" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/controller/CommentController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="136" width="572" x="2419" y="-374"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <interface id="1" language="java" name="com.webtoon.mapper.CommentMapper" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/mapper/CommentMapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="314" x="305" y="27"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <package id="2" language="java" name="com.webtoon.mapper" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/mapper" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="62" width="215" x="659" y="27"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <interface id="3" language="java" name="com.webtoon.mapper.UserMapper" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/mapper/UserMapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="256" width="276" x="914" y="27"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="4" language="java" name="com.webtoon.mapper.WebtoonMapper" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/mapper/WebtoonMapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="256" width="416" x="1230" y="27"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="5" language="java" name="com.webtoon.mapper.NaverMapper" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/mapper/NaverMapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="156" width="372" x="1686" y="27"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="6" language="java" name="com.webtoon.mapper.BoardMapper" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/mapper/BoardMapper.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="276" width="430" x="2098" y="27"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

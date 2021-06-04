@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.webtoon.domain.BoardVO" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/domain/BoardVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="556" width="356" x="24" y="-224"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.webtoon.domain.MyWebtoonVO" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/domain/MyWebtoonVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="356" width="204" x="420" y="-224"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="com.webtoon.domain.CommentVO" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/domain/CommentVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="556" width="356" x="664" y="-224"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="4" language="java" name="com.webtoon.domain" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/domain" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="62" width="213" x="1060" y="-224"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="5" language="java" name="com.webtoon.domain.UserVO" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/domain/UserVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="316" width="223" x="1313" y="-224"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="com.webtoon.domain.WebtoonViewVO" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/domain/WebtoonViewVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="316" width="263" x="1576" y="-224"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="com.webtoon.domain.WebtoonVO" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/domain/WebtoonVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="436" width="293" x="1879" y="-224"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.webtoon.domain.WebtoonListVO" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/domain/WebtoonListVO.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="436" width="368" x="2212" y="-224"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

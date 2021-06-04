@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.4" icons="true" automaticImage="PNG" always-add-relationships="false" generalizations="true" 
+  realizations="true" associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="com.webtoon.service.CommentServiceImpl" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/service/CommentServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="236" width="314" x="675" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="com.webtoon.service.NaverServiceImpl" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/service/NaverServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="216" width="372" x="1467" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="3" language="java" name="com.webtoon.service.NaverService" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/service/NaverService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="176" width="372" x="1467" y="453"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="4" language="java" name="com.webtoon.service.BoardService" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/service/BoardService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="276" width="362" x="2335" y="453"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="5" language="java" name="com.webtoon.service.WebtoonService" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/service/WebtoonService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="336" width="416" x="1879" y="453"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <interface id="6" language="java" name="com.webtoon.service.CommentService" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/service/CommentService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="196" width="314" x="675" y="453"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <class id="7" language="java" name="com.webtoon.service.UserServiceImpl" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/service/UserServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="316" width="398" x="1029" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="com.webtoon.service.BoardServiceImpl" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/service/BoardServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="316" width="362" x="2335" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <package id="9" language="java" name="com.webtoon.service" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/service" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="62" width="213" x="422" y="37"/>    
+    <display autosize="true" stereotype="true" sort-features="false" accessors="true"/>  
+  </package>  
+  <class id="10" language="java" name="com.webtoon.service.WebtoonServiceImpl" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/service/WebtoonServiceImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="376" width="416" x="1879" y="37"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <interface id="11" language="java" name="com.webtoon.service.UserService" project="Webtoon" 
+    file="/Webtoon/src/main/java/com/webtoon/service/UserService.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="276" width="398" x="1029" y="453"/>    
+    <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </interface>  
+  <association id="12">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="13" name="webtoonService"/>      
+      <multiplicity id="14" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="15">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="11"/>  
+  </realization>  
+  <realization id="16">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="4"/>  
+  </realization>  
+  <realization id="17">    
+    <end type="SOURCE" refId="1"/>    
+    <end type="TARGET" refId="6"/>  
+  </realization>  
+  <realization id="18">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="3"/>  
+  </realization>  
+  <realization id="19">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>
