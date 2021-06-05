@@ -18,6 +18,7 @@ public class MyInterceptor implements HandlerInterceptor {
 		return true;
 	}
 
+	//controller 처리후 동작
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
@@ -26,12 +27,6 @@ public class MyInterceptor implements HandlerInterceptor {
 		
 		String session_user_email = (String)session.getAttribute("session_user_email");
 		String session_user_nick = (String)session.getAttribute("session_user_nick");
-
-		
-		
-		System.out.println("session user email  " + session_user_email);
-		System.out.println(" session_user_nick  " + session_user_nick);
-		System.out.println("MyInterCeptor - postHandel");
 
 
 		modelAndView.addObject("session_user_nick", session_user_nick);  //변수명 변경해야할수도

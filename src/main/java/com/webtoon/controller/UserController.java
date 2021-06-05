@@ -333,12 +333,14 @@ public class UserController {
 	// 페이지 설명 추가
 	@GetMapping("/logout")
 	public String logoutGET(HttpServletRequest request, HttpSession session) {
+		session.invalidate();
+		
 		return "redirect:/";
 	}
 
 	@PostMapping("/logout")
 	public String logoutPOST() {
-		return "logout";
+		return "login";
 	}
 	/////////////////////////////////////////////////
 
@@ -406,7 +408,7 @@ public class UserController {
 	/////////////////////////////////////////////////
 
 	// mypage.jsp
-	// 페이지 설명 추가
+	// 마이페이지
 	@GetMapping("/mypage")
 	public String mypageGET(HttpServletRequest request, HttpSession session, Model model)
 			throws UnsupportedEncodingException {

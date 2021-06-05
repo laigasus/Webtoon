@@ -5,7 +5,6 @@ import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.Enumeration;
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -36,12 +35,12 @@ public class BoardController {
 	private CommentService commentService;
 
 	// jajak.jsp
-	// 커뮤니티 메인페이
+	// 커뮤니티 메인페이지
 	@GetMapping("/jajak")
 	public String jajakGET(HttpSession session, HttpServletRequest request, Model model)
 			throws UnsupportedEncodingException {
 		request.setCharacterEncoding("utf-8");
-		/////////////////////////////////////////////// 페이지에 맞는 게시글
+		/////////////////////////////////////////////// 페이지에 맞는 게시글 삽입
 		String category = (String) request.getParameter("category");
 		String search = (String) request.getParameter("search");
 		if (category == null || search == null) {
@@ -49,54 +48,51 @@ public class BoardController {
 			search = "";
 		}
 		int pageSize = 10; // 한페이지에 몇개의 글 출력할지 결정
+		int gongziCount = 1; // 공지글의 갯수를 가져옵니다. 기본값 1
+
 		String pageNum = request.getParameter("pageNum");
 		if (pageNum == null) {
 			pageNum = "1";
 		}
 		int currentPage = Integer.parseInt(pageNum);
-
-		int gongziCount = 1; // 공지글의 갯수를 가져옵니다. 기본값 1
 		int startRow = (currentPage - 1) * pageSize; // 현재페이지에 첫 번째 글
 		int count = 0;
 		BoardService forPage = boardService;
 		count = forPage.getCountBoard(); // 총 레코드갯수 반환
-		List<BoardVO> list = null;
-//		if (count > 0) {
-//			list = forPage.listBoard(startRow, pageSize);
-//		}
-		System.out.println(startRow);
 
 		ArrayList<BoardVO> articlesAdmin = boardService.AdminListBoard();
 		ArrayList<BoardVO> articles = boardService.listBoard(startRow, pageSize);
 
 		model.addAttribute("articlesAdmin", articlesAdmin);
 		model.addAttribute("articles", articles);
-		///////////////////////////////////////////////
 		/////////////////////////////////////////////// 페이징
+		int startPage = 0;
+		int endPage = 0;
+		int pageCount = 0;
+		int pageBlock = 10;
+		ArrayList<Integer> startToEndPage = new ArrayList<Integer>(); // jstl에 넘겨줄 배열
 		if (count > 0) {
 			// 총 페이지의 수를 결정
-			int pageCount = (count - gongziCount) / pageSize + ((count - gongziCount) % pageSize == 0 ? 0 : 1);
+			pageCount = (count - gongziCount) / pageSize + ((count - gongziCount) % pageSize == 0 ? 0 : 1);
 			// 한 화면안에 페이지에 갯수 넘으면 다음표시
-			int pageBlock = 10;
 			// 한 페이지에 보여줄 시작 및 끝 번호
-			int startPage = ((currentPage - 1) / pageBlock) * pageBlock + 1;
-			int endPage = startPage + pageBlock - 1;
+			startPage = ((currentPage - 1) / pageBlock) * pageBlock + 1;
+			endPage = startPage + pageBlock - 1; // 현재 화면의 끝 페이지
 			// 마지막 페이지가 총 페이지 수 보다 크면 endPage를 pageCount로 할당
-			if (endPage > pageCount) { // 없으면 자료가 15개 있을때 번호가 [1]~[9] 까지 다나옴
+			if (endPage > pageCount) { // 없으면 자료가 15개 있을때 번호가 [1]~[9] 까지만 나옴
 				endPage = pageCount;
 			}
-			if (startPage > pageBlock) { // 페이지 블록수보다 startPage가 클경우 이전 링크 생성
 
-			}
 			for (int i = startPage; i <= endPage; i++) { // 페이지 번호 결정
-				if (i == currentPage) { // 현재 페이지에는 링크를 설정하지 않음
-				} else { // 현재 페이지가 아닌 경우 링크 설정
-
-				}
-			}
-			if (endPage < pageCount) { // 현재 블록의 마지막 페이지보다 페이지 전체 블록수가 클경우 다음 링크 생성
+				startToEndPage.add(i);
 			}
 		}
+		
+		model.addAttribute("startToEndPage",startToEndPage);
+		model.addAttribute("currentPage",currentPage);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("pageCount",pageCount);
+		model.addAttribute("pageBlock",pageBlock);
 		//////////////// 페이징 끝
 
 		return "jajak";
@@ -139,7 +135,7 @@ public class BoardController {
 
 		String session_user_email = (String) session.getAttribute("session_user_email");
 
-		if (session_user_email != null) {
+		if (session_user_email == null || session_user_email == "") {
 			out.print("<script>");
 			out.print("alert('로그인해주세요');");
 			out.print("</script>");
@@ -154,14 +150,10 @@ public class BoardController {
 		}
 
 	}
-
-	/////////////////////////////////////////////////
-
 	/////////////////////////////////////////////////
 
 	// jajak_content.jsp
 	// 글 상세 페이지
-	// 댓글 기능 다시확인할 필요가 있음
 	@GetMapping("/jajak_content")
 	public String jajakContentGET(HttpServletRequest request, HttpSession session, Model model)
 			throws UnsupportedEncodingException {
@@ -176,29 +168,17 @@ public class BoardController {
 
 		BoardVO articles = boardService.contentBoard(bd_num);
 		boardService.viewIncrease(articles.getBd_num(), articles.getBd_view());
-		System.out.println("articles " + articles);
-		System.out.println("articles.getBd_email " + articles.getBd_email());
-
-		System.out.println("getuserIfo()" + userService.getUserInfo(articles.getBd_email()));
-		System.out.println("getNick()" + userService.getUserInfo(articles.getBd_email()).getNick());
 
 		String writer = (String) userService.getUserInfo(articles.getBd_email()).getNick(); //
-		System.out.println("writer " + writer);
-
 		ArrayList<CommentVO> comments = commentService.listComment(bd_num);
 		Boolean commentEmpty = comments.isEmpty();
 
-		if (commentEmpty) {
-			System.out.println("댓글이 없어요");
-		} else {
+		if (!commentEmpty) { // 댓글이 존재하면
 			CommentVO best = commentService.bestComment(bd_num);
 			String best_commentor = userService.getUserInfo(best.getEmail()).getNick();
 			model.addAttribute("best", best);
 			model.addAttribute("best_commentor", best_commentor);
-			System.out.println("best " + best);
 		}
-
-		System.out.println("articles  " + articles);
 
 		model.addAttribute("articles", articles);
 		model.addAttribute("bd_num", bd_num);
@@ -207,13 +187,6 @@ public class BoardController {
 		model.addAttribute("writer", writer);
 		model.addAttribute("commentEmpty", commentEmpty);
 		model.addAttribute("comments", comments);
-
-		return "jajak_content";
-	}
-
-	// 댓글을 이걸로 구현해야 할수도 있음
-	@PostMapping("/jajak_content")
-	public String jajakContentPOST() {
 
 		return "jajak_content";
 	}
@@ -306,7 +279,7 @@ public class BoardController {
 	public String jajakUpdatePOST() {
 		return "jajak_update";
 	}
-	/////////////////////////////////////////////////
+	////////////////////////////////
 
 	// jajak_update_control.jsp
 	// 커뮤니티 글 수정
@@ -356,8 +329,8 @@ public class BoardController {
 			return "login";
 		}
 	}
-
 	////////////////
+
 	// jajak_content_delete.jsp
 	// 커뮤니티 글 삭제
 	@GetMapping("/jajak_content_delete")
@@ -369,21 +342,6 @@ public class BoardController {
 		boardService.deleteBoard(bd_num);
 
 		return "redirect:/mypage";
-	}
-
-	/////////////////////////////////////////////////
-
-	// my_post.jsp
-	// 페이지 설명 추가
-	@GetMapping("/my_post")
-	public String myPostGET() {
-
-		return "";
-	}
-
-	@PostMapping("/my_post")
-	public String myPostPOST() {
-		return "my_post";
 	}
 	/////////////////////////////////////////////////
 
