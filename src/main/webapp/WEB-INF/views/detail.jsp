@@ -37,8 +37,15 @@
 					<button type="button" class="blue" onclick="location.href='/cart'">장바구니
 						담기</button>
 					<br>
+					<form style="display: none" method="post" action="/my_webtoon_add"
+						id="frm">
+						<input name="imgSrc" value="${InfoArr.get(0)}" /> <input
+							name="webtoonTitle" value="${InfoArr.get(1)}" /> <input id="url"
+							name="webtoonUrl" value="" />
+					</form>
 					<div class="like-button-div">
-						<button type="button" class="red">좋아요 ♥</button>
+						<button type="submit" class="red"
+							onclick="document.getElementById('frm').submit();">좋아요 ♥</button>
 					</div>
 				</div>
 			</div>
