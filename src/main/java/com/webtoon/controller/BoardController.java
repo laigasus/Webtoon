@@ -191,13 +191,6 @@ public class BoardController {
 		return "jajak_upload";
 	}
 
-	// 게시글 올리기 확인 버튼을 눌렀을때
-
-	@GetMapping("/jajak_upload_control")
-	public String jajakUploadControlPOST() {
-		return "jajak_upload_control";
-	}
-
 	// jajak_upload_control.jsp
 	// 게시글 올리기 확인 버튼을 눌렀을때
 	@PostMapping("/jajak_upload_control")
@@ -239,7 +232,7 @@ public class BoardController {
 			out.println("</script>");
 			out.flush();
 			out.close();
-			
+
 			return "jajak";
 
 		} else {
