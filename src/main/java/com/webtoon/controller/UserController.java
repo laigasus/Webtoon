@@ -50,25 +50,21 @@ public class UserController {
 	// admin_page_control
 	// 관리자 페이지 제어 이벤트 페이지
 	@PostMapping("/admin_page_control")
-	public String adminPageControlPOST(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public void adminPageControlPOST(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		response.setContentType("text/html; charset=euc-kr");
 		PrintWriter out = response.getWriter();
 
 		String email[] = request.getParameterValues("email");
 		for (int i = 0; i < email.length; i++) {
-			System.out.println("email===" + email[i]);
 			userService.deleteUser(email[i]);
 		}
-
 		out.println("<script>");
 		out.println("alert('회원탈퇴가 완료되었습니다');");
 		out.println("location.href='admin_page';");
 		out.println("</script>");
 		out.flush();
 		out.close();
-
-		return "redirect:admin_page";
 	}
 	/////////////////////////////////////////////////
 
@@ -96,18 +92,14 @@ public class UserController {
 	// deleteAccount_control
 	//
 	@PostMapping("/deleteAccount_control")
-	public String deleteAccountControlPOST(HttpServletRequest request, HttpServletResponse response,
-			HttpSession session, Model model) throws IOException {
+	public void deleteAccountControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+			Model model) throws IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=euc-kr");
 		PrintWriter out = response.getWriter();
 
-		System.out.println("deleteAccount_controlPost");
-
 		String email = (String) session.getAttribute("session_user_email");
 		String password = request.getParameter("password");
-		System.out.println("session email" + email);
-		System.out.println("password" + email);
 
 		int result = userService.userCheck(email, password);
 		if (result == 0) {
@@ -117,8 +109,6 @@ public class UserController {
 			out.println("</script>");
 			out.flush();
 			out.close();
-			return "deleteAccount";
-
 		} else {
 			userService.deleteUser(email);
 			session = request.getSession();
@@ -130,10 +120,7 @@ public class UserController {
 			out.println("</script>");
 			out.flush();
 			out.close();
-
-			return "";
 		}
-
 	}
 	/////////////////////////////////////////////////
 
@@ -141,7 +128,6 @@ public class UserController {
 	// 회원탈퇴 페이지
 	@GetMapping("deleteAccount")
 	public String deleteAccountGET() {
-
 		return "deleteAccount";
 	}
 	/////////////////////////////////////////////////
@@ -228,7 +214,6 @@ public class UserController {
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
 		int result = userService.userCheck(email, password);
-		System.out.println("result: " + result);
 
 		if (result == -1) {
 			out.println("<script>");
@@ -237,9 +222,6 @@ public class UserController {
 			out.println("</script>");
 			out.flush();
 			out.close();
-
-			return "login";
-
 		} else if (result == 0) {
 			out.println("<script>");
 			out.println("alert('비밀번호를 다시 입력해주세요');");
@@ -247,16 +229,12 @@ public class UserController {
 			out.println("</script>");
 			out.flush();
 			out.close();
-
-			return "login";
-
 		} else { // 로그인 성공
 			UserVO vo = userService.getUserInfo(email);
 			session.setAttribute("session_user_email", email);
 			session.setAttribute("session_user_password", password);
 			session.setAttribute("session_user_nick", vo.getNick());
 		}
-
 		return "redirect:/";
 	}
 	/////////////////////////////////////////////////
@@ -283,7 +261,7 @@ public class UserController {
 	// my_webtoon_add
 	// 찜하기 컨트롤러
 	@PostMapping("/my_webtoon_add")
-	public String myWebtoonAddPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+	public void myWebtoonAddPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
 		request.setCharacterEncoding("UTF-8");
 		response.setContentType("text/html; charset=euc-kr");
@@ -308,22 +286,23 @@ public class UserController {
 			out.println("</script>");
 			out.flush();
 			out.close();
-			String referer = request.getHeader("Referer");
-			return referer;
 		} else if (!userEmail.equals("")) { // 좋아요 안눌렀고 로그인 한상황
 			webtoonService.myWebtoonUpload(webtoonTitle, userEmail, imgSrc, webtoonUrl); // insert into 4가지 인자 삽입
+			out.println("<script>");
+			out.println("alert('좋아요를 눌렀습니다. ♥');");
+			out.println("history.go(-1);");
+			out.println("</script>");
+			out.flush();
+			out.close();
 		} else {
 			// 로그인 해주세요 실행
 			out.println("<script>");
 			out.println("alert('로그인 해주세요');");
+			out.println("location.href='/login';");
 			out.println("</script>");
 			out.flush();
 			out.close();
-			return "login";
 		}
-		// 이전페이지로 되돌아감
-		String referer = request.getHeader("Referer");
-		return "redirect:" + referer;
 	}
 	/////////////////////////////////////////////////
 
@@ -363,7 +342,6 @@ public class UserController {
 
 		}
 		//////////////////////////////////////////
-		System.out.println("email: " + email);
 		ArrayList<MyWebtoonVO> webtoons = webtoonService.getMyWebtoonList(email);
 		model.addAttribute("webtoons", webtoons);
 
@@ -374,7 +352,7 @@ public class UserController {
 	// nick_change_control
 	// 닉네임 변경
 	@PostMapping("/nick_change_control")
-	public String nickChangeControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+	public void nickChangeControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=euc-kr");
@@ -391,14 +369,13 @@ public class UserController {
 
 		out.println("<script>");
 		out.println("alert('닉네임이 성공적으로 변경되었습니다.');");
+		out.println("location.href='/mypage';");
 		out.println("</script>");
 		out.flush();
 		out.close();
-
-		return "/mypage";
 	}
 	/////////////////////////////////////////////////
-	
+
 	// nick_change.jsp
 	// 닉네임변경 페이지
 	@GetMapping("/nick_change")
@@ -419,7 +396,7 @@ public class UserController {
 	// pw_control
 	// 비밀번호 변경
 	@PostMapping("/pw_control")
-	public String pwControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+	public void pwControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html; charset=euc-kr");
@@ -493,7 +470,6 @@ public class UserController {
 			pstmt.setString(2, email);
 			pstmt.executeUpdate();
 		} catch (SQLException e) {// 오류시
-			System.out.println("Database 연결중 에러가 발생 했습니다.");
 			e.printStackTrace();
 		} finally {
 			try {
@@ -539,14 +515,14 @@ public class UserController {
 			out.println("</script>");
 			out.flush();
 			out.close();
-			return "login";
+			out.println("location.href='/login';");
 		} else {
 			out.println("<script>");
 			out.println("alert('비밀번호 변경 완료');");
 			out.println("</script>");
 			out.flush();
 			out.close();
-			return "login";
+			out.println("location.href='/login';");
 		}
 	}
 	/////////////////////////////////////////////////
@@ -563,7 +539,7 @@ public class UserController {
 	// register_control
 	// 회원가입 수행 컨트롤러
 	@PostMapping("/register_control")
-	public String registerControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
+	public void registerControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
 		request.setCharacterEncoding("utf-8");
 
@@ -586,14 +562,13 @@ public class UserController {
 			out.close();
 			session.setAttribute("user_email", email);
 			session.setAttribute("user_password", password);
-			return "index";
 		} else {
 			out.println("<script>");
 			out.println("alert('입력한 비밀번호가 일치하지 않습니다');");
+			out.println("location.href='/register';");
 			out.println("</script>");
 			out.flush();
 			out.close();
-			return "register";
 		}
 
 	}
@@ -608,7 +583,7 @@ public class UserController {
 	/////////////////////////////////////////////////
 
 	// nav.jsp
-	// 네비게이션  뷰
+	// 네비게이션 뷰
 	@GetMapping("/nav")
 	public String navGET(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model)
 			throws UnsupportedEncodingException {
