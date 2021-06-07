@@ -192,7 +192,6 @@ public class BoardController {
 	}
 
 	// jajak_upload.jsp
-	// 관리자 페이지 제어 이벤트 페이지
 	@GetMapping("/jajak_upload")
 	public String jajakUploadGET() {
 
@@ -212,7 +211,7 @@ public class BoardController {
 	}
 
 	// jajak_upload_control.jsp
-	// 관리자 페이지 제어 이벤트 페이지
+	// 게시글 올리기 확인 버튼을 눌렀을때
 	@PostMapping("/jajak_upload_control")
 	public String jajakUploadControlGET(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
@@ -261,7 +260,7 @@ public class BoardController {
 	}
 
 	// jajak_update.jsp
-	// 관리자 페이지 제어 이벤트 페이지
+	// 게시판 글 수정 화면
 	@GetMapping("/jajak_update")
 	public String jajakUpdateGET(HttpServletRequest request, HttpSession session, Model model)
 			throws UnsupportedEncodingException {
@@ -282,7 +281,7 @@ public class BoardController {
 	////////////////////////////////
 
 	// jajak_update_control.jsp
-	// 커뮤니티 글 수정
+	// 게시판 글 수정 제어
 	@PostMapping("/jajak_update_control")
 	public String jajakUpdateControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
