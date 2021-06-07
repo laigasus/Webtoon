@@ -217,7 +217,7 @@ public class UserController {
 	/////////////////////////////////////////////////
 
 	// login_control
-	// 
+	// 로그인 컨트롤러
 	@PostMapping("/login_control")
 	public String loginControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
@@ -262,43 +262,26 @@ public class UserController {
 	/////////////////////////////////////////////////
 
 	// login.jsp
-	// 페이지 설명 추가
+	// 로그인 페이지
 	@GetMapping("/login")
 	public String loginGET(HttpServletRequest request, HttpSession session, Model model) {
 
 		return "login";
 	}
-
-	@PostMapping("/login")
-	public String loginPOST() {
-		return "login";
-	}
 	/////////////////////////////////////////////////
 
-	// logout.jsp
-	// 페이지 설명 추가
+	// logout
+	// 로그아웃 수행
 	@GetMapping("/logout")
 	public String logoutGET(HttpServletRequest request, HttpSession session) {
 		session = request.getSession();
 		session.invalidate();
-
 		return "redirect:/";
 	}
 
-	@PostMapping("/logout")
-	public String logoutPOST() {
-		return "login";
-	}
 	/////////////////////////////////////////////////
-
-	// my_webtoon_add.jsp
-	// 페이지 설명 추가
-	@GetMapping("/my_webtoon_add")
-	public String myWebtoonAddGET() {
-
-		return "my_webtoon_add";
-	}
-
+	// my_webtoon_add
+	// 찜하기 컨트롤러
 	@PostMapping("/my_webtoon_add")
 	public String myWebtoonAddPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
@@ -344,17 +327,12 @@ public class UserController {
 	}
 	/////////////////////////////////////////////////
 
-	// my_webtoon_list.jsp
-	// 페이지 설명 추가
+	// my_webtoon_list
+	// mypage 웹툰 리스트
 	@GetMapping("/my_webtoon_list")
 	public String my_webtoonListGET(HttpServletRequest request, HttpSession session, Model model)
 			throws UnsupportedEncodingException {
 
-		return "my_webtoon_list";
-	}
-
-	@PostMapping("/myWebtoonList")
-	public String myWebtoonListPOST() {
 		return "my_webtoon_list";
 	}
 	/////////////////////////////////////////////////
@@ -391,20 +369,10 @@ public class UserController {
 
 		return "mypage";
 	}
-
-	@PostMapping("/mypage")
-	public String mypagePOST() {
-		return "mypage";
-	}
 	/////////////////////////////////////////////////
 
-	// nick_change_control.jsp
-	// 페이지 설명 추가
-	@GetMapping("/nick_change_control")
-	public String nickChangeControlGET() {
-		return "nick_change_control";
-	}
-
+	// nick_change_control
+	// 닉네임 변경
 	@PostMapping("/nick_change_control")
 	public String nickChangeControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
@@ -429,10 +397,10 @@ public class UserController {
 
 		return "/mypage";
 	}
-
 	/////////////////////////////////////////////////
+	
 	// nick_change.jsp
-	// 페이지 설명 추가
+	// 닉네임변경 페이지
 	@GetMapping("/nick_change")
 	public String nickChangeGET() {
 
@@ -441,10 +409,9 @@ public class UserController {
 	/////////////////////////////////////////////////
 
 	// pw_after.jsp
-	// 페이지 설명 추가
+	// 비밀번호 변경후 페이지
 	@GetMapping("/pw_after")
 	public String pwAfterGET() {
-
 		return "pw_after";
 	}
 	/////////////////////////////////////////////////
@@ -594,7 +561,7 @@ public class UserController {
 	/////////////////////////////////////////////////
 
 	// register_control
-	// 회원가입 수행
+	// 회원가입 수행 컨트롤러
 	@PostMapping("/register_control")
 	public String registerControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
@@ -633,7 +600,7 @@ public class UserController {
 	/////////////////////////////////////////////////
 
 	// register.jsp
-	// 페이지 설명 추가
+	// 회원가입페이지 뷰
 	@GetMapping("/register")
 	public String registerGET() {
 		return "register";
@@ -641,7 +608,7 @@ public class UserController {
 	/////////////////////////////////////////////////
 
 	// nav.jsp
-	// 페이지 설명 추가
+	// 네비게이션  뷰
 	@GetMapping("/nav")
 	public String navGET(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model)
 			throws UnsupportedEncodingException {
