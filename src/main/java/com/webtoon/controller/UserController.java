@@ -351,7 +351,7 @@ public class UserController {
 	// 페이지 설명 추가
 	@GetMapping("/my_webtoon_add")
 	public String myWebtoonAddGET() {
-
+		
 		return "my_webtoon_add";
 	}
 
@@ -372,13 +372,16 @@ public class UserController {
 			userEmail = (String) session.getAttribute("session_user_email");
 		}
 		int likeCheck = webtoonService.myWebtoonCheck(webtoonTitle, userEmail); // like좋아요 했으면 1반환
-
+		
 		if (!userEmail.equals("") && likeCheck == 1) { // 좋아요를 이미 눌렀고 로그인을 한상황
 			webtoonService.myWebtoonDelete(webtoonTitle, userEmail); // insert into 4가지 인자 삽입
 			out.println("<script>");
-			out.println("alert('좋아요를 취소하였습니다.');");
+			out.println("alert('좋아요를 취소하였습니다.♥');");
+			out.println("history.go(-1);");
 			out.println("</script>");
 			out.flush();
+			String referer = request.getHeader("Referer");
+			return referer;
 		} else if (!userEmail.equals("")) { // 좋아요 안눌렀고 로그인 한상황
 			webtoonService.myWebtoonUpload(webtoonTitle, userEmail, imgSrc, webtoonUrl); // insert into 4가지 인자 삽입
 		} else {

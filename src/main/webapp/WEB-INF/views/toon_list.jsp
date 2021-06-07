@@ -39,9 +39,9 @@
 					<br>
 					<form style="display: none" method="post"
 						action="/my_webtoon_add" id="frm">
-						<input name="imgSrc" value="${InfoArr.get(0)}" /> <input
-							name="webtoonTitle" value="${InfoArr.get(1)}" /> <input id="url"
-							name="webtoonUrl" value="" />
+						<input name="imgSrc" value="${InfoArr.get(0)}" /> 
+						<input name="webtoonTitle" value="${InfoArr.get(1)}" /> 
+						<input id="url"	name="webtoonUrl" value="" />
 					</form>
 					<div class="like-button-div">
 						<button type="submit" class="red"
