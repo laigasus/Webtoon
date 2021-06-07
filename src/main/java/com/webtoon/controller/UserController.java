@@ -65,7 +65,7 @@ public class UserController {
 		out.println("</script>");
 		out.flush();
 
-		return "admin_page";
+		return "forward:admin_page";
 	}
 
 	@PostMapping("/admin_page_control")
@@ -79,7 +79,7 @@ public class UserController {
 	@GetMapping("/admin_page")
 	public String adminPageGET(Model model) {
 		ArrayList<UserVO> users = userService.listUser();
-		model.addAttribute(users);
+		model.addAttribute("users", users);
 
 		return "admin_page";
 	}

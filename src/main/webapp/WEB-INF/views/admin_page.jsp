@@ -41,7 +41,7 @@
 								<td width="10%"><input type="checkbox" name="email"
 									value="${user.getEmail()}"><label for="select_row"></label></td>
 								<td width="50%"><a class="black_a"
-									href="admin_user_mypage.jsp?admin_user_email=${user.getEmail()}">${user.getEmail()}</a></td>
+									href="/admin_user_mypage?admin_user_email=${user.getEmail()}">${user.getEmail()}</a></td>
 								<td width="20%">${user.getPw()}</td>
 								<td width="20%">${user.getNick()}</td>
 							</tr>
