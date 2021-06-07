@@ -49,6 +49,6 @@ pageEncoding="UTF-8"%>
     </jsp:include>
     <a href="#nav-container" id="top"><img src="${path}/resources/img/button/top.svg" /></a>
     <script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
-    <script src="js/script.js"></script>
+    <script src="${path}/resources/js/script.js"></script>
   </body>
 </html>

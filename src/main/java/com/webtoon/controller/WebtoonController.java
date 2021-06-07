@@ -42,7 +42,9 @@ public class WebtoonController {
 	@GetMapping("/detail")
 	public String detailGET(HttpServletRequest request, Model model) {
 		String URL = (String) request.getParameter("URL");
-		URL = "https://comic.naver.com" + URL;
+		String NO= (String) request.getParameter("no");
+
+		URL = "https://comic.naver.com" + URL+"&no="+NO;
 
 		ArrayList<String> InfoArr = service.toonInfo(URL);
 		ArrayList<WebtoonViewVO> articles = service.toonView(URL);
@@ -142,7 +144,9 @@ public class WebtoonController {
 
 		String URL = (String) request.getParameter("URL");
 		URL = "https://comic.naver.com" + URL;
+		System.out.println("url: " + URL);
 		String titleId = URL.substring(49, 55);
+
 		ArrayList<String> InfoArr = service.toonInfo(URL);
 		ArrayList<WebtoonListVO> articles = service.toonList(URL, titleId);
 
