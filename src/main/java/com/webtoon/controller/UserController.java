@@ -25,6 +25,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.SessionAttributes;
 
 import com.webtoon.domain.BoardVO;
 import com.webtoon.domain.MyWebtoonVO;
@@ -36,6 +37,7 @@ import com.webtoon.service.UserService;
 import com.webtoon.service.WebtoonService;
 
 @Controller
+@SessionAttributes("*")
 public class UserController {
 
 	@Autowired
@@ -333,8 +335,9 @@ public class UserController {
 	// 페이지 설명 추가
 	@GetMapping("/logout")
 	public String logoutGET(HttpServletRequest request, HttpSession session) {
+		session = request.getSession();
 		session.invalidate();
-		
+
 		return "redirect:/";
 	}
 

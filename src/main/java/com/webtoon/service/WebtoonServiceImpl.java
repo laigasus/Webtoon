@@ -278,7 +278,7 @@ public class WebtoonServiceImpl implements WebtoonService {
 							Elements title = detail.select("h2");
 							Elements author = detail.select("h2 > span");
 							// title이 제목과 작가이름이 같이 붙어서 나오기 떄문에 작가명을 떼어냄
-							String titleConv = title.text().replace(" " + author.text(), "");
+							String titleConv = title.text().replace(author.text(), "");
 							Elements genre = detail.select("p > .genre");
 
 							infoArr.add(IMG.attr("src"));
