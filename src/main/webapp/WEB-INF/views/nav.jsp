@@ -9,7 +9,8 @@
 <title>nav.jsp</title>
 <link rel="stylesheet" href="${path}/resources/css/bootstrap.css" />
 <link rel="stylesheet" href="${path}/resources/css/bootstrap-theme.css" />
-<link rel="stylesheet" type="text/css" href="${path}/resources/css/style.css" />
+<link rel="stylesheet" type="text/css"
+	href="${path}/resources/css/style.css" />
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
@@ -23,12 +24,13 @@
 				<li><a href="/nate">네이트</a></li>
 				<li><a href="/jajak">커뮤니티</a></li>
 				<div id="nav-icon">
-					<li id="user"><img src="${path}/resources/img/button/nav/user.svg" id="user-img" /><img
+					<li id="user"><img
+						src="${path}/resources/img/button/nav/user.svg" id="user-img" /><img
 						src="${path}/resources/img/button/nav/close.svg" id="user-close" />
 					</li>
-					<li id="search"><img src="${path}/resources/img/button/nav/search.svg"
-						id="search-img" /><img src="${path}/resources/img/button/nav/close.svg"
-						id="search-close" /></li>
+					<li id="search"><img
+						src="${path}/resources/img/button/nav/search.svg" id="search-img" /><img
+						src="${path}/resources/img/button/nav/close.svg" id="search-close" /></li>
 				</div>
 			</ul>
 		</div>
@@ -39,8 +41,7 @@
 						<a href="/login"><button class="blue">로그인</button></a>
 						<a href="/register"><button class="red">회원가입</button></a>
 					</c:when>
-					<c:when
-						test="${session_user_email eq 'root@naver.com'}">
+					<c:when test="${session_user_email eq 'root@naver.com'}">
 						<a href="/logout"><button class="red">로그아웃</button></a>
 						<a href="/admin_page"><button class="blue">관리자페이지</button></a>
 					</c:when>
@@ -56,8 +57,8 @@
 		<div id="search-bar">
 			<div class="container">
 				<form action="/naver_search_result">
-					<img src="${path}/resources/img/input/search.svg" /><input type="text" name="q"
-						placeholder="제목 / 작가" />
+					<img src="${path}/resources/img/input/search.svg" /><input
+						type="text" name="q" placeholder="제목 / 작가" />
 					<button type="submit" class="blue">검색</button>
 				</form>
 			</div>

@@ -3,7 +3,8 @@
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
 <%-- session에 등록된 check 값에 따라 이메일 중복여부 확인 --%>
 
-<form id="emailduplicate-form" action="/email_duplicate_control" method="post">
+<form id="emailduplicate-form" action="/email_duplicate_control"
+	method="post">
 	<c:choose>
 		<c:when test="${check==null}">
 			<input type="email" name="email" placeholder="이메일" />

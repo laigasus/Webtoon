@@ -79,21 +79,17 @@
 
 					</c:choose>
 					<tr id="jajak-paging-tr">
-						<td colspan="6" align="center">
-							<c:choose>
+						<td colspan="6" align="center"><c:choose>
 								<c:when test="${startPage} gt ${pageBlock}">
 									<a href="jajak?pageNum=${startPage - 10}">[이전]</a>
 								</c:when>
-							</c:choose> 
-							<c:forEach items="${startToEndPage}" var="i">
+							</c:choose> <c:forEach items="${startToEndPage}" var="i">
 								<a href="jajak?pageNum=${i}">[${i}] </a>
-							</c:forEach> 
-							<c:choose>
+							</c:forEach> <c:choose>
 								<c:when test="${endPage} lt ${pageCount}">
 									<a href="jajak?pageNum=${startPage + 10}">[다음]</a>
 								</c:when>
-							</c:choose>
-						</td>
+							</c:choose></td>
 					</tr>
 				</tbody>
 			</table>

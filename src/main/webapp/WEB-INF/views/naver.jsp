@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -21,7 +21,7 @@
 			<h1>
 				<img src="${path}/resources/img/button/arrow.svg" /> 네이버 웹툰
 			</h1>
-			
+
 			<ul id="day-tab">
 				<c:forEach var="i" begin="0" end="${fn:length(weekArr)-1}" step="1">
 					<li class="${weekArr[i]}"><a
@@ -45,7 +45,8 @@
 	<jsp:include page="footer.jsp">
 		<jsp:param name="name" value="value" />
 	</jsp:include>
-	<a href="#nav-container" id="top"><img src="${path}/resources/img/button/top.svg" /></a>
+	<a href="#nav-container" id="top"><img
+		src="${path}/resources/img/button/top.svg" /></a>
 	<script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
 	<script src="${path}/resources/js/script.js"></script>
 </body>

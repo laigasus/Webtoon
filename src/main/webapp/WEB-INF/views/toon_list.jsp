@@ -34,14 +34,14 @@
 						<dt>작가</dt>
 						<dd>${InfoArr.get(3)}</dd>
 					</dl>
-					<button type="button" class="blue"
-						onclick="location.href='/cart'">장바구니 담기</button>
+					<button type="button" class="blue" onclick="location.href='/cart'">장바구니
+						담기</button>
 					<br>
-					<form style="display: none" method="post"
-						action="/my_webtoon_add" id="frm">
-						<input name="imgSrc" value="${InfoArr.get(0)}" /> 
-						<input name="webtoonTitle" value="${InfoArr.get(1)}" /> 
-						<input id="url"	name="webtoonUrl" value="" />
+					<form style="display: none" method="post" action="/my_webtoon_add"
+						id="frm">
+						<input name="imgSrc" value="${InfoArr.get(0)}" /> <input
+							name="webtoonTitle" value="${InfoArr.get(1)}" /> <input id="url"
+							name="webtoonUrl" value="" />
 					</form>
 					<div class="like-button-div">
 						<button type="submit" class="red"
@@ -78,7 +78,8 @@
 	<jsp:include page="footer.jsp">
 		<jsp:param name="name" value="value" />
 	</jsp:include>
-	<a href="#nav-container" id="top"><img src="${path}/resources/img/button/top.svg" /></a>
+	<a href="#nav-container" id="top"><img
+		src="${path}/resources/img/button/top.svg" /></a>
 	<script src="https://cdn.jsdelivr.net/jquery/3.2.1/jquery.min.js"></script>
 	<script src="${path}/resources/js/script.js"></script>
 	<script>

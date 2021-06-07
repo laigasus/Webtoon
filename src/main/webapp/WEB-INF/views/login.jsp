@@ -9,7 +9,8 @@
 <meta charset="utf-8" />
 <link rel="stylesheet" href="${path}/resources/css/bootstrap.css" />
 <link rel="stylesheet" href="${path}/resources/css/bootstrap-theme.css" />
-<link rel="stylesheet" type="text/css" href="${path}/resources/css/user.css" />
+<link rel="stylesheet" type="text/css"
+	href="${path}/resources/css/user.css" />
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>

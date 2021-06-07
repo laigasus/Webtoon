@@ -8,14 +8,16 @@
 <title>비밀번호 찾기 - 툰스토어</title>
 <link rel="stylesheet" href="${path}/resources/css/bootstrap.css" />
 <link rel="stylesheet" href="${path}/resources/css/bootstrap-theme.css" />
-<link rel="stylesheet" type="text/css" href="${path}/resources/css/user.css" />
+<link rel="stylesheet" type="text/css"
+	href="${path}/resources/css/user.css" />
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="container">
-		<br> <a href="/"><img src="${path}/resources/img/menu/user.svg" /></a> <br>
-		<br> 회원님의 비밀번호가 이메일로 전송되었습니다.
+		<br> <a href="/"><img
+			src="${path}/resources/img/menu/user.svg" /></a> <br> <br>
+		회원님의 비밀번호가 이메일로 전송되었습니다.
 	</div>
 </body>
 </html>
