@@ -25,9 +25,6 @@
 				<input type="password" name="password" placeholder="비밀번호"
 					value="${savePw}" required />
 			</div>
-			<div class="form-input-checkbox">
-				<input type="checkbox" name="saveCheck" value="checked" ${chSave} /><span>아이디/비밀번호저장</span>
-			</div>
 			<input type="submit" value="로그인" />
 			<div class="link">
 				<a href="/pw_find">비밀번호 찾기</a> <a href="/register">회원가입</a>
