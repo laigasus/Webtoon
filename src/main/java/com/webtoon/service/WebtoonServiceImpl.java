@@ -38,8 +38,6 @@ public class WebtoonServiceImpl implements WebtoonService {
 
 	@Override
 	public int myWebtoonCheck(String webtoonTitle, String login) {
-		System.out.println("webtoonTitle: " + webtoonTitle);
-		System.out.println("login: " + login);
 
 		MyWebtoonVO vo = webtoonMapper.myWebtoonCheck(webtoonTitle, login);
 		int check;
@@ -299,14 +297,6 @@ public class WebtoonServiceImpl implements WebtoonService {
 
 	@Override
 	public ArrayList<MyWebtoonVO> getMyWebtoonList(String email) {
-
-		for (MyWebtoonVO webtoon : webtoonMapper.getMyWebtoonList(email)) {
-			System.out.println("getWebtoonTitle: " + webtoon.getMt_title());
-			System.out.println("getUserEmail: " + webtoon.getMt_user());
-			System.out.println("getWebtoonUrl: " + webtoon.getMt_url());
-			System.out.println("getImgSrc" + webtoon.getMt_imgsrc());
-		}
-
 		return webtoonMapper.getMyWebtoonList(email);
 	}
 }

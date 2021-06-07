@@ -24,7 +24,6 @@ public class NaverServiceImpl implements NaverService {
 	public ArrayList<WebtoonVO> listBoard(int YoIll) {
 		
 		webtoonService.webtoonCrawling();
-		System.out.println("네이버 서비스 실행");
 		return naverMapper.listBoard(YoIll);
 	}
 

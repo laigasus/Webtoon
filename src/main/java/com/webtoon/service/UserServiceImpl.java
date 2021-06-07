@@ -37,8 +37,6 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public int userCheck(String email, String password) {
 		int check = -1;
-		System.out.println("email: " + email);
-		System.out.println("password: " + password);
 		UserVO vo = userMapper.userCheck(email, password);
 		if (vo == null) {
 			check = -1;
