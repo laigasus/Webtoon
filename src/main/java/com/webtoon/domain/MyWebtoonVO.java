@@ -1,12 +1,15 @@
 package com.webtoon.domain;
 
 /*	담당자 옥재욱
-create table my_toon(
-mt_title varchar(45) not null primary key,
-mt_user varchar(45) not null,
-mt_imgsrc mediumtext not null,
-mt_url mediumtext not null
-); 
+CREATE TABLE `my_toon` (
+  `mt_title` varchar(45) NOT NULL,
+  `mt_user` varchar(45) NOT NULL,
+  `mt_imgsrc` mediumtext,
+  `mt_url` mediumtext,
+  PRIMARY KEY (`mt_title`,`mt_user`),
+  KEY `fk_my_toon_toon_user_idx` (`mt_user`),
+  CONSTRAINT `fk_my_toon_toon_user` FOREIGN KEY (`mt_user`) REFERENCES `toon_user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 */
 
 public class MyWebtoonVO {

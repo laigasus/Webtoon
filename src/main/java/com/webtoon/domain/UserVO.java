@@ -3,10 +3,10 @@ package com.webtoon.domain;
 /* 담당자 김민수 
 CREATE TABLE `toon_user` (
   `email` varchar(45) NOT NULL,
-  `nick` varchar(45) DEFAULT NULL,
-  `pw` varchar(45) DEFAULT NULL,
+  `nick` varchar(45) NOT NULL,
+  `pw` varchar(45) NOT NULL,
   PRIMARY KEY (`email`)
-);
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
  */
 
 public class UserVO {

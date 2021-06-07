@@ -3,14 +3,18 @@ package com.webtoon.domain;
 import java.sql.Date;
 
 /*  담당자 김민수 
-create table board_comment (
-	bd_num		int,
-	cm_id 		int not null primary key  auto_increment,
-	cm_writer	varchar(45),
-	cm_date		DATETIME DEFAULT CURRENT_TIMESTAMP,
-	cm_content	varchar(1000),
-	cm_like		int
-);
+CREATE TABLE `board_comment` (
+  `bd_num` int NOT NULL,
+  `cm_id` int NOT NULL AUTO_INCREMENT,
+  `cm_writer` varchar(45) NOT NULL,
+  `cm_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `cm_content` varchar(1000) DEFAULT NULL,
+  `cm_like` int DEFAULT NULL,
+  `email` varchar(45) NOT NULL,
+  PRIMARY KEY (`cm_id`),
+  KEY `fk_board_comment_toon_board1_idx` (`bd_num`),
+  CONSTRAINT `fk_board_comment_toon_board` FOREIGN KEY (`bd_num`) REFERENCES `toon_board` (`bd_num`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 */
 
 public class CommentVO {

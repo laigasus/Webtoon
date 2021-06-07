@@ -1,14 +1,14 @@
 package com.webtoon.domain;
 
 /*   담당자 옥재욱
- * CREATE TABLE `webtoon` (
-		  `no` int NOT NULL AUTO_INCREMENT,
-		  `day` tinyint(1) DEFAULT '0',
-		  `title` varchar(30) DEFAULT NULL,
-		  `url` varchar(255) DEFAULT NULL,
-		  `thumb` varchar(2000) DEFAULT NULL,
-		  PRIMARY KEY (`no`)
-		);
+CREATE TABLE `webtoon` (
+  `no` int NOT NULL AUTO_INCREMENT,
+  `day` tinyint(1) NOT NULL DEFAULT '0',
+  `title` varchar(45) NOT NULL,
+  `url` varchar(255) DEFAULT NULL,
+  `thumb` varchar(2000) DEFAULT NULL,
+  PRIMARY KEY (`no`)
+) ENGINE=InnoDB AUTO_INCREMENT=405 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 */
 
 public class WebtoonVO {

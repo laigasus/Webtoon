@@ -1,12 +1,12 @@
 package com.webtoon.domain;
 
 /*   담당자 옥재욱
- * CREATE TABLE `webtoon_view` (
-		  `num` int NOT NULL AUTO_INCREMENT,
-		  `url` varchar(255) DEFAULT NULL,
-		  `img` varchar(2000) DEFAULT NULL,
-		  PRIMARY KEY (`num`)
-		);
+CREATE TABLE `webtoon_view` (
+  `num` int NOT NULL AUTO_INCREMENT,
+  `img` varchar(2000) NOT NULL,
+  `url` varchar(255) NOT NULL,
+  PRIMARY KEY (`num`)
+) ENGINE=InnoDB AUTO_INCREMENT=128 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 */
 
 public class WebtoonViewVO {

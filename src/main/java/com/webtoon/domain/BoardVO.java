@@ -3,16 +3,19 @@ package com.webtoon.domain;
 import java.sql.Date;
 
 /*    담당자 김민수 
-create table toon_board (
-	bd_num int not null primary key  auto_increment,
-    bd_title varchar(45) NOT NULL,
-    bd_writer varchar(45),
-    bd_date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    bd_view INT,    
-	bd_content mediumtext, 
-    bd_img mediumtext,
-    bd_email varchar(50)
-);
+CREATE TABLE `toon_board` (
+  `bd_num` int NOT NULL AUTO_INCREMENT,
+  `bd_title` varchar(45) NOT NULL,
+  `bd_writer` varchar(45) NOT NULL,
+  `bd_date` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `bd_view` int DEFAULT NULL,
+  `bd_content` mediumtext,
+  `bd_img` mediumtext,
+  `bd_email` varchar(45) NOT NULL,
+  PRIMARY KEY (`bd_num`),
+  KEY `fk_toon_board_toon_user1_idx` (`bd_email`),
+  CONSTRAINT `fk_toon_board_toon_user` FOREIGN KEY (`bd_email`) REFERENCES `toon_user` (`email`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 */
 
 public class BoardVO {
