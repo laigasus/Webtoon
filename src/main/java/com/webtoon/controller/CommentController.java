@@ -24,8 +24,6 @@ public class CommentController {
 			throws IOException {
 		request.setCharacterEncoding("utf-8");
 
-		System.out.println("comment_like_control");
-
 		int bd_num = Integer.parseInt(request.getParameter("bd_num"));
 		int cm_id = Integer.parseInt(request.getParameter("cm_id"));
 		String writer = request.getParameter("writer");

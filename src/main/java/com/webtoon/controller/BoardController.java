@@ -202,8 +202,6 @@ public class BoardController {
 
 		String email = (String) session.getAttribute("session_user_email");
 		String writer = (String) session.getAttribute("session_user_nick");
-		System.out.println("email " + email);
-		System.out.println("writer " + writer);
 		boolean check;
 		if (email == null) {
 			check = false;
@@ -224,7 +222,6 @@ public class BoardController {
 			String title = multi.getParameter("title");// 제목 가져옴
 			String content = multi.getParameter("content");// 본문 가져옴
 			boardService.regist(email, writer, title, content, absoluteImgPath);
-			System.out.println("check  " + check);
 			model.addAttribute("check", check);
 
 			out.println("<script>");
@@ -232,9 +229,6 @@ public class BoardController {
 			out.println("</script>");
 			out.flush();
 			out.close();
-
-			return "jajak";
-
 		} else {
 			out.println("<script>");
 			out.println("alert('로그인해주세요');");
@@ -243,7 +237,7 @@ public class BoardController {
 			out.flush();
 			out.close();
 		}
-		return "jajak";
+		return "redirect:jajak";
 	}
 
 	// jajak_update.jsp
@@ -293,13 +287,9 @@ public class BoardController {
 
 			String title = multi.getParameter("title");// 제목 가져옴
 			String content = multi.getParameter("content");// 본문 가져옴
-			System.out.println("multi  " + multi.toString());
-			System.out.println("multi.getParameter(\"title\")  " + multi.getParameter("title"));
-			System.out.println("request.getParameter(\"r\")  " + multi.getParameter("bd_num"));
 			int bd_num = Integer.parseInt(multi.getParameter("bd_num"));
 			boardService.updateBoard(title, content, absoluteImgPath, bd_num);
 
-			System.out.println("check====  " + check);
 			model.addAttribute("check", check);
 			return "redirect:jajak";
 		} else {

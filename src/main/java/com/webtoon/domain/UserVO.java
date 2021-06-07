@@ -1,6 +1,6 @@
 package com.webtoon.domain;
 
-/*
+/* 담당자 김민수 
 CREATE TABLE `toon_user` (
   `email` varchar(45) NOT NULL,
   `nick` varchar(45) DEFAULT NULL,

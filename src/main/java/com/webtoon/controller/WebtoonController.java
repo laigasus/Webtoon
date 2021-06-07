@@ -76,7 +76,6 @@ public class WebtoonController {
 	public String naverGET(HttpServletRequest request, Model model) throws Exception {
 		request.setCharacterEncoding("utf-8");
 		String choosedDay = (String) request.getParameter("choosedDay");
-		System.out.println("choosedDay: " + choosedDay);
 		String[] weekArr = { "", "", "", "", "", "", "" };
 
 		for (int i = 0; i < weekArr.length; i++) {
@@ -93,14 +92,10 @@ public class WebtoonController {
 				}
 			}
 		}
-		System.out.println("weekArr: " + weekArr);
-		System.out.println("choosedDay: " + choosedDay);
 
 		String[] dayOfWeekKor = CalculateDate.dayOfWeekKor;
 
-		System.out.println("요일값: " + CalculateDate.calcDayOfWeek("kor", choosedDay));
 		ArrayList<WebtoonVO> articles = service.listBoard(CalculateDate.calcDayOfWeek("kor", choosedDay));
-		System.out.println("컨트롤러 실행!");
 		model.addAttribute("dayOfWeekKor", dayOfWeekKor);
 		model.addAttribute("choosedDay", choosedDay);
 		model.addAttribute("weekArr", weekArr);
@@ -117,7 +112,6 @@ public class WebtoonController {
 
 		String URL = (String) request.getParameter("URL");
 		URL = "https://comic.naver.com" + URL;
-		System.out.println("url: " + URL);
 		String titleId = URL.substring(49, 55);
 
 		ArrayList<String> InfoArr = service.toonInfo(URL);

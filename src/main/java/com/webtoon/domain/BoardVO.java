@@ -2,7 +2,7 @@ package com.webtoon.domain;
 
 import java.sql.Date;
 
-/*
+/*    담당자 김민수 
 create table toon_board (
 	bd_num int not null primary key  auto_increment,
     bd_title varchar(45) NOT NULL,

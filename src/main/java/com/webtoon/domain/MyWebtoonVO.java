@@ -1,6 +1,6 @@
 package com.webtoon.domain;
 
-/*
+/*	담당자 옥재욱
 create table my_toon(
 mt_title varchar(45) not null primary key,
 mt_user varchar(45) not null,

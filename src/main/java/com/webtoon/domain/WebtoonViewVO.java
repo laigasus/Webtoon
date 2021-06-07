@@ -1,6 +1,7 @@
 package com.webtoon.domain;
 
-/*CREATE TABLE `webtoon_view` (
+/*   담당자 옥재욱
+ * CREATE TABLE `webtoon_view` (
 		  `num` int NOT NULL AUTO_INCREMENT,
 		  `url` varchar(255) DEFAULT NULL,
 		  `img` varchar(2000) DEFAULT NULL,
