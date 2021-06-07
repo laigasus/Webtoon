@@ -33,15 +33,15 @@
 				<c:when test="${email eq articles.getBd_email()}">
 					<div class="jajak_content_footer ">
 						<button class="red"
-							onclick="alert('글이 삭제되었습니다'); location.href='jajak_content_delete?bd_num=${bd_num}'">삭제</button>
+							onclick="alert('글이 삭제되었습니다'); location.href='/jajak_content_delete?bd_num=${bd_num}'">삭제</button>
 						<button class="blue"
-							onclick="location.href='jajak_update?content_number=${bd_num}'">수정</button>
+							onclick="location.href='/jajak_update?content_number=${bd_num}'">수정</button>
 					</div>
 				</c:when>
 				<c:when test="${email eq 'root@naver.com'}">
 					<div class="jajak_content_footer ">
 						<button class="red"
-							onclick="alert('글이 삭제되었습니다'); location.href='jajak_content_delete?bd_num=${bd_num}'">삭제</button>
+							onclick="alert('글이 삭제되었습니다'); location.href='/jajak_content_delete?bd_num=${bd_num}'">삭제</button>
 					</div>
 				</c:when>
 			</c:choose>
