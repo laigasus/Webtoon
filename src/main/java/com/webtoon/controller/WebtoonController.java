@@ -8,14 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 
 import com.webtoon.domain.WebtoonListVO;
 import com.webtoon.domain.WebtoonVO;
 import com.webtoon.domain.WebtoonViewVO;
+import com.webtoon.external.CalculateDate;
 import com.webtoon.service.NaverService;
-
-import com.webtoon.external.*;
 
 @Controller
 public class WebtoonController {
@@ -28,11 +26,6 @@ public class WebtoonController {
 	@GetMapping("/daum")
 	public String daumGET() {
 
-		return "daum";
-	}
-
-	@PostMapping("/daum")
-	public String daumPOST() {
 		return "daum";
 	}
 	/////////////////////////////////////////////////
@@ -54,11 +47,6 @@ public class WebtoonController {
 
 		return "detail";
 	}
-
-	@PostMapping("/detail")
-	public String detailPOST() {
-		return "detail";
-	}
 	/////////////////////////////////////////////////
 
 	// nate.jsp
@@ -66,11 +54,6 @@ public class WebtoonController {
 	@GetMapping("/nate")
 	public String nateGET() {
 
-		return "nate";
-	}
-
-	@PostMapping("/nate")
-	public String natePOST() {
 		return "nate";
 	}
 	/////////////////////////////////////////////////
@@ -83,11 +66,6 @@ public class WebtoonController {
 		ArrayList<WebtoonVO> articles = service.searchBoard(searchParam);
 		model.addAttribute("articles", articles);
 
-		return "naver_search_result";
-	}
-
-	@PostMapping("/naver_search_result")
-	public String naverSearchResultPOST() {
 		return "naver_search_result";
 	}
 	/////////////////////////////////////////////////
@@ -130,11 +108,6 @@ public class WebtoonController {
 
 		return "naver";
 	}
-
-	@PostMapping("/naver")
-	public String naverPOST() {
-		return "naver";
-	}
 	/////////////////////////////////////////////////
 
 	// toon_list.jsp
@@ -153,11 +126,6 @@ public class WebtoonController {
 		model.addAttribute("InfoArr", InfoArr);
 		model.addAttribute("articles", articles);
 
-		return "toon_list";
-	}
-
-	@PostMapping("/toon_list")
-	public String toonListPOST() {
 		return "toon_list";
 	}
 	/////////////////////////////////////////////////

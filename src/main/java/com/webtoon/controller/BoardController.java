@@ -87,12 +87,12 @@ public class BoardController {
 				startToEndPage.add(i);
 			}
 		}
-		
-		model.addAttribute("startToEndPage",startToEndPage);
-		model.addAttribute("currentPage",currentPage);
-		model.addAttribute("startPage",startPage);
-		model.addAttribute("pageCount",pageCount);
-		model.addAttribute("pageBlock",pageBlock);
+
+		model.addAttribute("startToEndPage", startToEndPage);
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startPage", startPage);
+		model.addAttribute("pageCount", pageCount);
+		model.addAttribute("pageBlock", pageBlock);
 		//////////////// 페이징 끝
 
 		return "jajak";
@@ -192,11 +192,6 @@ public class BoardController {
 	}
 
 	// 게시글 올리기 확인 버튼을 눌렀을때
-	@PostMapping("/jajak_upload")
-	public String jajakUploadPOST() {
-
-		return "redirect:jajak";
-	}
 
 	@GetMapping("/jajak_upload_control")
 	public String jajakUploadControlPOST() {
@@ -222,7 +217,7 @@ public class BoardController {
 		} else {
 			check = true;
 		}
-		String path = request.getSession().getServletContext().getRealPath("fileFolder");
+		String path = request.getSession().getServletContext().getRealPath("/resources/uploads");
 		int size = 1024 * 1024 * 10; // 저장가능한 파일 크기 이미지,파일 업로드 기능 확장시 사용
 		String file = ""; // 업로드한 파일 이름(변경될 수 있음)
 		String originalFile = ""; // 이름이 변경되었다면 변경되기 전 실제 파일 이름
@@ -239,18 +234,17 @@ public class BoardController {
 			System.out.println("check  " + check);
 			model.addAttribute("check", check);
 
-			return "jajak";
+			return "redirect:jajak";
 
 		} else {
 			out.println("<script>");
 			out.println("alert('로그인해주세요');");
+			out.println("location.href('/login');");
 			out.println("</script>");
 			out.flush();
 			out.close();
-
-			return "login";
 		}
-
+		return "jajak";
 	}
 
 	// jajak_update.jsp
@@ -265,11 +259,6 @@ public class BoardController {
 
 		model.addAttribute("articles", articles);
 
-		return "jajak_update";
-	}
-
-	@PostMapping("/jajak_update")
-	public String jajakUpdatePOST() {
 		return "jajak_update";
 	}
 	////////////////////////////////
@@ -291,7 +280,7 @@ public class BoardController {
 		} else {
 			check = true;
 		}
-		String path = request.getSession().getServletContext().getRealPath("fileFolder");
+		String path = request.getSession().getServletContext().getRealPath("/resources/uploads");
 		int size = 1024 * 1024 * 10; // 저장가능한 파일 크기 이미지,파일 업로드 기능 확장시 사용
 		String file = ""; // 업로드한 파일 이름(변경될 수 있음)
 		String originalFile = ""; // 이름이 변경되었다면 변경되기 전 실제 파일 이름
@@ -317,11 +306,12 @@ public class BoardController {
 		} else {
 			out.println("<script>");
 			out.println("alert('로그인해주세요');");
+			out.println("location.href('/login');");
 			out.println("</script>");
 			out.flush();
 			out.close();
-			return "login";
 		}
+		return "redirect:jajak";
 	}
 	////////////////
 
@@ -335,7 +325,7 @@ public class BoardController {
 
 		boardService.deleteBoard(bd_num);
 
-		return "redirect:/mypage";
+		return "redirect:/jajak";
 	}
 	/////////////////////////////////////////////////
 

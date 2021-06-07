@@ -33,7 +33,6 @@ public class CommentController {
 
 		return ("forward:jajak_content?Bd_num=" + bd_num + "&nick=" + writer + "#comment-h1");
 	}
-
 	/////////////////////////////////////////////////
 
 }
