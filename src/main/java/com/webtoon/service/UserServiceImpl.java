@@ -59,18 +59,20 @@ public class UserServiceImpl implements UserService {
 	public int userCheckEmail(String email) {
 		UserVO vo = userMapper.userCheckEmail(email);
 		int check = 0;
-		if (vo.getEmail() != null) {
+		if(vo==null) {
+			check=-1;
+		}else{
 			String dbEmail = vo.getEmail();
 			if (dbEmail.equals(email)) {
 				check = 1; // 로그인 성공
 			}
-		} else {
-			check = -1;
 		}
-
 		return check;
 	}
 
+
+	
+	
 	@Override
 	public UserVO getUserInfo(String email) {
 		return userMapper.getUserInfo(email);

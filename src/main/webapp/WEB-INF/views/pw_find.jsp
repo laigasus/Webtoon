@@ -13,7 +13,6 @@ pageEncoding="UTF-8"%>
   </head>
   <body>
     <div class="container">
-      <br>
       <a href="/"><img src="${path}/resources/img/menu/user.svg" /></a>
       <form action="/pw_control" method="post">
         <div class="form-input">

@@ -21,7 +21,7 @@
 			<h1>
 				<img src="${path}/resources/img/button/arrow.svg" /> 커뮤니티
 			</h1>
-			<form action="/admin_page_control" method="get">
+			<form action="/admin_page_control" method="post">
 				<table>
 					<thead>
 						<tr>
@@ -43,9 +43,6 @@
 								<td width="20%">${user.getNick()}</td>
 							</tr>
 						</c:forEach>
-
-
-
 					</tbody>
 				</table>
 				<button type="submit" class="blue">계정 삭제</button>

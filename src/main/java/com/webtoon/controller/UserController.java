@@ -50,27 +50,30 @@ public class UserController {
 	// admin_page_control.jsp
 	// 관리자 페이지 제어 이벤트 페이지
 	@GetMapping("/admin_page_control")
-	public String adminPageControlGET(HttpServletRequest request, HttpServletResponse response) throws IOException {
+	public String adminPageControlGET() {
+		return "forward:admin_page";
+	}
+
+	@PostMapping("/admin_page_control")
+	public String adminPageControlPOST(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
 		response.setContentType("text/html; charset=euc-kr");
 		PrintWriter out = response.getWriter();
 
 		String email[] = request.getParameterValues("email");
 		for (int i = 0; i < email.length; i++) {
+			System.out.println("email===" + email[i]);
 			userService.deleteUser(email[i]);
 		}
 
 		out.println("<script>");
 		out.println("alert('회원탈퇴가 완료되었습니다');");
+		out.println("location.href='admin_page';");
 		out.println("</script>");
 		out.flush();
+		out.close();
 
-		return "forward:admin_page";
-	}
-
-	@PostMapping("/admin_page_control")
-	public String adminPageControlPOST() {
-		return "admin_page_control";
+		return "redirect:admin_page";
 	}
 	/////////////////////////////////////////////////
 
@@ -110,6 +113,7 @@ public class UserController {
 	// 페이지 설명 추가
 	@GetMapping("/deleteAccount_control")
 	public String deleteAccountControlGET() {
+		System.out.println("deleteGET");
 		return "deleteAccount_control";
 	}
 
@@ -120,25 +124,38 @@ public class UserController {
 		response.setContentType("text/html; charset=euc-kr");
 		PrintWriter out = response.getWriter();
 
-		String email = (String) request.getAttribute("session_user_email");
+		System.out.println("deleteAccount_controlPost");
+
+		String email = (String) session.getAttribute("session_user_email");
 		String password = request.getParameter("password");
+		System.out.println("session email" + email);
+		System.out.println("password" + email);
 
 		int result = userService.userCheck(email, password);
 		if (result == 0) {
 			out.println("<script>");
-			out.println("alert('비밀번호를 다시 입력해주세요');");
+			out.println("alert('비밀번호를 다시 입력해주세요..');");
+			out.println("location.href='/deleteAccount';");
 			out.println("</script>");
 			out.flush();
-			return "deleteAccount_control";
+			out.close();
+			return "deleteAccount";
 
 		} else {
 			userService.deleteUser(email);
+			session = request.getSession();
+			session.invalidate(); // 로그아웃
+
 			out.println("<script>");
 			out.println("alert('회원탈퇴가 완료되었습니다');");
+			out.println("location.href='/';");
 			out.println("</script>");
 			out.flush();
-			return "/";
+			out.close();
+
+			return "";
 		}
+
 	}
 	/////////////////////////////////////////////////
 
@@ -243,71 +260,37 @@ public class UserController {
 
 		String email = request.getParameter("email");
 		String password = request.getParameter("password");
-		String check = request.getParameter("saveCheck");
-		// 아이디비번저장 체크박스가 체크되었는지를 확인하여서 체크되면 "saveCheck"="1" 를가져오고 아니면 null
-
-		if (check == null) { // equals 오류방지
-			check = "";
-		}
 		int result = userService.userCheck(email, password);
 		System.out.println("result: " + result);
-		System.out.println("check: " + check);
 
-		if (check.equals("checked")) { // check가 됐으면
-			if (result == -1) {
-				out.println("<script>");
-				out.println("alert('없는 이메일입니다');");
-				out.println("</script>");
-				out.flush();
+		if (result == -1) {
+			out.println("<script>");
+			out.println("alert('없는 이메일입니다');");
+			out.println("location.href='/login';");
+			out.println("</script>");
+			out.flush();
+			out.close();
 
-				return "login";
+			return "login";
 
-			} else if (result == 0) {
-				out.println("<script>");
-				out.println("alert('비밀번호를 다시 입력해주세요');");
-				out.println("</script>");
-				out.flush();
+		} else if (result == 0) {
+			out.println("<script>");
+			out.println("alert('비밀번호를 다시 입력해주세요');");
+			out.println("location.href='/login';");
+			out.println("</script>");
+			out.flush();
+			out.close();
 
-				return "login";
-
-			} else { // 로그인 성공
-				UserVO vo = userService.getUserInfo(email);
-				session.setAttribute("session_user_email", email);
-				session.setAttribute("session_user_password", password);
-				session.setAttribute("session_user_nick", vo.getNick());
-				session.setAttribute("chSave", "checked"); // chSave가 "checked" 을 가지면 login.jsp에서 체크상태가 유지됨
-				session.setAttribute("saveId", email);
-				session.setAttribute("savePw", password);
-			}
-			return "redirect:/";
-		} else { // 체크 되면
-			if (result == -1) {
-				out.println("<script>");
-				out.println("alert('없는 이메일입니다');");
-				out.println("</script>");
-				out.flush();
-
-				return "login";
-
-			} else if (result == 0) {
-				out.println("<script>");
-				out.println("alert('비밀번호를 다시 입력해주세요');");
-				out.println("</script>");
-				out.flush();
-
-				return "login";
-
-			} else { // 로그인 성공
-				UserVO vo = userService.getUserInfo(email);
-				session.setAttribute("session_user_email", email);
-				session.setAttribute("session_user_password", password);
-				session.setAttribute("session_user_nick", vo.getNick());
-				session.removeAttribute("chSave"); // 체크 안됐으니 지우기
-				session.removeAttribute("saveId");
-				session.removeAttribute("savePw");
-			}
-			return "redirect:/";
+			return "login";
+			
+		} else { // 로그인 성공
+			UserVO vo = userService.getUserInfo(email);
+			session.setAttribute("session_user_email", email);
+			session.setAttribute("session_user_password", password);
+			session.setAttribute("session_user_nick", vo.getNick());
 		}
+		
+		return "redirect:/";
 	}
 	/////////////////////////////////////////////////
 
@@ -315,13 +298,7 @@ public class UserController {
 	// 페이지 설명 추가
 	@GetMapping("/login")
 	public String loginGET(HttpServletRequest request, HttpSession session, Model model) {
-		String chSave = (String) session.getAttribute("chSave"); // 체크했으면 checked 저장
-		String saveId = (String) session.getAttribute("saveId"); // saveId
-		String savePw = (String) session.getAttribute("savePw");
-		if (saveId == null) { // saveId가 비어있어서 null이 보여지는 것 방지
-			saveId = "";
-			savePw = "";
-		}
+		
 		return "login";
 	}
 
@@ -351,7 +328,7 @@ public class UserController {
 	// 페이지 설명 추가
 	@GetMapping("/my_webtoon_add")
 	public String myWebtoonAddGET() {
-		
+
 		return "my_webtoon_add";
 	}
 
@@ -372,7 +349,7 @@ public class UserController {
 			userEmail = (String) session.getAttribute("session_user_email");
 		}
 		int likeCheck = webtoonService.myWebtoonCheck(webtoonTitle, userEmail); // like좋아요 했으면 1반환
-		
+
 		if (!userEmail.equals("") && likeCheck == 1) { // 좋아요를 이미 눌렀고 로그인을 한상황
 			webtoonService.myWebtoonDelete(webtoonTitle, userEmail); // insert into 4가지 인자 삽입
 			out.println("<script>");
@@ -380,6 +357,7 @@ public class UserController {
 			out.println("history.go(-1);");
 			out.println("</script>");
 			out.flush();
+			out.close();
 			String referer = request.getHeader("Referer");
 			return referer;
 		} else if (!userEmail.equals("")) { // 좋아요 안눌렀고 로그인 한상황
@@ -390,6 +368,7 @@ public class UserController {
 			out.println("alert('로그인 해주세요');");
 			out.println("</script>");
 			out.flush();
+			out.close();
 			return "login";
 		}
 		// 이전페이지로 되돌아감
@@ -479,6 +458,7 @@ public class UserController {
 		out.println("alert('닉네임이 성공적으로 변경되었습니다.');");
 		out.println("</script>");
 		out.flush();
+		out.close();
 
 		return "/mypage";
 	}
@@ -516,6 +496,7 @@ public class UserController {
 	// 페이지 설명 추가
 	@GetMapping("/pw_control")
 	public String pwControlGET() {
+		System.out.println("pwCON GET");
 		return "pw_control";
 	}
 
@@ -527,34 +508,40 @@ public class UserController {
 		PrintWriter out = response.getWriter();
 
 		String email = request.getParameter("email");
-		String session_user_email = (String) session.getAttribute("session_user_email");
+		String session_user_email = (String) session.getAttribute("session_user_email"); // 로그인안하면 null
 		int userCheck = userService.userCheckEmail(email);
 
-		if (session_user_email == null) { // 로그인중 비번을 몰라서 왔을때
+		if (session_user_email == null || session_user_email == "") { // 로그인중 비번을 몰라서 왔을때
 			if (userCheck == 1) { // 이메일일치
 				out.println("<script>");
 				out.println("alert('회원님의 임시비밀번호가 이메일로 보내졌습니다.');");
+				out.println("location.href='/';");
 				out.println("</script>");
 				out.flush();
+				out.close();
 			} else { // userCheck -1 받았던가 걍 실패
 				out.println("<script>");
 				out.println("alert('유효하지 않은 이메일입니다.');");
-				out.println("location.href = 'pw_find.jsp';");
+				out.println("location.href = '/pw_find';");
 				out.println("</script>");
 				out.flush();
+				out.close();
 			}
 		} else { // 이미 로그인을 했을때 비번을 바꾸려고 할때
 			if (session_user_email.equals(email)) {
 				out.println("<script>");
 				out.println("alert('회원님의 임시비밀번호가 이메일로 보내졌습니다.');");
+				out.println("location.href='/';");
 				out.println("</script>");
 				out.flush();
+				out.close();
 			} else {
 				out.println("<script>");
 				out.println("alert('유효하지 않은 이메일입니다.');");
-				out.println("location.href = 'pw_find.jsp';");
+				out.println("location.href = '/pw_find';");
 				out.println("</script>");
 				out.flush();
+				out.close();
 			}
 		}
 
@@ -633,12 +620,14 @@ public class UserController {
 			out.println("alert('잘못된 값을 입력하셨습니다.');");
 			out.println("</script>");
 			out.flush();
+			out.close();
 			return "login";
 		} else {
 			out.println("<script>");
 			out.println("alert('비밀번호 변경 완료');");
 			out.println("</script>");
 			out.flush();
+			out.close();
 			return "login";
 		}
 	}
@@ -659,7 +648,7 @@ public class UserController {
 	/////////////////////////////////////////////////
 
 	// register_control.jsp
-	// 페이지 설명 추가
+	// 회원가입
 	@GetMapping("/register_control")
 	public String registerControlGET() {
 		return "register_control";
@@ -683,8 +672,10 @@ public class UserController {
 			userService.insertUser(new_account);
 			out.println("<script>");
 			out.println("alert('회원가입을 완료하였습니다');");
+			out.println("location.href='/';");
 			out.println("</script>");
 			out.flush();
+			out.close();
 			session.setAttribute("user_email", email);
 			session.setAttribute("user_password", password);
 			return "index";
@@ -693,6 +684,7 @@ public class UserController {
 			out.println("alert('입력한 비밀번호가 일치하지 않습니다');");
 			out.println("</script>");
 			out.flush();
+			out.close();
 			return "register";
 		}
 

@@ -116,14 +116,6 @@ public class BoardController {
 		return "jajak";
 	}
 
-	@GetMapping("/jajak_comment_control")
-	public String jajakContentControlGET(HttpServletRequest request, HttpSession session, Model model)
-			throws UnsupportedEncodingException {
-		request.setCharacterEncoding("utf-8");
-
-		return "jajak_content_control";
-	}
-
 	// jajak_content_control.jsp
 	// 커뮤니티 글에서 댓글 적을때
 	@PostMapping("/jajak_comment_control")
@@ -140,6 +132,7 @@ public class BoardController {
 			out.print("alert('로그인해주세요');");
 			out.print("</script>");
 			out.flush();
+			out.close();
 			return "login";
 		} else {
 			String cm_content = (String) request.getParameter("cm_content");
@@ -253,6 +246,7 @@ public class BoardController {
 			out.println("alert('로그인해주세요');");
 			out.println("</script>");
 			out.flush();
+			out.close();
 
 			return "login";
 		}
@@ -322,9 +316,10 @@ public class BoardController {
 			return "redirect:jajak";
 		} else {
 			out.println("<script>");
-			out.println("alert(\"로그인해주세요\");");
+			out.println("alert('로그인해주세요');");
 			out.println("</script>");
 			out.flush();
+			out.close();
 			return "login";
 		}
 	}
