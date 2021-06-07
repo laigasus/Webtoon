@@ -47,13 +47,8 @@ public class UserController {
 	@Autowired
 	private BoardService boardService;
 
-	// admin_page_control.jsp
+	// admin_page_control
 	// 관리자 페이지 제어 이벤트 페이지
-	@GetMapping("/admin_page_control")
-	public String adminPageControlGET() {
-		return "forward:admin_page";
-	}
-
 	@PostMapping("/admin_page_control")
 	public String adminPageControlPOST(HttpServletRequest request, HttpServletResponse response) throws IOException {
 
@@ -78,7 +73,7 @@ public class UserController {
 	/////////////////////////////////////////////////
 
 	// admin_page.jsp
-	// 관리자 페이지 제어 페이지
+	// 관리자 페이지
 	@GetMapping("/admin_page")
 	public String adminPageGET(Model model) {
 		ArrayList<UserVO> users = userService.listUser();
@@ -86,37 +81,20 @@ public class UserController {
 
 		return "admin_page";
 	}
-
-	@PostMapping("/admin_page")
-	public String adminPagePOST() {
-		return "admin_page";
-	}
 	/////////////////////////////////////////////////
 
-	// admin_user_mypage.jsp
-	// admin_page.jsp에서 a 태그로 값을 받아서 mypage로 가기전에 넘겨주는 페이지입니다.
-
+	// admin_user_mypage
+	// admin_page.jsp에서 원하는 사용자의 마이페이지를 보는 페이지입니다.
 	@GetMapping("/admin_user_mypage")
 	public String adminUserMypageGET(HttpServletRequest request, HttpSession session, Model model) {
 		String admin_user_email = request.getParameter("admin_user_email");
 		session.setAttribute("admin_user_email", admin_user_email);
 		return "redirect:mypage";
 	}
-
-	@PostMapping("/admin_user_mypage")
-	public String adminUserMypagePOST() {
-		return "admin_user_mypage";
-	}
 	/////////////////////////////////////////////////
 
-	// deleteAccount_control.jsp
-	// 페이지 설명 추가
-	@GetMapping("/deleteAccount_control")
-	public String deleteAccountControlGET() {
-		System.out.println("deleteGET");
-		return "deleteAccount_control";
-	}
-
+	// deleteAccount_control
+	//
 	@PostMapping("/deleteAccount_control")
 	public String deleteAccountControlPOST(HttpServletRequest request, HttpServletResponse response,
 			HttpSession session, Model model) throws IOException {
@@ -159,22 +137,17 @@ public class UserController {
 	}
 	/////////////////////////////////////////////////
 
-	// deleteAccount.jsp
-	// 페이지 설명 추가
+	// deleteAccount
+	// 회원탈퇴 페이지
 	@GetMapping("deleteAccount")
 	public String deleteAccountGET() {
 
 		return "deleteAccount";
 	}
-
-	@PostMapping("/deleteAccount")
-	public String deleteAccountPOST() {
-		return "deleteAccount";
-	}
 	/////////////////////////////////////////////////
 
 	// email_duplicate_control.jsp
-	// 페이지 설명 추가
+	// 이메일중복검사
 	@GetMapping("/email_duplicate_control")
 	public String emailDuplicateControlGET() {
 		return "/email_duplicate_control";
@@ -243,14 +216,8 @@ public class UserController {
 	}
 	/////////////////////////////////////////////////
 
-	// login_control.jsp
-	// 페이지 설명 추가
-	@GetMapping("/login_control")
-	public String loginControlGET() {
-		return "login_control";
-
-	}
-
+	// login_control
+	// 로그인 컨트롤러
 	@PostMapping("/login_control")
 	public String loginControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
@@ -282,56 +249,39 @@ public class UserController {
 			out.close();
 
 			return "login";
-			
+
 		} else { // 로그인 성공
 			UserVO vo = userService.getUserInfo(email);
 			session.setAttribute("session_user_email", email);
 			session.setAttribute("session_user_password", password);
 			session.setAttribute("session_user_nick", vo.getNick());
 		}
-		
+
 		return "redirect:/";
 	}
 	/////////////////////////////////////////////////
 
 	// login.jsp
-	// 페이지 설명 추가
+	// 로그인 페이지
 	@GetMapping("/login")
 	public String loginGET(HttpServletRequest request, HttpSession session, Model model) {
-		
-		return "login";
-	}
 
-	@PostMapping("/login")
-	public String loginPOST() {
 		return "login";
 	}
 	/////////////////////////////////////////////////
 
-	// logout.jsp
-	// 페이지 설명 추가
+	// logout
+	// 로그아웃 수행
 	@GetMapping("/logout")
 	public String logoutGET(HttpServletRequest request, HttpSession session) {
 		session = request.getSession();
 		session.invalidate();
-
 		return "redirect:/";
 	}
 
-	@PostMapping("/logout")
-	public String logoutPOST() {
-		return "login";
-	}
 	/////////////////////////////////////////////////
-
-	// my_webtoon_add.jsp
-	// 페이지 설명 추가
-	@GetMapping("/my_webtoon_add")
-	public String myWebtoonAddGET() {
-
-		return "my_webtoon_add";
-	}
-
+	// my_webtoon_add
+	// 찜하기 컨트롤러
 	@PostMapping("/my_webtoon_add")
 	public String myWebtoonAddPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
@@ -377,17 +327,12 @@ public class UserController {
 	}
 	/////////////////////////////////////////////////
 
-	// my_webtoon_list.jsp
-	// 페이지 설명 추가
+	// my_webtoon_list
+	// mypage 웹툰 리스트
 	@GetMapping("/my_webtoon_list")
 	public String my_webtoonListGET(HttpServletRequest request, HttpSession session, Model model)
 			throws UnsupportedEncodingException {
 
-		return "my_webtoon_list";
-	}
-
-	@PostMapping("/myWebtoonList")
-	public String myWebtoonListPOST() {
 		return "my_webtoon_list";
 	}
 	/////////////////////////////////////////////////
@@ -424,20 +369,10 @@ public class UserController {
 
 		return "mypage";
 	}
-
-	@PostMapping("/mypage")
-	public String mypagePOST() {
-		return "mypage";
-	}
 	/////////////////////////////////////////////////
 
-	// nick_change_control.jsp
-	// 페이지 설명 추가
-	@GetMapping("/nick_change_control")
-	public String nickChangeControlGET() {
-		return "nick_change_control";
-	}
-
+	// nick_change_control
+	// 닉네임 변경
 	@PostMapping("/nick_change_control")
 	public String nickChangeControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
@@ -463,43 +398,26 @@ public class UserController {
 		return "/mypage";
 	}
 	/////////////////////////////////////////////////
-
+	
 	// nick_change.jsp
-	// 페이지 설명 추가
+	// 닉네임변경 페이지
 	@GetMapping("/nick_change")
 	public String nickChangeGET() {
 
 		return "nick_change";
 	}
-
-	@PostMapping("/nick_change")
-	public String nickChangePOST() {
-		return "nick_change";
-	}
 	/////////////////////////////////////////////////
 
 	// pw_after.jsp
-	// 페이지 설명 추가
+	// 비밀번호 변경후 페이지
 	@GetMapping("/pw_after")
 	public String pwAfterGET() {
-
-		return "pw_after";
-	}
-
-	@PostMapping("/pw_after")
-	public String pwAfterPOST() {
 		return "pw_after";
 	}
 	/////////////////////////////////////////////////
 
-	// pw_control.jsp
-	// 페이지 설명 추가
-	@GetMapping("/pw_control")
-	public String pwControlGET() {
-		System.out.println("pwCON GET");
-		return "pw_control";
-	}
-
+	// pw_control
+	// 비밀번호 변경
 	@PostMapping("/pw_control")
 	public String pwControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
@@ -634,26 +552,16 @@ public class UserController {
 	/////////////////////////////////////////////////
 
 	// pw_find.jsp
-	// 페이지 설명 추가
+	// 비밀번호 변경 페이지
 	@GetMapping("/pw_find")
 	public String pwFindGET() {
 
 		return "pw_find";
 	}
-
-	@PostMapping("/pw_find")
-	public String pwFindPOST() {
-		return "pw_find";
-	}
 	/////////////////////////////////////////////////
 
-	// register_control.jsp
-	// 회원가입
-	@GetMapping("/register_control")
-	public String registerControlGET() {
-		return "register_control";
-	}
-
+	// register_control
+	// 회원가입 수행 컨트롤러
 	@PostMapping("/register_control")
 	public String registerControlPOST(HttpServletRequest request, HttpServletResponse response, HttpSession session,
 			Model model) throws IOException {
@@ -692,20 +600,15 @@ public class UserController {
 	/////////////////////////////////////////////////
 
 	// register.jsp
-	// 페이지 설명 추가
+	// 회원가입페이지 뷰
 	@GetMapping("/register")
 	public String registerGET() {
-		return "register";
-	}
-
-	@PostMapping("/register")
-	public String registerPOST() {
 		return "register";
 	}
 	/////////////////////////////////////////////////
 
 	// nav.jsp
-	// 페이지 설명 추가
+	// 네비게이션  뷰
 	@GetMapping("/nav")
 	public String navGET(HttpServletRequest request, HttpServletResponse response, HttpSession session, Model model)
 			throws UnsupportedEncodingException {
@@ -719,10 +622,6 @@ public class UserController {
 		return "nav";
 	}
 
-	@PostMapping("/nav")
-	public String navPOST() {
-		return "nav";
-	}
 	/////////////////////////////////////////////////
 
 }

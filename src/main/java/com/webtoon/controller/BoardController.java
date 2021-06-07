@@ -234,7 +234,13 @@ public class BoardController {
 			System.out.println("check  " + check);
 			model.addAttribute("check", check);
 
-			return "redirect:jajak";
+			out.println("<script>");
+			out.println("location.href='/jajak';");
+			out.println("</script>");
+			out.flush();
+			out.close();
+			
+			return "jajak";
 
 		} else {
 			out.println("<script>");
